@@ -42,8 +42,8 @@ public:
 
 private:
 	void updateFriend(member* _member);
-	char m_name[MAX_NAME_LEN];
-	char m_dateOfBirth[DATE_LEN];
+	char m_name[MAX_NAME_LEN] = "No One";
+	char m_dateOfBirth[DATE_LEN] = "00/00/0000";
 	int m_logSize10Statuses = 9;
 	vector<member*> m_friendsList;
 	vector<page*> m_pages;

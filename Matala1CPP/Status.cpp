@@ -16,7 +16,7 @@ status::status(const status& other)
 
 status::~status()
 {
-	delete m_content;
+	free (m_content);
 }
 
 void status::getContent(const char* content) //get contant to status
