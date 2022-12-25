@@ -4,7 +4,7 @@
 bool member::isPageExist(page* _page) // check if page is already exsist at his pages
 {
 	bool exist = false;
-	for (int i = 0; i < m_logSizePageList; i++)
+	for (int i = 0; i < m_pages.size(); i++)
 	{
 		if (m_pages[i] == _page)
 		{
@@ -15,32 +15,10 @@ bool member::isPageExist(page* _page) // check if page is already exsist at his 
 	return exist;
 }
 
-member::~member() //dct'or
-{
-	if (m_isFirstFriend == false)
-	{
-		delete[] m_friendsList;
-	}
-	if (m_isFirstPage == false)
-	{	
-		delete[]m_pages;
-	}
-
-	if (m_isFirstStatus == false)
-	{
-		for (int i = 0; i < m_logSizeStatusList; i++)
-		{
-			delete m_mySatuses[i];
-		}
-		delete[]m_mySatuses;
-	}
-}
-	
-
 bool member::isFriendExist(member* _member) //check if friend is already at friend with this
 {
 	bool exist = false;
-	for (int i = 0; i < m_logSizeFriendList; i++)
+	for (int i = 0; i < m_friendsList.size(); i++)
 	{
 		if (strcmp(m_friendsList[i]->m_name ,_member->m_name) == 0)
 		{
@@ -53,7 +31,7 @@ bool member::isFriendExist(member* _member) //check if friend is already at frie
 
 void member::printMyFriendFriendList(int ind) //print one of the friend friend list
 {
-	m_friendsList[ind]->printFriends();
+	m_friendsList.at(ind)->printFriends();
 }
 
 member::member(const member& other) //ct'or
@@ -73,21 +51,7 @@ member::member(const char* name, const char* birthDate) //ct'or
 
 void member::updateFriend(member* _member) // update frien at friend list
 {
-	if (m_isFirstFriend == true)
-	{
-		m_friendsList = new member*[2];
-		m_isFirstFriend = false;
-		m_physSizeFriendList = 2;
-	}
-	m_friendsList[m_logSizeFriendList] = _member;
-	m_logSizeFriendList++;
-	//delete m_friendsList;
-	cout << _CrtDumpMemoryLeaks();
-	if (m_logSizeFriendList == m_physSizeFriendList)
-	{
-		m_physSizeFriendList *= 2;
-		m_friendsList = ourRealloc(m_logSizeFriendList, m_physSizeFriendList, m_friendsList);
-	}
+	m_friendsList.push_back(_member);
 }
 
 void member::addFriend(member* _member) // add friend 
@@ -110,7 +74,7 @@ void member::addFriend(member* _member) // add friend
 int member::findFriendIndex(char* wanted) // find friend index
 {
 	int res;
-	for (int i = 0; i < m_logSizeFriendList; i++)
+	for (int i = 0; i < m_friendsList.size(); i++)
 	{
 		if (strcmp(m_friendsList[i]->m_name, wanted) == 0)
 		{
@@ -123,64 +87,44 @@ int member::findFriendIndex(char* wanted) // find friend index
 
 void member::removeFriend(int indOfRemove) // remove friend from friend list
 {
-	if (m_logSizeFriendList == 0)
+	if (m_friendsList.size() == 0)
 	{
 		cout << "You dont have friends at all!" << endl;
 		return;
 	}
-	for (int i = indOfRemove; i < m_logSizeFriendList; i++)
-	{
-		m_friendsList[i] = m_friendsList[i + 1];
-	}
-	m_logSizeFriendList--;
-	m_friendsList = ourRealloc(m_physSizeFriendList, m_logSizeFriendList, m_friendsList);
+	vector<member*>::iterator itr = m_friendsList.begin() + indOfRemove;
+	m_friendsList.erase(itr);
 }
 
 void member::addPage(page* currPage) //add follow to a page
 {
-	if (m_isFirstPage == true)
-	{
-		m_pages = new page*;
-		m_isFirstPage = false;
-	}
 	if (isPageExist(currPage))
 	{
 		cout << "Page already followed" << endl;
 		return;
 	}
 	
-	m_pages[m_logSizePageList] = currPage;
-	m_logSizePageList++;
-	if (m_logSizePageList == m_physSizePageList)
-	{
-		m_physSizePageList *= 2;
-		m_pages = ourRealloc(m_logSizePageList, m_physSizePageList, m_pages);
-	}
+	m_pages.push_back(currPage);
 	currPage->addFollower(this);
 }
 
 void member::removePage(int indOfRemove) //remove follow from page
 {
-	if (m_logSizePageList == 0)
+	if (m_pages.size() == 0)
 	{
 		cout << "You are not following any pages at all!" << endl;
 		return;
 	}
 	m_pages[indOfRemove]->removeFollower(this);
-	for (int i = indOfRemove; i < m_logSizePageList; i++)
-	{
-		m_pages[i] = m_pages[i + 1];
-	}
-	m_logSizePageList--;
-	m_pages = ourRealloc(m_physSizePageList, m_logSizePageList, m_pages);
-
+	vector<page*>::iterator itr = m_pages.begin() + indOfRemove;
+	m_pages.erase(itr);
 }
 
 void member::printMyFriendStatuses() //print my friend statuses
 {
-	for (int i = 0; i < m_logSizeFriendList; i++)
+	for (int i = 0; i < m_friendsList.size(); i++)
 	{
-		m_friendsList[i]->printMyStatuses();
+		m_friendsList.at(i)->printMyStatuses();
 	}
 
 }
@@ -188,59 +132,47 @@ void member::printMyFriendStatuses() //print my friend statuses
 void member::printFriends() // print my friend list 
 {
 	cout << "My friend List is: " << endl;
-	for (int i = 0; i < m_logSizeFriendList; i++)
+	for (int i = 0; i < m_friendsList.size(); i++)
 	{
 		cout << "#" << i + 1 << " ";
-		cout << m_friendsList[i]->m_name << endl;
+		cout << m_friendsList.at(i)->m_name << endl;
 	}
 }
 
 void member::printPages() // print the pages that i follow 
 {
 	cout << "List of the Pages I follow:" << endl;
-	for (int i = 0; i < m_logSizePageList; i++)
+	for (int i = 0; i < m_pages.size(); i++)
 	{
 		cout << "#" << i + 1 << endl;
-		m_pages[i]->printPage();
+		m_pages.at(i)->printPage();
 	}
 }
 
 void member::printMyStatuses() // print my statuses
 {
 	cout << "My Statuses:" << endl;
-	for (int i = 0; i < m_logSizeStatusList; i++)
+	for (int i = 0; i < m_mySatuses.size(); i++)
 	{
-		m_mySatuses[i]->printStatus();
+		m_mySatuses.at(i)->printStatus();
 	}
 }
 
 void member::createStatus(const char* _status) // create new status
 {
-	
-	if (m_isFirstStatus == true)
-	{
-		m_mySatuses = new status*[2];
-		m_isFirstStatus = false;
-		m_physSizeFriendList = 2;
-	}
-	m_mySatuses[m_logSizeStatusList] = new status;
-	m_mySatuses[m_logSizeStatusList]->getContent(_status);
-	m_logSizeStatusList++;
-	if (m_logSizeStatusList == m_physSizeStatusList)
-	{
-		m_physSizeStatusList *= 2;
-		m_mySatuses = ourRealloc(m_logSizeStatusList, m_physSizeStatusList, m_mySatuses);
-	}
+	status* newStatus = new status;
+	newStatus->getContent(_status);
+	m_mySatuses.push_back(newStatus);
 
-	for (int i = 0; i < m_logSizeFriendList; i++)
+	for (int i = 0; i < m_friendsList.size(); i++)
 	{
-		m_friendsList[i]->updatelastStatuses(m_mySatuses[m_logSizeStatusList - 1]);
+		m_friendsList.at(i)->updatelastStatuses(m_mySatuses[m_mySatuses.size() - 1]);
 	}
 }
 
 void member::updatelastStatuses(status* _status) //update the 10 last statuses
 {
-	if (m_logSize10Statuses == 0)
+	if (m_last10statuses.size() == 0)
 	{
 		for (int i = 9; i > 0; i--)
 		{
@@ -282,10 +214,10 @@ void member::printMyDetails() // print my info
 
 int member::myNumOfFriends() // return num of friend
 {
-	return m_logSizeFriendList;
+	return m_friendsList.size();
 }
 
 int member::myNumOfPagesFollow() // return num of pages i'm follow
 {
-	return m_logSizePageList;
+	return m_pages.size();
 }

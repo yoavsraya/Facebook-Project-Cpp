@@ -1,7 +1,6 @@
 #pragma once
 #include "Member.h"
 #include "Page.h"
-#include "generalFun.h"
 #include <vector>
 #pragma warning(disable: 4996)
 

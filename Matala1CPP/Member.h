@@ -3,6 +3,8 @@
 class page;
 #include <iostream>
 #include "Status.h"
+#include <vector>
+#include<array>
 #pragma warning(disable: 4996)
 
 using namespace std;
@@ -43,18 +45,9 @@ private:
 	void updateFriend(member* _member);
 	char m_name[MAX_NAME_LEN];
 	char m_dateOfBirth[DATE_LEN];
-	int m_logSizeFriendList = 0;
-	int m_physSizeFriendList = 0;
-	int m_logSizePageList = 0;
-	int m_physSizePageList = 0;
-	int m_logSizeStatusList = 0;
-	int m_physSizeStatusList = 0;
 	int m_logSize10Statuses = 9;
-	bool m_isFirstStatus = true;
-	bool m_isFirstFriend = true;
-	bool m_isFirstPage = true;
-	member** m_friendsList = nullptr;
-	page** m_pages = nullptr;
-	status** m_mySatuses = nullptr;
-	status* m_last10statuses[10];
+	vector<member*> m_friendsList;
+	vector<page*> m_pages;
+	vector<status*> m_mySatuses;
+	array<status*, 10> m_last10statuses;
 };
