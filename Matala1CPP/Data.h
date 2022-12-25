@@ -2,6 +2,7 @@
 #include "Member.h"
 #include "Page.h"
 #include "generalFun.h"
+#include <vector>
 #pragma warning(disable: 4996)
 
 const int MAX_NAME_LENGTH = 30;
@@ -27,13 +28,9 @@ public:
 	int whichPage();
 
 private:
-	member** m_members;
-	page** m_pages;
-	int m_logSizeMembers;
-	int m_physSizeMembers;
-	int m_logSizePages;
-	int m_physSizePages;
-
+	vector <member*> m_members;
+	vector <page*> m_pages;
+	
 public:
 	void watch_MyFriend_Friend_List(); //11
 	void  print_All_FaceBook_Members_And_Pages(); //10

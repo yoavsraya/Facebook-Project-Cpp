@@ -2,89 +2,66 @@
 
 Facebook::Facebook()
 {
-	m_members = new member*[3];
-	m_pages = new page*[3];
-	m_physSizeMembers = 3;
-	m_physSizePages = 3;
+	m_members.reserve(3);
+	m_pages.reserve(3);
 }
 
 Facebook::~Facebook() //free program
 {
-	for (int i = 0; i < m_logSizeMembers; i++)
+	for (int i = 0; i < m_members.size(); i++)
 	{
 		
-		delete m_members[i];
+		delete m_members.at(i);
 	}
-	delete[]m_members;
 
-	for (int i = 0; i < m_logSizePages; i++)
+	for (int i = 0; i < m_pages.size(); i++)
 	{
-		delete m_pages[i];
+		delete m_pages.at(i);
 	}
-	delete[]m_pages;
 } 
 
 void Facebook::addMember(member* _member) //add new member to facebook
 {
-	if (m_logSizeMembers == m_physSizeMembers)
-	{
-		m_physSizeMembers++;
-		m_members = ourRealloc(m_logSizeMembers, m_physSizeMembers, m_members);
-	}
-	m_members[m_logSizeMembers] = new member;
-	m_members[m_logSizeMembers] = _member;
-	m_logSizeMembers++;
+	
+	member* temp = new member;
+	m_members.push_back(temp);
 } 
 
 void Facebook::removeMember(const int index) // remove friend from facebook
 {
-	delete m_members[index];
-	for (int i = index; i < m_logSizeMembers; i++)
-	{
-		m_members[i] = m_members[i + 1];
-	}
-	m_members[m_logSizeMembers - 1] = nullptr;
-
-	m_members = ourRealloc(m_logSizeMembers, m_logSizeMembers - 1, m_members);
+	delete m_members.at(index);
+	vector <member*>::iterator itor = m_members.begin() + index;
+	m_members.erase(itor);
 }
 
 void Facebook::printMembers() //print all members at facebook 
 {
-	for (int i = 0; i < m_logSizeMembers; i++)
+	for (int i = 0; i < m_members.size(); i++)
 	{
 		cout << "#" << i + 1 << endl;
-		m_members[i]->printMyDetails();
+		m_members.at(i)->printMyDetails();
 	}
 }
 
 void Facebook::addPage(page* _page) //add new page to facebook
 {
-	if (m_logSizePages == m_physSizePages)
-	{
-		m_physSizePages++;
-		m_pages = ourRealloc(m_logSizePages, m_physSizePages, m_pages);
-	}
-	m_pages[m_logSizePages] = new page;
-	m_pages[m_logSizePages] = _page;
-	m_logSizePages++;
+	page* temp = new page;
+	m_pages.push_back(temp);
 }
 
 void Facebook::removePage(const int index) //remove page from facebook
 {
-	for (int i = index; i < m_logSizePages; i++)
-	{
-		m_pages[i] = m_pages[i + 1];
-	}
-	m_pages[m_logSizePages - 1] = nullptr;
-	m_pages = ourRealloc(m_logSizePages, m_logSizePages - 1, m_pages);
+	delete m_pages.at(index);
+	vector <page*>::iterator itor = m_pages.begin() + index;
+	m_pages.erase(itor);
 }
 
 void Facebook::printPages() // print all pages on facebook
 {
-	for (int i = 0; i < m_logSizePages; i++)
+	for (int i = 0; i < m_pages.size(); i++)
 	{
 		cout << "#" << i + 1 << " ";
-		m_pages[i]->printPage();
+		m_pages.at(i)->printPage();
 	}
 }
 
@@ -94,30 +71,28 @@ void Facebook::starterFunc() //start the facebook with 3 members, 3 page, and 2 
 	member* starterUser2 = new member("Boaz Cohen", "04/05/1973");
 	member* starterUser3 = new member("Barak Kendell", "24/05/1981");
 	
-	m_members[0] = starterUser1;
-	m_members[1] = starterUser2;
-	m_members[2] = starterUser3;
-	m_logSizeMembers = 3;
+	m_members.push_back(starterUser1);
+	m_members.push_back(starterUser2);
+	m_members.push_back(starterUser3);
 
 	page* starterPage1 = new page("golf Lovers", "tonight! tiger woods challenging the world championship", "what is your favorite club?");
 	page* starterPage2 = new page("math for doctors", "google just found the next number in phi!!", "Leonhard Euler is the best");
 	page* starterPage3 = new page("weather news", "big storm coming to us this weekend!", "this is a butiful day today!");
 
-	m_pages[0] = starterPage1;
-	m_pages[1] = starterPage2;
-	m_pages[2] = starterPage3;
-	m_logSizePages = 3;
-	
-	m_members[0]->addPage(m_pages[2]);
-	m_members[1]->addFriend(m_members[2]);
-	m_members[2]->addPage(m_pages[0]);
+	m_pages.push_back(starterPage1);
+	m_pages.push_back(starterPage2);
+	m_pages.push_back(starterPage3);
 
-	m_members[0]->createStatus("hi im uzi");
-	m_members[0]->createStatus("i teach calculus 1");
-	m_members[1]->createStatus("hi im boaz");
-	m_members[1]->createStatus("i teach calculus 2");
-	m_members[2]->createStatus("hi im barak");
-	m_members[2]->createStatus("i teach probability");
+	m_members.at(0)->addPage(m_pages.at(2));
+	m_members.at(1)->addFriend(m_members.at(2));
+	m_members.at(2)->addPage(m_pages.at(0));
+
+	m_members.at(0)->createStatus("hi im uzi");
+	m_members.at(0)->createStatus("i teach calculus 1");
+	m_members.at(1)->createStatus("hi im boaz");
+	m_members.at(1)->createStatus("i teach calculus 2");
+	m_members.at(2)->createStatus("hi im barak");
+	m_members.at(2)->createStatus("i teach probability");
 
 }
 
@@ -184,14 +159,14 @@ int Facebook::whoAreYou() // return the user index
 	int ind;
 	cout << "who Are you? choose number: " << endl;
 	cout << "--------------" << endl;
-	for (int i = 1; i <= m_logSizeMembers; i++)
+	for (int i = 1; i <= m_members.size(); i++)
 	{
 		cout << "#" << i << endl;
-		m_members[i - 1]->printMyDetails();
+		m_members.at(i - 1)->printMyDetails();
 		cout << "----------------------------" << endl;
 	}
 	cin >> ind;
-	while (ind < 1 || ind >m_logSizeMembers)
+	while (ind < 1 || ind >m_members.size())
 	{
 		cout << "Invalid choice! Please choose again:" << endl;
 		cin >> ind;
@@ -204,14 +179,14 @@ int Facebook::whichPage() //return page index
 	int ind;
 	cout << "who Are you? choose number: " << endl;
 	cout << "--------------" << endl;
-	for (int i = 1; i <= m_logSizePages; i++)
+	for (int i = 1; i <= m_pages.size(); i++)
 	{
 		cout << "#" << i << endl;
-		m_pages[i - 1]->printPage();
+		m_pages.at(i - 1)->printPage();
 		cout << "----------------------------" << endl;
 	}
 	cin >> ind;
-	while (ind < 1 || ind > m_logSizePages)
+	while (ind < 1 || ind > m_pages.size())
 	{
 		cout << "Invalid choice! Please choose again:" << endl;
 		cin >> ind;
@@ -246,15 +221,15 @@ void Facebook::watch_MyFriend_Friend_List() //11
 	}
 	if (chose == 1)
 	{
-		m_members[indMe]->printFriends(); // the user friends list
+		m_members.at(indMe)->printFriends(); // the user friends list
 		index = whichOne(); // the user choose friend
-		m_members[indMe]->printMyFriendFriendList(index);
+		m_members.at(indMe)->printMyFriendFriendList(index);
 	}
 	else if (chose == 2)
 	{
 		printPages();
 		index = whichOne(); // the user choose friend
-		m_pages[index]->printFollowers();
+		m_pages.at(index)->printFollowers();
 
 	}
 }
@@ -262,36 +237,36 @@ void Facebook::watch_MyFriend_Friend_List() //11
 void  Facebook::print_All_FaceBook_Members_And_Pages() //10
 {
 	cout << "All Facebook users: " << endl;
-	for (int i = 0; i < m_logSizeMembers; i++)
+	for (int i = 0; i < m_members.size(); i++)
 	{
-		m_members[i]->printMyDetails();
+		m_members.at(i)->printMyDetails();
 		cout << endl;
 	}
 	cout << "----------------------------" << endl;
 	cout << endl;
 	cout << "All Pages in Facebook: " << endl;
-	for (int i = 0; i < m_logSizePages; i++)
+	for (int i = 0; i < m_pages.size(); i++)
 	{
-		m_pages[i]->printPage();
+		m_pages.at(i)->printPage();
 	}
 }
 
 void Facebook::UnlikePage() //9
 {
 	int indMe = whoAreYou();
-	if (m_members[indMe]->myNumOfPagesFollow() == 0)
+	if (m_members.at(indMe)->myNumOfPagesFollow() == 0)
 	{
 		cout << " you dont follow after any page" << endl;
 		return;
 	}
-	m_members[indMe]->printPages();
+	m_members.at(indMe)->printPages();
 	int pageInd = whichOne();
-	while (pageInd < 0 && pageInd > m_members[indMe]->myNumOfPagesFollow())
+	while (pageInd < 0 && pageInd > m_members.at(indMe)->myNumOfPagesFollow())
 	{
 		cout << "Invalid choice! Please choose again:" << endl;
 		pageInd = whichOne();
 	}
-	m_members[indMe]->removePage(pageInd);
+	m_members.at(indMe)->removePage(pageInd);
 }
 
 void Facebook::LikeNewPage() //8
@@ -300,32 +275,32 @@ void Facebook::LikeNewPage() //8
 	cout << "choose a page you want to follow:" << endl;
 	printPages();
 	int pageInd = whichOne();
-	while (pageInd < 0 && pageInd > m_logSizePages)
+	while (pageInd < 0 && pageInd > m_pages.size())
 	{
 		cout << "Invalid choice! Please choose again:" << endl;
 		pageInd = whichOne();
 	}
-	m_members[ind]->addPage(m_pages[pageInd]);
+	m_members.at(ind)->addPage(m_pages.at(pageInd));
 }
 
 void Facebook::RemoveFriend() //7
 {
 	
 	int indMe = whoAreYou();
-	if (m_members[indMe]->myNumOfFriends() == 0)
+	if (m_members.at(indMe)->myNumOfFriends() == 0)
 	{
 		cout << "you dont have any friends!" << endl;
 		return;
 	}
 	cout << "choose a friend to remove" << endl;
-	m_members[indMe]->printFriends();
+	m_members.at(indMe)->printFriends();
 	int friendInd = whichOne();
-	while (friendInd < 0 && friendInd > m_members[friendInd]->myNumOfFriends())
+	while (friendInd < 0 && friendInd > m_members.at(friendInd)->myNumOfFriends())
 	{
 		cout << "Invalid choice! Please choose again:" << endl;
 		friendInd = whoAreYou();
 	}
-	m_members[indMe]->removeFriend(friendInd);
+	m_members.at(indMe)->removeFriend(friendInd);
 }
 
 void Facebook::AddFriend() //6
@@ -334,30 +309,30 @@ void Facebook::AddFriend() //6
 	cout << "choose a friend you want to add" << endl;
 	printMembers();
 	int friendToAdd = whichOne();
-	while (friendToAdd < 0 && friendToAdd > m_logSizeMembers)
+	while (friendToAdd < 0 && friendToAdd > m_members.size())
 	{
 		cout << "Invalid choice! Please choose again:" << endl;
 		friendToAdd = whoAreYou();
 	}
-	m_members[indMe]->addFriend(m_members[friendToAdd]);
+	m_members.at(indMe)->addFriend(m_members.at(friendToAdd));
 }
 
 void Facebook::WhatIsMyfriend_Friends_Latest_Status() //5
 {
 	int member_index = whoAreYou();
-	if (m_members[member_index]->myNumOfFriends() == 0)
+	if (m_members.at(member_index)->myNumOfFriends() == 0)
 	{
 		cout << "you dont have any friends!" << endl;
 		return;
 	}
-	m_members[member_index]->printFriends();
+	m_members.at(member_index)->printFriends();
 	int friend_index = whichOne();
-	while (friend_index < 0 && friend_index > m_members[member_index]->myNumOfFriends())
+	while (friend_index < 0 && friend_index > m_members.at(member_index)->myNumOfFriends())
 	{
 		cout << "Invalid choice! Please choose again:" << endl;
 		friend_index = whoAreYou();
 	}
-	m_members[member_index]->print10lastStatuses(friend_index);
+	m_members.at(member_index)->print10lastStatuses(friend_index);
 }
 
 void Facebook::SeeAllMyStatus() //4
@@ -377,13 +352,13 @@ void Facebook::SeeAllMyStatus() //4
 	if (choose == 1)
 	{
 		index = whichPage();
-		m_pages[index]->printAllStatus();
+		m_pages.at(index)->printAllStatus();
 	}
 
 	else if (choose == 2)
 	{
 		index = whoAreYou();
-		m_members[index]->printMyStatuses();
+		m_members.at(index)->printMyStatuses();
 	}
 }
 
@@ -408,7 +383,7 @@ void  Facebook::WriteNewStatus() //3
 		cout << "what is on your mind? (no more then 1,000 letters)" << endl;
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cin.getline(contant, 1000);
-		m_members[index]->createStatus(contant);
+		m_members.at(index)->createStatus(contant);
 	}
 	
 	else if (choose == 1)
@@ -417,7 +392,7 @@ void  Facebook::WriteNewStatus() //3
 		cout << "what is on your mind? (no more then 1,000 letters)" << endl;
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cin.getline(contant, 1000);
-		m_pages[index]->createStatus(contant);
+		m_pages.at(index)->createStatus(contant);
 	}
 	else
 		cout << "you choose the worng number choose again" << endl;
