@@ -1,6 +1,5 @@
 #pragma once
 #include "Status.h"
-#include "generalFun.h"
 #include <vector>
 #pragma warning(disable: 4996)
 
