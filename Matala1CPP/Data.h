@@ -11,17 +11,17 @@ const int MAX_STATUS_LENGTH = 1000;
 class Facebook
 {
 public:
-	void printMembers();
-	void printPages();
+	void printMembers()const;
+	void printPages()const;
 	Facebook();
 	~Facebook();
-	void addMember(member* other);
+	void addMember(member* const other);
 	void removeMember(const int index);
 	void addPage(page* other);
 	void removePage(const int index);
 	void runMenu();
 	void starterFunc();
-	void printMenu();
+	void printMenu()const;
 	int whoAreYou();
 	int whichOne();
 	int whichPage();
@@ -32,7 +32,7 @@ private:
 	
 public:
 	void watch_MyFriend_Friend_List(); //11
-	void  print_All_FaceBook_Members_And_Pages(); //10
+	void  print_All_FaceBook_Members_And_Pages() const; //10
 	void UnlikePage(); //9
 	void LikeNewPage(); //8
 	void RemoveFriend(); //7

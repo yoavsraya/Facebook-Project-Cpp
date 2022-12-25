@@ -21,7 +21,7 @@ void page::removeFollower(member* follower) //remove follower from page
 	m_ListOFfollowers.erase(itr);
 }
 
-void page::createStatus(char* text) //create new status
+void page::createStatus(char* const text) //create new status
 {
 	status* tmp = new status;
 	tmp->getContent(text);
@@ -38,19 +38,14 @@ void page::printAllStatus() // print all statuses
 	}
 }
 
-void page::printPage() //print page
+void page::printPage()const //print page
 {
 	cout << m_name << endl;
 }
 
-void page::set(char* name)
+void page::set(char* const name)
 {
 	strcpy_s(m_name, name);
-}
-
-page::~page() //dt'or
-{
-
 }
 
 page::page(const char* name)
@@ -58,7 +53,7 @@ page::page(const char* name)
 	strcpy(m_name, name);
 }
 
-int page::findFollowerInd(member* follower) //find follower index
+int page::findFollowerInd(member* const follower)const//find follower index
 {
 	for (int i = 0; i < m_ListOFfollowers.size(); i++)
 	{
@@ -68,7 +63,7 @@ int page::findFollowerInd(member* follower) //find follower index
 	return -1;
 }
 
-void page::printFollowers() //print followers of a page
+void page::printFollowers()const //print followers of a page
 {
 	cout << "the page " << this->m_name << " follwers are:" << endl;
 	for (int i = 0; i < m_ListOFfollowers.size(); i++)

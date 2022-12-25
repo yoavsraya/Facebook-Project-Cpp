@@ -20,7 +20,7 @@ Facebook::~Facebook() //free program
 	}
 } 
 
-void Facebook::addMember(member* _member) //add new member to facebook
+void Facebook::addMember(member* const _member) //add new member to facebook
 {
 	
 	member* temp = new member;
@@ -34,7 +34,7 @@ void Facebook::removeMember(const int index) // remove friend from facebook
 	m_members.erase(itor);
 }
 
-void Facebook::printMembers() //print all members at facebook 
+void Facebook::printMembers()const //print all members at facebook 
 {
 	for (int i = 0; i < m_members.size(); i++)
 	{
@@ -56,7 +56,7 @@ void Facebook::removePage(const int index) //remove page from facebook
 	m_pages.erase(itor);
 }
 
-void Facebook::printPages() // print all pages on facebook
+void Facebook::printPages()const // print all pages on facebook
 {
 	for (int i = 0; i < m_pages.size(); i++)
 	{
@@ -148,7 +148,7 @@ void Facebook::runMenu() //run the facebook manu until exit
 	cout << "Thanks you for using our FaceBook! hope to see you soon again :)" << endl;
 }
 
-void Facebook::printMenu() //print manu option
+void Facebook::printMenu()const //print manu option
 {
 	cout << "\nwhat would you like to do? (insert number from 1-12):" << endl;
 	cout << "1 - Add New Member\n2 - Add New Page\n3 - Write New Status\n4 - See All My Status\n5 - What is My friend friends latest Status\n6 - Add friend\n7 - Remove Friend\n8 - Like New Page\n9 - Unlike Page\n10 - print All FaceBook Members And Pages\n11 - Watch My Friend List Friends\n12 - Exit" << endl << endl;
@@ -234,7 +234,7 @@ void Facebook::watch_MyFriend_Friend_List() //11
 	}
 }
 
-void  Facebook::print_All_FaceBook_Members_And_Pages() //10
+void  Facebook::print_All_FaceBook_Members_And_Pages()const //10
 {
 	cout << "All Facebook users: " << endl;
 	for (int i = 0; i < m_members.size(); i++)
