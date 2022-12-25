@@ -5,8 +5,11 @@ page::page(const char* name, const char* status1, const char* status2) //ct'or
 {
 	strcpy(m_name, name);
 	m_board.reserve(2);
-	m_board[0]->getContent(status1);
-	m_board[1]->getContent(status2);
+	status* firststatus = new status;
+	firststatus->getContent(status1);
+	m_board.push_back(firststatus);
+	status* secstatus = new status;
+	m_board.push_back(secstatus);
 }
 
 void page::addFollower(member* follower) // add foolower to a page
