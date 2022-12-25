@@ -48,11 +48,6 @@ void page::set(char* name)
 	strcpy_s(m_name, name);
 }
 
-page::~page() //dt'or
-{
-
-}
-
 page::page(const char* name)
 {
 	strcpy(m_name, name);
