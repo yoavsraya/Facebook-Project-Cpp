@@ -15,13 +15,13 @@ public:
 	page(const char* name, const char* status1, const char* status2);
 	page() {};
 	page(const char* name);
-	int findFollowerInd(member* follower);
-	void addFollower(member* follower);
+	int findFollowerInd(member* const follower)const;
+	void addFollower(member* const follower);
 	void removeFollower(member* follower);
-	void createStatus(char* text);
+	void createStatus(char* const text);
 	void printAllStatus();
-	void set(char* name);
-	void printPage();
-	void printFollowers();	
+	void set(char* const name);
+	void printPage()const;
+	void printFollowers()const;	
 };
 
