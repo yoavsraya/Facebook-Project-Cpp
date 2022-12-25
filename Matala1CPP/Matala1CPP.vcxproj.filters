@@ -47,9 +47,6 @@
     <ClCompile Include="Data.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="returnFriendIndex.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="generalFun.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
