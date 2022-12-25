@@ -26,7 +26,7 @@ void status::getContent(const char* content) //get contant to status
 }
 
 
-void status::printStatus() //print status
+void status::printStatus()const //print status
 {
 	cout << m_content << endl;
 	cout << "upload time and date: " << ctime(&dateAndtimeOfStatus) << endl;

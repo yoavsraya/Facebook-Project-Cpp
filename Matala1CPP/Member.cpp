@@ -1,12 +1,12 @@
 #include "Member.h"
 #include "Page.h"
 
-bool member::isPageExist(page* _page) // check if page is already exsist at his pages
+bool member::isPageExist(const page* _page)const // check if page is already exsist at his pages
 {
 	bool exist = false;
 	for (int i = 0; i < m_pages.size(); i++)
 	{
-		if (m_pages[i] == _page)
+		if (m_pages.at(i) == _page)
 		{
 			exist = true;
 			return exist;
@@ -15,12 +15,12 @@ bool member::isPageExist(page* _page) // check if page is already exsist at his 
 	return exist;
 }
 
-bool member::isFriendExist(member* _member) //check if friend is already at friend with this
+bool member::isFriendExist(const member* _member)const //check if friend is already at friend with this
 {
 	bool exist = false;
 	for (int i = 0; i < m_friendsList.size(); i++)
 	{
-		if (strcmp(m_friendsList[i]->m_name ,_member->m_name) == 0)
+		if (strcmp(m_friendsList.at(i)->m_name ,_member->m_name) == 0)
 		{
 			exist = true;
 			return exist;
@@ -29,7 +29,7 @@ bool member::isFriendExist(member* _member) //check if friend is already at frie
 	return exist;
 }
 
-void member::printMyFriendFriendList(int ind) //print one of the friend friend list
+void member::printMyFriendFriendList(int const ind) const //print one of the friend friend list
 {
 	m_friendsList.at(ind)->printFriends();
 }
@@ -71,12 +71,12 @@ void member::addFriend(member* _member) // add friend
 	_member->updateFriend(this);
 }
 
-int member::findFriendIndex(char* wanted) // find friend index
+int member::findFriendIndex(const char* wanted)const // find friend index
 {
 	int res;
 	for (int i = 0; i < m_friendsList.size(); i++)
 	{
-		if (strcmp(m_friendsList[i]->m_name, wanted) == 0)
+		if (strcmp(m_friendsList.at(i)->m_name, wanted) == 0)
 		{
 			res = i;
 			return res;
@@ -85,7 +85,7 @@ int member::findFriendIndex(char* wanted) // find friend index
 	return -1;
 }
 
-void member::removeFriend(int indOfRemove) // remove friend from friend list
+void member::removeFriend(const int indOfRemove) // remove friend from friend list
 {
 	if (m_friendsList.size() == 0)
 	{
@@ -108,19 +108,19 @@ void member::addPage(page* currPage) //add follow to a page
 	currPage->addFollower(this);
 }
 
-void member::removePage(int indOfRemove) //remove follow from page
+void member::removePage(const int indOfRemove) //remove follow from page
 {
 	if (m_pages.size() == 0)
 	{
 		cout << "You are not following any pages at all!" << endl;
 		return;
 	}
-	m_pages[indOfRemove]->removeFollower(this);
+	m_pages.at(indOfRemove)->removeFollower(this);
 	vector<page*>::iterator itr = m_pages.begin() + indOfRemove;
 	m_pages.erase(itr);
 }
 
-void member::printMyFriendStatuses() //print my friend statuses
+void member::printMyFriendStatuses()const //print my friend statuses
 {
 	for (int i = 0; i < m_friendsList.size(); i++)
 	{
@@ -129,7 +129,7 @@ void member::printMyFriendStatuses() //print my friend statuses
 
 }
 
-void member::printFriends() // print my friend list 
+void member::printFriends()const // print my friend list 
 {
 	cout << "My friend List is: " << endl;
 	for (int i = 0; i < m_friendsList.size(); i++)
@@ -139,7 +139,7 @@ void member::printFriends() // print my friend list
 	}
 }
 
-void member::printPages() // print the pages that i follow 
+void member::printPages()const // print the pages that i follow 
 {
 	cout << "List of the Pages I follow:" << endl;
 	for (int i = 0; i < m_pages.size(); i++)
@@ -149,7 +149,7 @@ void member::printPages() // print the pages that i follow
 	}
 }
 
-void member::printMyStatuses() // print my statuses
+void member::printMyStatuses()const // print my statuses
 {
 	cout << "My Statuses:" << endl;
 	for (int i = 0; i < m_mySatuses.size(); i++)
@@ -166,7 +166,7 @@ void member::createStatus(const char* _status) // create new status
 
 	for (int i = 0; i < m_friendsList.size(); i++)
 	{
-		m_friendsList.at(i)->updatelastStatuses(m_mySatuses[m_mySatuses.size() - 1]);
+		m_friendsList.at(i)->updatelastStatuses(m_mySatuses.at(m_mySatuses.size() - 1));
 	}
 }
 
@@ -187,37 +187,37 @@ void member::updatelastStatuses(status* _status) //update the 10 last statuses
 	}
 }
 
-void member::print10lastStatuses(int index) // print last 10 statuses
+void member::print10lastStatuses(int index)const // print last 10 statuses
 {
-	cout << "the last 10 statuses of " << m_friendsList[index]->m_name << " friends is:" << endl;
+	cout << "the last 10 statuses of " << m_friendsList.at(index)->m_name << " friends is:" << endl;
 	for (int i = 9; i > m_logSize10Statuses; i--)
 	{
-		m_friendsList[index]->m_last10statuses[i]->printStatus();
+		m_friendsList.at(index)->m_last10statuses[i]->printStatus();
 	}
 }
 
-void member::setName(char* name) 
+void member::setName(const char* name) 
 {
 	strcpy_s(m_name, name);
 }
 
-void member::setBirth(char* birth)
+void member::setBirth(const char* birth)
 {
 	strcpy_s(m_dateOfBirth, birth);
 }
 
-void member::printMyDetails() // print my info
+void member::printMyDetails()const // print my info
 {
 	cout << "Name: " << m_name << endl;
 	cout << "Born in: " << m_dateOfBirth << endl;
 }
 
-int member::myNumOfFriends() // return num of friend
+int member::myNumOfFriends()const // return num of friend
 {
 	return m_friendsList.size();
 }
 
-int member::myNumOfPagesFollow() // return num of pages i'm follow
+int member::myNumOfPagesFollow()const // return num of pages i'm follow
 {
 	return m_pages.size();
 }

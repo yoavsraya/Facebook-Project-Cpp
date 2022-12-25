@@ -8,7 +8,7 @@ class status
 {
 public:
 	void getContent(const char* content);
-	void printStatus();
+	void printStatus() const;
 	status(const char* content);
 	status(const status& other);
 	status& operator=(const status& other);

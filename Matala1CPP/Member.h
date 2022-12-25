@@ -19,27 +19,26 @@ public:
 	member(const char* name, const char* birthDate);
 	member(const member& other);
 	member() {};
-	~member();
-	bool isFriendExist(member* _member);
-	void printMyFriendFriendList(int ind);
-	bool isPageExist(page* _member);
-	int findFriendIndex(char* wanted);
+	bool isFriendExist(const member* _member)const;
+	void printMyFriendFriendList(int const ind) const;
+	bool isPageExist(const page* _page)const;
+	int findFriendIndex(const char* wanted)const;
 	void addFriend(member* _member); //add friend to friend list
-	void removeFriend(int indOfRemove); //remove friend from friend list
+	void removeFriend(const int indOfRemove); //remove friend from friend list
 	void addPage(page* currPage);
-	void removePage(int indOfRemove);
-	void printFriends();
-	void printPages();
+	void removePage(const int indOfRemove);
+	void printFriends() const;
+	void printPages() const;
 	void createStatus(const char* status);
-	void printMyStatuses();
-	void printMyDetails();
-	void setName(char* name);
-	void setBirth(char* birth);
-	void printMyFriendStatuses();
+	void printMyStatuses() const;
+	void printMyDetails() const;
+	void setName(const char* name);
+	void setBirth(const char* birth);
+	void printMyFriendStatuses() const;
 	void updatelastStatuses(status* _status);
-	void print10lastStatuses(int index);
-	int myNumOfFriends(); //return my number of friends
-	int myNumOfPagesFollow(); // return mt number of pages I following
+	void print10lastStatuses(const int index) const;
+	int myNumOfFriends()const ; //return my number of friends
+	int myNumOfPagesFollow()const; // return mt number of pages I following
 
 private:
 	void updateFriend(member* _member);
