@@ -23,8 +23,8 @@ Facebook::~Facebook() //free program
 void Facebook::addMember(member* const _member) //add new member to facebook
 {
 	
-	member* temp = new member;
-	m_members.push_back(temp);
+	//member* temp = new member;
+	m_members.push_back(_member);
 } 
 
 void Facebook::removeMember(const int index) // remove friend from facebook
@@ -45,8 +45,8 @@ void Facebook::printMembers()const //print all members at facebook
 
 void Facebook::addPage(page* _page) //add new page to facebook
 {
-	page* temp = new page;
-	m_pages.push_back(temp);
+	//page* temp = new page(_page);
+	m_pages.push_back(_page);
 }
 
 void Facebook::removePage(const int index) //remove page from facebook
