@@ -27,9 +27,6 @@
     <ClInclude Include="Page.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="generalFun.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Member.cpp">
@@ -45,12 +42,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Data.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="returnFriendIndex.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="generalFun.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

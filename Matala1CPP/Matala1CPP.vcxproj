@@ -140,18 +140,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Data.h" />
-    <ClInclude Include="generalFun.h" />
     <ClInclude Include="Member.h" />
     <ClInclude Include="Page.h" />
     <ClInclude Include="Status.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Data.cpp" />
-    <ClCompile Include="generalFun.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Member.cpp" />
     <ClCompile Include="Page.cpp" />
-    <ClCompile Include="returnFriendIndex.cpp" />
     <ClCompile Include="Status.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
