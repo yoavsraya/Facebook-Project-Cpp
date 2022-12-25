@@ -31,7 +31,7 @@ private:
 	vector <page*> m_pages;
 	
 public:
-	void watch_MyFriend_Friend_List(); //11
+	void watch_MyFriend_List(); //11
 	void  print_All_FaceBook_Members_And_Pages() const; //10
 	void UnlikePage(); //9
 	void LikeNewPage(); //8

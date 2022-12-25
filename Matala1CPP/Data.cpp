@@ -111,7 +111,7 @@ void Facebook::runMenu() //run the facebook manu until exit
 			runningProgram = false;
 			break;
 		case(11):
-			watch_MyFriend_Friend_List();
+			watch_MyFriend_List();
 			break;
 		case(10):
 			print_All_FaceBook_Members_And_Pages();
@@ -151,7 +151,7 @@ void Facebook::runMenu() //run the facebook manu until exit
 void Facebook::printMenu()const //print manu option
 {
 	cout << "\nwhat would you like to do? (insert number from 1-12):" << endl;
-	cout << "1 - Add New Member\n2 - Add New Page\n3 - Write New Status\n4 - See All My Status\n5 - What is My friend friends latest Status\n6 - Add friend\n7 - Remove Friend\n8 - Like New Page\n9 - Unlike Page\n10 - print All FaceBook Members And Pages\n11 - Watch My Friend List Friends\n12 - Exit" << endl << endl;
+	cout << "1 - Add New Member\n2 - Add New Page\n3 - Write New Status\n4 - See All My Status\n5 - What is My friend friends latest Status\n6 - Add friend\n7 - Remove Friend\n8 - Like New Page\n9 - Unlike Page\n10 - print All FaceBook Members And Pages\n11 - Watch My Friend List\n12 - Exit" << endl << endl;
 }
 
 int Facebook::whoAreYou() // return the user index 
@@ -204,34 +204,29 @@ int Facebook::whichOne() //ask the user to choose one
 
 //////////////////////All the menu functions 1-11
 
-void Facebook::watch_MyFriend_Friend_List() //11
+void Facebook::watch_MyFriend_List() //11
 {
-	int indMe = whoAreYou(); //who is the user 
-	int chose;
-	int index;
-	cout << "what would you like to do? (choose the number)" << endl;
-	cout << "----------------------------" << endl;
-	cout << "1. watch one of my friend friends list" << endl;
-	cout << "2. watch one of the pages followers" << endl;
-	cin >> chose;
-	while (chose != 1 && chose != 2)
+	int choose;
+	cout << "are you a member or a page?" << endl;
+	cout << "1. i'm member" << endl;
+	cout << "2. i'm page" << endl;
+	cin >> choose;
+	while (choose != 1 && choose != 2)
 	{
 		cout << "Invalid choice! Please choose again:" << endl;
-		cin >> chose;
+		cin >> choose;
 	}
-	if (chose == 1)
+	if (choose == 1)
 	{
-		m_members.at(indMe)->printFriends(); // the user friends list
-		index = whichOne(); // the user choose friend
-		m_members.at(indMe)->printMyFriendFriendList(index);
+		int indMe = whoAreYou(); //who is the user 
+		m_members.at(indMe)->printFriends();
 	}
-	else if (chose == 2)
+	else
 	{
-		printPages();
-		index = whichOne(); // the user choose friend
-		m_pages.at(index)->printFollowers();
+		int indMe = whichPage(); //who is the page
+		m_pages.at(indMe)->printFollowers();
+	}
 
-	}
 }
 
 void  Facebook::print_All_FaceBook_Members_And_Pages()const //10
