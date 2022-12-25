@@ -44,5 +44,11 @@
     <ClCompile Include="Data.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="generalFun.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+=======
+>>>>>>> 472805d2769a6a462014b8d236598c7c4022f1d3
   </ItemGroup>
 </Project>
