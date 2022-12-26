@@ -3,7 +3,7 @@
 
 page::page(const char* name, const char* status1, const char* status2) //ct'or
 {
-	strcpy(m_name, name);
+	m_name = name;
 	m_board.reserve(2);
 	status* firststatus = new status;
 	firststatus->getContent(status1);
@@ -48,12 +48,12 @@ void page::printPage()const //print page
 
 void page::set(char* const name)
 {
-	strcpy_s(m_name, name);
+	m_name = name;
 }
 
 page::page(const char* name)
 {
-	strcpy(m_name, name);
+	m_name = name;
 }
 
 int page::findFollowerInd(member* const follower)const//find follower index

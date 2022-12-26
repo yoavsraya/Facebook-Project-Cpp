@@ -9,14 +9,8 @@ status::status(const char* content)
 
 status::status(const status& other)
 {
-	m_content = strdup(other.m_content);
+	m_content = other.m_content;
 	time_t dateAndtimeOfStatus = other.dateAndtimeOfStatus;
-}
-
-
-status::~status()
-{
-	free (m_content);
 }
 
 void status::getContent(const char* content) //get contant to status

@@ -20,7 +20,7 @@ bool member::isFriendExist(const member* _member)const //check if friend is alre
 	bool exist = false;
 	for (int i = 0; i < m_friendsList.size(); i++)
 	{
-		if (strcmp(m_friendsList.at(i)->m_name ,_member->m_name) == 0)
+		if (m_friendsList.at(i)->m_name == _member->m_name)
 		{
 			exist = true;
 			return exist;
@@ -36,8 +36,8 @@ void member::printMyFriendFriendList(int const ind) const //print one of the fri
 
 member::member(const member& other) //ct'or
 {
-	strcpy_s(m_name, other.m_name);
-	strcpy_s(m_dateOfBirth, other.m_dateOfBirth);
+	m_name = other.m_name;
+	m_dateOfBirth = other.m_dateOfBirth;
 	m_friendsList = other.m_friendsList;
 	m_mySatuses = other.m_mySatuses;
 	m_pages = other.m_pages;
@@ -45,8 +45,8 @@ member::member(const member& other) //ct'or
 
 member::member(const char* name, const char* birthDate) //ct'or
 {
-	strcpy(m_name, name);
-	strcpy(m_dateOfBirth, birthDate);
+	m_name= name;
+	m_dateOfBirth = birthDate;
 }
 
 void member::updateFriend(member* _member) // update frien at friend list
@@ -76,7 +76,7 @@ int member::findFriendIndex(const char* wanted)const // find friend index
 	int res;
 	for (int i = 0; i < m_friendsList.size(); i++)
 	{
-		if (strcmp(m_friendsList.at(i)->m_name, wanted) == 0)
+		if (m_friendsList.at(i)->m_name == wanted)
 		{
 			res = i;
 			return res;
@@ -198,12 +198,12 @@ void member::print10lastStatuses(int index)const // print last 10 statuses
 
 void member::setName(const char* name) 
 {
-	strcpy_s(m_name, name);
+	m_name = name;
 }
 
 void member::setBirth(const char* birth)
 {
-	strcpy_s(m_dateOfBirth, birth);
+	m_dateOfBirth = birth;
 }
 
 void member::printMyDetails()const // print my info

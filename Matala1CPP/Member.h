@@ -5,6 +5,7 @@ class page;
 #include "Status.h"
 #include <vector>
 #include<array>
+#include <string>
 #pragma warning(disable: 4996)
 
 using namespace std;
@@ -42,8 +43,8 @@ public:
 
 private:
 	void updateFriend(member* _member);
-	char m_name[MAX_NAME_LEN] = "No One";
-	char m_dateOfBirth[DATE_LEN] = "00/00/0000";
+	string m_name;
+	string m_dateOfBirth;
 	int m_logSize10Statuses = 9;
 	vector<member*> m_friendsList;
 	vector<page*> m_pages;

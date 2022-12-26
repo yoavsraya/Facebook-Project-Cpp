@@ -1,13 +1,14 @@
 #pragma once
 #include "Status.h"
 #include <vector>
+#include <string>
 #pragma warning(disable: 4996)
 
 class member;
 
 class page
 {
-	char m_name[30];
+	string m_name;
 	vector <member*> m_ListOFfollowers;
 	vector <status*> m_board;
 

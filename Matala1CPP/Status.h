@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <time.h>
+#include <string>
 #pragma warning(disable: 4996)
 using namespace std;
 
@@ -13,10 +14,9 @@ public:
 	status(const status& other);
 	status& operator=(const status& other);
 	status(){};
-	~status();
 
 private:
 	time_t dateAndtimeOfStatus;
-	char* m_content;
+	string m_content;
 
 };
