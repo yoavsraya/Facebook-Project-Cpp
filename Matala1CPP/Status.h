@@ -9,7 +9,7 @@ class status
 {
 public:
 	void printStatus() const;
-	status(const char* content);
+	status(const char* content) noexcept(false);
 	status(const status& other);
 	bool operator==(const status& other)const;
 	bool operator!=(const status& other)const;

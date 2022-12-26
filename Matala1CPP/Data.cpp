@@ -142,6 +142,9 @@ void Facebook::runMenu() //run the facebook manu until exit
 		case(1):
 			AddNewMember();
 			break;
+		default:
+			cout << "Wrong choice, choose again..." << endl;
+			break;
 		}
 	}
 	cout << "Thanks you for using our FaceBook! hope to see you soon again :)" << endl;

@@ -3,7 +3,9 @@
 
 status::status(const char* content)
 {
-	m_content = _strdup(content);
+	m_content = content;
+	if (m_content.size() == 0)
+		throw "you tried to enter an empty status...";
 	time(&dateAndtimeOfStatus);
 }
 
@@ -36,6 +38,8 @@ status& status::operator=(const char* str)
 
 void status::printStatus()const //print status
 {
+	if (m_content.size() == 0)
+		throw "you tried to enter an empty status...";
 	cout << m_content << endl;
 	cout << "upload time and date: " << ctime(&dateAndtimeOfStatus) << endl;
 	cout << "------------------------------" << endl;

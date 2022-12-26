@@ -52,3 +52,12 @@ private:
 	vector<status*> m_mySatuses;
 	array<status*, 10> m_last10statuses;
 };
+
+class memberException : public exception
+{
+public:
+	virtual const char* what() const override
+	{
+		return ""
+	}
+};
