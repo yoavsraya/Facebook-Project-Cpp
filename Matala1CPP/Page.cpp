@@ -1,6 +1,20 @@
 #include "page.h"
 #include "Member.h"
 
+bool page::operator>(const page& _page) const
+{
+	if (m_ListOFfollowers.size() > _page.m_ListOFfollowers.size())
+		return true;
+	return false;
+}
+
+bool page::operator>(const member& _member) const
+{
+	if (m_ListOFfollowers.size() > _member.myNumOfFriends())
+		return true;
+	return false;
+}
+
 page::page(const char* name, const char* status1, const char* status2) //ct'or
 {
 	m_name = name;
@@ -10,6 +24,11 @@ page::page(const char* name, const char* status1, const char* status2) //ct'or
 	m_board.push_back(firststatus);
 	status* secstatus = new status;
 	m_board.push_back(secstatus);
+}
+
+int page::myNumOfFollowers()const
+{
+	return m_ListOFfollowers.size();
 }
 
 void page::addFollower(member* follower) // add foolower to a page

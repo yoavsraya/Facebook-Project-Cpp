@@ -84,7 +84,7 @@ void Facebook::starterFunc() //start the facebook with 3 members, 3 page, and 2 
 	m_pages.push_back(starterPage3);
 
 	m_members.at(0)->addPage(m_pages.at(2));
-	m_members.at(1)->addFriend(m_members.at(2));
+	*m_members.at(1) += *m_members.at(2);
 	m_members.at(2)->addPage(m_pages.at(0));
 
 	m_members.at(0)->createStatus("hi im uzi");
@@ -100,7 +100,6 @@ void Facebook::runMenu() //run the facebook manu until exit
 {
 	bool runningProgram = true;
 	int select;
-
 	while (runningProgram == true)
 	{
 		printMenu();
@@ -275,7 +274,8 @@ void Facebook::LikeNewPage() //8
 		cout << "Invalid choice! Please choose again:" << endl;
 		pageInd = whichOne();
 	}
-	m_members.at(ind)->addPage(m_pages.at(pageInd));
+	//m_members.at(ind)->addPage(m_pages.at(pageInd));
+	*m_members.at(ind) += *m_pages.at(pageInd);
 }
 
 void Facebook::RemoveFriend() //7
@@ -309,7 +309,7 @@ void Facebook::AddFriend() //6
 		cout << "Invalid choice! Please choose again:" << endl;
 		friendToAdd = whoAreYou();
 	}
-	m_members.at(indMe)->addFriend(m_members.at(friendToAdd));
+	*m_members.at(indMe) += *m_members.at(friendToAdd);
 }
 
 void Facebook::WhatIsMyfriend_Friends_Latest_Status() //5

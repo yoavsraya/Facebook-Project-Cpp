@@ -15,6 +15,27 @@ bool member::isPageExist(const page* _page)const // check if page is already exs
 	return exist;
 }
 
+bool member::operator>(const page& _page) const
+{
+	if (m_friendsList.size() > _page.myNumOfFollowers())
+		return true;
+	return false;
+}
+
+member& member::operator+=(member& _member)
+{
+	m_friendsList.push_back(&_member);
+	_member.m_friendsList.push_back(this);
+	return *this;
+}
+
+member& member::operator+=(page& _page)
+{
+	m_pages.push_back(&_page);
+	_page.addFollower(this);
+	return *this;
+}
+
 bool member::isFriendExist(const member* _member)const //check if friend is already at friend with this
 {
 	bool exist = false;
@@ -32,6 +53,13 @@ bool member::isFriendExist(const member* _member)const //check if friend is alre
 void member::printMyFriendFriendList(int const ind) const //print one of the friend friend list
 {
 	m_friendsList.at(ind)->printFriends();
+}
+
+bool member::operator>(const member& _member) const
+{
+	if (m_friendsList.size() > _member.m_friendsList.size())
+		return true;
+	return false;
 }
 
 member::member(const member& other) //ct'or
@@ -52,23 +80,6 @@ member::member(const string name, const string birthDate) //ct'or
 void member::updateFriend(member* _member) // update frien at friend list
 {
 	m_friendsList.push_back(_member);
-}
-
-void member::addFriend(member* _member) // add friend 
-{
-	if (isFriendExist(_member))
-	{
-		cout << "You are already friends!" << endl;
-		return;
-	}
-	if (_member == this)
-	{
-		cout << "you cant add your self!!" << endl;
-		return;
-	}
-
-	updateFriend(_member);
-	_member->updateFriend(this);
 }
 
 int member::findFriendIndex(const char* wanted)const // find friend index
@@ -169,7 +180,7 @@ void member::createStatus(const char* _status) // create new status
 
 void member::updatelastStatuses(status* _status) //update the 10 last statuses
 {
-	if (m_last10statuses.size() == 0)
+	if (m_logSize10Statuses == 0)
 	{
 		for (int i = 9; i > 0; i--)
 		{

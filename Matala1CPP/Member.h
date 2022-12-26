@@ -17,11 +17,14 @@ public:
 	member(const string name, const string birthDate);
 	member(const member& other);
 	member() {};
+	member& operator+=(member& _member);
+	member& operator+=(page& _page);
+	bool operator>( const member& _member) const;
+	bool operator>( const page& _page) const;
 	bool isFriendExist(const member* _member)const;
 	void printMyFriendFriendList(int const ind) const;
 	bool isPageExist(const page* _page)const;
 	int findFriendIndex(const char* wanted)const;
-	void addFriend(member* _member); //add friend to friend list
 	void removeFriend(const int indOfRemove); //remove friend from friend list
 	void addPage(page* currPage);
 	void removePage(const int indOfRemove);

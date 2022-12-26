@@ -16,7 +16,10 @@ public:
 	page(const char* name, const char* status1, const char* status2);
 	page() {};
 	page(const char* name);
+	bool operator>(const page& _page)const;
+	bool operator>(const member& _member)const;
 	int findFollowerInd(member* const follower)const;
+	int myNumOfFollowers() const;
 	void addFollower(member* const follower);
 	void removeFollower(member* follower);
 	void createStatus(char* const text);
