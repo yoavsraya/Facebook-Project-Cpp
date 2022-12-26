@@ -12,7 +12,8 @@ public:
 	void printStatus() const;
 	status(const char* content);
 	status(const status& other);
-	status& operator=(const status& other);
+	bool operator==(const status& other)const;
+	bool operator!=(const status& other)const;
 	status(){};
 
 private:

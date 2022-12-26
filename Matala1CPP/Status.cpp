@@ -13,6 +13,20 @@ status::status(const status& other)
 	time_t dateAndtimeOfStatus = other.dateAndtimeOfStatus;
 }
 
+bool status::operator==(const status& other) const
+{
+	if (m_content == other.m_content)
+		return true;
+	return false;
+}
+
+bool status::operator!=(const status& other) const
+{
+	if (m_content != other.m_content)
+		return true;
+	return false;
+}
+
 void status::getContent(const char* content) //get contant to status
 {
 	m_content = strdup(content);
