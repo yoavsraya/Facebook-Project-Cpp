@@ -58,6 +58,6 @@ class memberException : public exception
 public:
 	virtual const char* what() const override
 	{
-		return ""
+		return "problemos";
 	}
 };
