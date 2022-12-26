@@ -1,6 +1,35 @@
 #include "page.h"
 #include "Member.h"
 
+page::page(const char* name, const char* status1, const char* status2)noexcept(false)
+{
+	if (strlen(name) == 0)
+		throw "Invalid Name!";
+	m_name = name;
+	m_board.reserve(2);
+	status* firststatus;
+	try
+	{
+		firststatus = new status;
+	}
+	catch (std::bad_alloc& e)
+	{
+		throw std::bad_alloc();
+	}
+	*firststatus = status1;
+	m_board.push_back(firststatus);
+	status* secstatus = new status;
+	try
+	{
+		firststatus = new status;
+	}
+	catch (std::bad_alloc& e)
+	{
+		throw std::bad_alloc();
+	}
+	*secstatus = status2;
+	m_board.push_back(secstatus);
+}
 bool page::operator>(const page& _page) const
 {
 	if (m_ListOFfollowers.size() > _page.m_ListOFfollowers.size())
@@ -15,17 +44,6 @@ bool page::operator>(const member& _member) const
 	return false;
 }
 
-page::page(const char* name, const char* status1, const char* status2) //ct'or
-{
-	m_name = name;
-	m_board.reserve(2);
-	status* firststatus = new status;
-	*firststatus = status1;
-	m_board.push_back(firststatus);
-	status* secstatus = new status;
-	*secstatus = status2;
-	m_board.push_back(secstatus);
-}
 
 int page::myNumOfFollowers()const
 {
@@ -47,6 +65,14 @@ void page::removeFollower(member* follower) //remove follower from page
 void page::createStatus(char* const text) //create new status
 {
 	status* tmp = new status;
+	try
+	{
+		tmp = new status;
+	}
+	catch (std::bad_alloc& e)
+	{
+		throw std::bad_alloc();
+	}
 	*tmp = text;
 	m_board.push_back(tmp);
 	
@@ -68,11 +94,15 @@ void page::printPage()const //print page
 
 void page::set(char* const name)
 {
+	if (strlen(name) == 0)
+		throw "invalid name";
 	m_name = name;
 }
 
 page::page(const char* name)
 {
+	if (strlen(name) == 0)
+		throw "invalid name";
 	m_name = name;
 }
 
@@ -95,3 +125,4 @@ void page::printFollowers()const //print followers of a page
 		m_ListOFfollowers[i]->printMyDetails();
 	}
 }
+

@@ -13,7 +13,7 @@ class page
 	vector <status*> m_board;
 
 public:
-	page(const char* name, const char* status1, const char* status2);
+	page(const char* name, const char* status1, const char* status2) noexcept(false);
 	page() {};
 	page(const char* name);
 	bool operator>(const page& _page)const;
@@ -28,4 +28,15 @@ public:
 	void printPage()const;
 	void printFollowers()const;	
 };
+
+class pageException : public std::exception
+{
+public:
+	virtual const char* what() const override
+	{
+		return "Faild create page\n";
+	}
+};
+
+class 
 
