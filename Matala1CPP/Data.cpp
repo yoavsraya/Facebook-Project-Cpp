@@ -193,6 +193,80 @@ int Facebook::whichPage() //return page index
 	return ind - 1;
 }
 
+void Facebook::WhoisBigger()
+{
+	int choose1;
+	int choose2;
+	int indme;
+	int indcompre;
+	bool res;
+
+	cout << "are you page or member? enter 1 for member, 2 for page" << endl;
+	cin >> choose1;
+	if (choose1 == 1)
+		 indme = whoAreYou();
+	else if (choose1 == 2)
+		 indme = whichPage();
+	cout << "what do you want to compre with? choose 1 for member, 2 for page" << endl;
+	cin >> choose2;
+	if (choose2 == 1)
+		 indcompre = whichOne();
+	else if (choose2 == 2)
+		 indcompre = whichPage();
+
+	if (choose1 == choose2 == 1)
+	{
+		if (*m_members[indme] > *m_members[indcompre])
+		{
+			m_members[indme]->printMyDetails();
+			cout << "have more friend then ";
+			m_members[indcompre]->printMyDetails();
+		}
+		else
+		{
+			m_members[indme]->printMyDetails();
+			cout << "have less friend then ";
+			m_members[indcompre]->printMyDetails();
+		}
+	}
+
+	else if (choose1 == choose2 == 2)
+	{
+		if (*m_pages[indme] > *m_pages[indcompre])
+		{
+			m_pages[indme]->printPage();
+			cout << "have more followers then ";
+			m_pages[indcompre]->printPage();
+		}
+		else
+		{
+			m_pages[indme]->printPage();
+			cout << "have less followers then ";
+			m_pages[indcompre]->printPage();
+		}
+	}
+	
+	else if (choose1 == 1 && choose2 == 2)
+	{
+		if (*m_members[indme] > *m_pages[indcompre])
+			cout << "the member have more";
+		else
+			cout << "the page have more";
+	}
+
+	else if (choose1 == 2 && choose2 == 1)
+	{
+		if (*m_pages[indme] > *m_members[indcompre])
+			cout << "the page have more";
+		else
+			cout << "the member have more";
+	}
+
+		
+	
+
+}
+
 int Facebook::whichOne() //ask the user to choose one 
 {
 	cout << "choose One:" << endl;

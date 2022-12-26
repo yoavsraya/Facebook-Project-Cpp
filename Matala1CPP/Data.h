@@ -25,6 +25,7 @@ public:
 	int whoAreYou();
 	int whichOne();
 	int whichPage();
+	void WhoisBigger();
 
 private:
 	vector <member*> m_members;
@@ -42,5 +43,6 @@ public:
 	void  WriteNewStatus(); //3
 	void AddNewPage(); //2
 	void AddNewMember(); //1
+	
 };
 
