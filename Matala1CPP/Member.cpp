@@ -179,13 +179,13 @@ void member::createStatus(const char* _status) // create new status
 
 void member::updatelastStatuses(status* _status) //update the 10 last statuses
 {
-	if (m_logSize10Statuses == 0)
+	if (m_logSize10Statuses == -1)
 	{
 		for (int i = 9; i > 0; i--)
 		{
 			m_last10statuses[i] = m_last10statuses[i - 1];
 		}
-		m_last10statuses[m_logSize10Statuses] = _status;
+		m_last10statuses[0] = _status;
 	}
 	else
 	{
