@@ -34,7 +34,7 @@ public:
 	void setBirth(const char* birth);
 	void printMyFriendStatuses() const;
 	void updatelastStatuses(status* _status);
-	void print10lastStatuses(const int index) const;
+	void print10lastStatuses() const;
 	int myNumOfFriends()const ; //return my number of friends
 	int myNumOfPagesFollow()const; // return mt number of pages I following
 	void printMyFriendLastStatuses()const;

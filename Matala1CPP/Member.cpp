@@ -164,10 +164,7 @@ void member::createStatus(const char* _status) // create new status
 	newStatus->getContent(_status);
 	m_mySatuses.push_back(newStatus);
 
-	for (int i = 0; i < m_friendsList.size(); i++)
-	{
-		m_friendsList.at(i)->updatelastStatuses(m_mySatuses.at(m_mySatuses.size() - 1));
-	}
+	updatelastStatuses(newStatus);
 }
 
 void member::updatelastStatuses(status* _status) //update the 10 last statuses
@@ -187,12 +184,12 @@ void member::updatelastStatuses(status* _status) //update the 10 last statuses
 	}
 }
 
-void member::print10lastStatuses(int index)const // print last 10 statuses
+void member::print10lastStatuses()const // print last 10 statuses
 {
-	cout << "the last 10 statuses of " << m_friendsList.at(index)->m_name << " friends is:" << endl;
+	cout << "the last 10 statuses of " << m_name << " is:" << endl;
 	for (int i = 9; i > m_logSize10Statuses; i--)
 	{
-		m_friendsList.at(index)->m_last10statuses[i]->printStatus();
+		m_last10statuses[i]->printStatus();
 	}
 }
 
@@ -222,10 +219,10 @@ int member::myNumOfPagesFollow()const // return num of pages i'm follow
 	return m_pages.size();
 }
 
-//void member::printMyFriendLastStatuses() const
-//{
-//	for (int i = 0; i < m_friendsList.size(); i++)
-//	{
-//		m_friendsList.at(i)->print10lastStatuses();
-//	}
-//}
+void member::printMyFriendLastStatuses() const
+{
+	for (int i = 0; i < m_friendsList.size(); i++)
+	{
+		m_friendsList.at(i)->print10lastStatuses();
+	}
+}

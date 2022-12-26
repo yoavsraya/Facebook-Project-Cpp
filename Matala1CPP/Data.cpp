@@ -321,7 +321,9 @@ void Facebook::WhatIsMyfriend_Friends_Latest_Status() //5
 		return;
 	}
 	
-	m_members.at(member_index);//call function that call print10last statuses
+	
+	
+	m_members.at(member_index)->printMyFriendLastStatuses();
 }
 
 void Facebook::SeeAllMyStatus() //4
