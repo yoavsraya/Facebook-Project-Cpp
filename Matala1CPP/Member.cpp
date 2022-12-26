@@ -43,9 +43,9 @@ member::member(const member& other) //ct'or
 	m_pages = other.m_pages;
 }
 
-member::member(const char* name, const char* birthDate) //ct'or
+member::member(const string name, const string birthDate) //ct'or
 {
-	m_name= name;
+	m_name = name;
 	m_dateOfBirth = birthDate;
 }
 
@@ -221,3 +221,11 @@ int member::myNumOfPagesFollow()const // return num of pages i'm follow
 {
 	return m_pages.size();
 }
+
+//void member::printMyFriendLastStatuses() const
+//{
+//	for (int i = 0; i < m_friendsList.size(); i++)
+//	{
+//		m_friendsList.at(i)->print10lastStatuses();
+//	}
+//}

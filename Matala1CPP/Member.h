@@ -9,15 +9,12 @@ class page;
 #pragma warning(disable: 4996)
 
 using namespace std;
-const int MAX_NAME_LEN = 30;
-const int DATE_LEN = 11;
-
 
 class member
 {
 public:
 	//member(const char* name, const char* birthDate,const char* status1,const char* status2);
-	member(const char* name, const char* birthDate);
+	member(const string name, const string birthDate);
 	member(const member& other);
 	member() {};
 	bool isFriendExist(const member* _member)const;
@@ -40,6 +37,7 @@ public:
 	void print10lastStatuses(const int index) const;
 	int myNumOfFriends()const ; //return my number of friends
 	int myNumOfPagesFollow()const; // return mt number of pages I following
+	void printMyFriendLastStatuses()const;
 
 private:
 	void updateFriend(member* _member);
