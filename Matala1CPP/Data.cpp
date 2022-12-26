@@ -320,14 +320,8 @@ void Facebook::WhatIsMyfriend_Friends_Latest_Status() //5
 		cout << "you dont have any friends!" << endl;
 		return;
 	}
-	m_members.at(member_index)->printFriends();
-	int friend_index = whichOne();
-	while (friend_index < 0 && friend_index > m_members.at(member_index)->myNumOfFriends())
-	{
-		cout << "Invalid choice! Please choose again:" << endl;
-		friend_index = whoAreYou();
-	}
-	m_members.at(member_index)->print10lastStatuses(friend_index);
+	
+	m_members.at(member_index);//call function that call print10last statuses
 }
 
 void Facebook::SeeAllMyStatus() //4
