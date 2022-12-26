@@ -172,9 +172,8 @@ void member::printMyStatuses()const // print my statuses
 void member::createStatus(const char* _status) // create new status
 {
 	status* newStatus = new status;
-	newStatus->getContent(_status);
+	*newStatus = _status;
 	m_mySatuses.push_back(newStatus);
-
 	updatelastStatuses(newStatus);
 }
 

@@ -27,12 +27,12 @@ bool status::operator!=(const status& other) const
 	return false;
 }
 
-void status::getContent(const char* content) //get contant to status
+status& status::operator=(const char* str)
 {
-	m_content = strdup(content);
+	m_content = str;
 	time(&dateAndtimeOfStatus);
+	return *this;
 }
-
 
 void status::printStatus()const //print status
 {

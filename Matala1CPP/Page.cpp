@@ -20,9 +20,10 @@ page::page(const char* name, const char* status1, const char* status2) //ct'or
 	m_name = name;
 	m_board.reserve(2);
 	status* firststatus = new status;
-	firststatus->getContent(status1);
+	*firststatus = status1;
 	m_board.push_back(firststatus);
 	status* secstatus = new status;
+	*secstatus = status2;
 	m_board.push_back(secstatus);
 }
 
@@ -46,7 +47,7 @@ void page::removeFollower(member* follower) //remove follower from page
 void page::createStatus(char* const text) //create new status
 {
 	status* tmp = new status;
-	tmp->getContent(text);
+	*tmp = text;
 	m_board.push_back(tmp);
 	
 }

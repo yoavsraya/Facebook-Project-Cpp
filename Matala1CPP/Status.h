@@ -8,12 +8,12 @@ using namespace std;
 class status
 {
 public:
-	void getContent(const char* content);
 	void printStatus() const;
 	status(const char* content);
 	status(const status& other);
 	bool operator==(const status& other)const;
 	bool operator!=(const status& other)const;
+	status& operator=(const char* str);
 	status(){};
 
 private:
