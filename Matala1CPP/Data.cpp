@@ -23,8 +23,6 @@ Facebook::~Facebook() //free program
 
 void Facebook::addMember(member* const _member) //add new member to facebook
 {
-	
-	//member* temp = new member;
 	m_members.push_back(_member);
 } 
 
@@ -67,17 +65,51 @@ void Facebook::printPages()const // print all pages on facebook
 
 void Facebook::starterFunc() //start the facebook with 3 members, 3 page, and 2 statuses each
 {
-	member* starterUser1 = new member("Uzi Harush", "06/09/1988");
-	member* starterUser2 = new member("Boaz Cohen", "04/05/1973");
-	member* starterUser3 = new member("Barak Kendell", "24/05/1981");
-	
+	member* starterUser1;
+	member* starterUser2;
+	member* starterUser3;
+	try
+	{
+		starterUser1 = new member("Uzi Harush", "06/09/1988");
+		starterUser2 = new member("Boaz Cohen", "04/05/1973");
+		starterUser3 = new member("Barak Kendell", "24/05/1981");
+	}
+	catch(wrongInput& e)
+	{
+		delete starterUser1;
+		delete starterUser2;
+		delete starterUser3;
+		throw wrongInput();
+	}
 	m_members.push_back(starterUser1);
 	m_members.push_back(starterUser2);
 	m_members.push_back(starterUser3);
 
-	page* starterPage1 = new page("golf Lovers", "tonight! tiger woods challenging the world championship", "what is your favorite club?");
-	page* starterPage2 = new page("math for doctors", "google just found the next number in phi!!", "Leonhard Euler is the best");
-	page* starterPage3 = new page("weather news", "big storm coming to us this weekend!", "this is a butiful day today!");
+	page* starterPage1;
+	page* starterPage2;
+	page* starterPage3;
+
+	try
+	{
+		starterPage1 = new page("golf Lovers", "tonight! tiger woods challenging the world championship", "what is your favorite club?");
+		starterPage2 = new page("math for doctors", "google just found the next number in phi!!", "Leonhard Euler is the best");
+		starterPage3 = new page("weather news", "big storm coming to us this weekend!", "this is a butiful day today!");
+	}
+	catch(bad_alloc& e)
+	{
+		delete starterPage1;
+		delete starterPage2;
+		delete starterPage3;
+		throw badAlloc();
+	}
+	catch(wrongInput& e)
+	{
+		throw wrongInput();
+	}
+	catch(badAlloc& e)
+	{
+		throw badAlloc();
+	}
 
 	m_pages.push_back(starterPage1);
 	m_pages.push_back(starterPage2);
@@ -454,8 +486,11 @@ void Facebook::AddNewPage()noexcept(false) //2
 	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	cin.getline(name, MAX_NAME_LENGTH);
 	page* newPage = new page(name);
-	if (!newPage)
+	if (!newPage) 
+	{
+		delete newPage;
 		throw badAlloc();
+	}
 	addPage(newPage);
 }
 
@@ -492,5 +527,10 @@ void Facebook::AddNewMember()noexcept(false) //1
 	date.push_back('/');
 	date += itoa(year, buffer, 10);
 	member* newMember = new member(name, date);
+	if(!newMember)
+	{
+		delete newMember;
+		throw badAlloc();
+	}
 	addMember(newMember);
 }
