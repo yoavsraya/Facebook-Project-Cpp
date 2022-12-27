@@ -171,6 +171,8 @@ void Facebook::runMenu() //run the facebook manu until exit
 				AddNewMember();
 				break;
 			default:
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				cout << "Wrong choice, choose again..." << endl;
 				break;
 			}
