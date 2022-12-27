@@ -15,7 +15,6 @@ page::page(const char* name, const char* status1, const char* status2) noexcept(
 	}
 	catch (bad_alloc& e)
 	{
-		delete firststatus;
 		throw badAlloc();
 	}
 	*firststatus = status1;

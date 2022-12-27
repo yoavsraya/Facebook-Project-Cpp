@@ -76,9 +76,6 @@ void Facebook::starterFunc() //start the facebook with 3 members, 3 page, and 2 
 	}
 	catch(wrongInput& e)
 	{
-		delete starterUser1;
-		delete starterUser2;
-		delete starterUser3;
 		throw wrongInput();
 	}
 	m_members.push_back(starterUser1);
@@ -97,9 +94,6 @@ void Facebook::starterFunc() //start the facebook with 3 members, 3 page, and 2 
 	}
 	catch(bad_alloc& e)
 	{
-		delete starterPage1;
-		delete starterPage2;
-		delete starterPage3;
 		throw badAlloc();
 	}
 	catch(wrongInput& e)
