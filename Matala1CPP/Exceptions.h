@@ -37,3 +37,30 @@ public:
 		return "You are already friends";
 	}
 };
+
+class emptyFriendList : public exception
+{
+public:
+	virtual const char* what() const override
+	{
+		return "You dont have any friends";
+	}
+};
+
+class emptyPageList : public exception
+{
+public:
+	virtual const char* what() const override
+	{
+		return "You are not following on any pages";
+	}
+};
+
+class emptyFollowerList : public exception
+{
+public:
+	virtual const char* what() const override
+	{
+		return "Nobody follow this page";
+	}
+};

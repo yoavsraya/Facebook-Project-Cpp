@@ -1,5 +1,6 @@
 #include "Member.h"
 #include "Page.h"
+#include "Exceptions.h"
 
 bool member::isPageExist(const page* _page)const // check if page is already exsist at his pages
 {
@@ -99,10 +100,8 @@ int member::findFriendIndex(const char* wanted)const // find friend index
 void member::removeFriend(const int indOfRemove) // remove friend from friend list
 {
 	if (m_friendsList.size() == 0)
-	{
-		cout << "You dont have friends at all!" << endl;
-		return;
-	}
+		throw emptyFriendList();
+
 	vector<member*>::iterator itr = m_friendsList.begin() + indOfRemove;
 	m_friendsList.erase(itr);
 }
@@ -122,10 +121,7 @@ void member::addPage(page* currPage) //add follow to a page
 void member::removePage(const int indOfRemove) //remove follow from page
 {
 	if (m_pages.size() == 0)
-	{
-		cout << "You are not following any pages at all!" << endl;
-		return;
-	}
+		throw emptyPageList();
 	m_pages.at(indOfRemove)->removeFollower(this);
 	vector<page*>::iterator itr = m_pages.begin() + indOfRemove;
 	m_pages.erase(itr);
@@ -172,6 +168,9 @@ void member::printMyStatuses()const // print my statuses
 void member::createStatus(const char* _status) // create new status
 {
 	status* newStatus = new status;
+	if (!newStatus)
+		throw badAlloc();
+
 	*newStatus = _status;
 	m_mySatuses.push_back(newStatus);
 	updatelastStatuses(newStatus);
