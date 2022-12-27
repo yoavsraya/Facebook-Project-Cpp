@@ -271,6 +271,16 @@ void Facebook::WhoisBigger()
 
 }
 
+bool Facebook::isExsist(string name)
+{
+	for (int i = 0; i < m_members.size(); i++)
+	{
+		if (m_members.at(i)->getName() == name)
+			return false;
+	}
+	return true;
+}
+
 int Facebook::whichOne() //ask the user to choose one 
 {
 	cout << "choose One:" << endl;
@@ -478,17 +488,38 @@ void Facebook::AddNewPage() //2
 	addPage(newPage);
 }
 
-void Facebook::AddNewMember() //1
+void Facebook::AddNewMember()noexcept(false) //1
 {
-	char name[MAX_NAME_LENGTH];
-	char date[MAX_DATE_LENGTH];
+	string name;
+	char buffer[2];
+	string date;
+
+	int day, month, year;
 
 	cout << "What is your name?" << endl;
 	cin.ignore(numeric_limits<streamsize>::max(), '\n');
-	cin.getline(name, MAX_NAME_LENGTH);
-	if 
-	cout << "When have you burn? insert XX/XX/XXXX" << endl;
-	cin.getline(date, MAX_DATE_LENGTH);
+	getline(cin, name);
+	if (name.size() == 0)
+		throw wrongInput();
+	else if (isExsist(name) == false)
+		throw friendExist();
+	cout << "When have you burn? insert day:" << endl;
+	cin >> day;
+	if (day < 1 || day >30)
+		throw wrongInput();
+	cout << "insert month:" << endl;
+	cin >> month;
+	if (month < 1 || month >12)
+		throw wrongInput();
+	cout << "insert year:" << endl;
+	cin >> year;
+	if (year < 1)
+		throw wrongInput();
+	date += itoa(day, buffer, 10);
+	date.push_back('/');
+	date += itoa(month, buffer, 10);
+	date.push_back('/');
+	date += itoa(year, buffer, 10);
 	member* newMember = new member(name, date);
 	addMember(newMember);
 }

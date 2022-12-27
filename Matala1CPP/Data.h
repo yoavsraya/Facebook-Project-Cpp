@@ -26,23 +26,24 @@ public:
 	int whichOne(); //return user index
 	int whichPage(); //return page
 	void WhoisBigger(); //use oprator > (Q2)
+	bool isExsist(string name);
 
 private:
 	vector <member*> m_members;
 	vector <page*> m_pages;
 	
 public:
-	void watch_MyFriend_List(); //11
-	void  print_All_FaceBook_Members_And_Pages() const; //10
-	void UnlikePage(); //9
-	void LikeNewPage(); //8
-	void RemoveFriend(); //7
-	void AddFriend(); //6
-	void WhatIsMyfriend_Friends_Latest_Status(); //5
-	void SeeAllMyStatus(); //4
-	void  WriteNewStatus(); //3
-	void AddNewPage(); //2
-	void AddNewMember(); //1
+	void watch_MyFriend_List()noexcept(false); //11
+	void  print_All_FaceBook_Members_And_Pages() const noexcept(false); //10
+	void UnlikePage()noexcept(false); //9
+	void LikeNewPage()noexcept(false); //8
+	void RemoveFriend()noexcept(false); //7
+	void AddFriend()noexcept(false); //6
+	void WhatIsMyfriend_Friends_Latest_Status()noexcept(false); //5
+	void SeeAllMyStatus()noexcept(false); //4
+	void  WriteNewStatus()noexcept(false); //3
+	void AddNewPage()noexcept(false); //2
+	void AddNewMember()noexcept(false); //1
 	
 };
 

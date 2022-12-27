@@ -236,3 +236,8 @@ void member::printMyFriendLastStatuses() const
 		m_friendsList.at(i)->print10lastStatuses();
 	}
 }
+
+string member::getName()
+{
+	return m_name;
+}
