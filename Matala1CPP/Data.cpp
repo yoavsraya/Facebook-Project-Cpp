@@ -421,7 +421,7 @@ void Facebook::RemoveFriend()noexcept(false) //7
 	cout << "choose a friend to remove" << endl;
 	m_members.at(indMe)->printFriends();
 	int friendInd = whichOne();
-	if (friendInd < 0 && friendInd > m_members.at(friendInd)->myNumOfFriends())
+	if (friendInd < 0 || friendInd > m_members.at(indMe)->myNumOfFriends())
 		throw wrongInput();
 
 	m_members.at(indMe)->removeFriend(friendInd);
