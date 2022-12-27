@@ -286,7 +286,7 @@ int Facebook::whichOne() //ask the user to choose one
 
 //////////////////////All the menu functions 1-11
 
-void Facebook::watch_MyFriend_List() //11
+void Facebook::watch_MyFriend_List()noexcept(false) //11
 {
 	int choose;
 	cout << "are you a member or a page?" << endl;
@@ -309,7 +309,7 @@ void Facebook::watch_MyFriend_List() //11
 
 }
 
-void  Facebook::print_All_FaceBook_Members_And_Pages()const //10
+void  Facebook::print_All_FaceBook_Members_And_Pages()const noexcept(false)//10
 {
 	cout << "All Facebook users: " << endl;
 	for (int i = 0; i < m_members.size(); i++)
@@ -326,7 +326,7 @@ void  Facebook::print_All_FaceBook_Members_And_Pages()const //10
 	}
 }
 
-void Facebook::UnlikePage() //9
+void Facebook::UnlikePage()noexcept(false) //9
 {
 	int indMe = whoAreYou();
 	if (m_members.at(indMe)->myNumOfPagesFollow() == 0)
@@ -342,7 +342,7 @@ void Facebook::UnlikePage() //9
 	m_members.at(indMe)->removePage(pageInd);
 }
 
-void Facebook::LikeNewPage() //8
+void Facebook::LikeNewPage()noexcept(false) //8
 {
 	int ind = whoAreYou();
 	cout << "choose a page you want to follow:" << endl;
@@ -353,7 +353,7 @@ void Facebook::LikeNewPage() //8
 	*m_members.at(ind) += *m_pages.at(pageInd);
 }
 
-void Facebook::RemoveFriend() //7
+void Facebook::RemoveFriend()noexcept(false) //7
 {
 	
 	int indMe = whoAreYou();
@@ -369,7 +369,7 @@ void Facebook::RemoveFriend() //7
 	m_members.at(indMe)->removeFriend(friendInd);
 }
 
-void Facebook::AddFriend() //6
+void Facebook::AddFriend()noexcept(false) //6
 {
 	int indMe = whoAreYou();
 	cout << "choose a friend you want to add" << endl;
@@ -390,7 +390,7 @@ void Facebook::WhatIsMyfriend_Friends_Latest_Status() //5
 	m_members.at(member_index)->printMyFriendLastStatuses();
 }
 
-void Facebook::SeeAllMyStatus() //4
+void Facebook::SeeAllMyStatus()noexcept(false) //4
 {
 	int choose;
 	int index;
@@ -415,7 +415,7 @@ void Facebook::SeeAllMyStatus() //4
 	}
 }
 
-void  Facebook::WriteNewStatus() //3
+void  Facebook::WriteNewStatus()noexcept(false) //3
 {
 	int choose;
 	int index;
@@ -447,7 +447,7 @@ void  Facebook::WriteNewStatus() //3
 	}
 }
 
-void Facebook::AddNewPage() //2
+void Facebook::AddNewPage()noexcept(false) //2
 {
 	char name[MAX_NAME_LENGTH];
 	cout << "What is the page name?" << endl;
