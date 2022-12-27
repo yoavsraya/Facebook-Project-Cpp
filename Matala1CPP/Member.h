@@ -41,6 +41,7 @@ public:
 	int myNumOfFriends()const ; //return my number of friends
 	int myNumOfPagesFollow()const; // return mt number of pages I following
 	void printMyFriendLastStatuses()const;
+	string getName();
 
 private:
 	void updateFriend(member* _member);
