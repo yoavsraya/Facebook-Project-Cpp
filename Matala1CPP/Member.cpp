@@ -51,11 +51,6 @@ bool member::isFriendExist(const member* _member)const //check if friend is alre
 	return exist;
 }
 
-void member::printMyFriendFriendList(int const ind) const //print one of the friend friend list
-{
-	m_friendsList.at(ind)->printFriends();
-}
-
 bool member::operator>(const member& _member) const
 {
 	if (m_friendsList.size() > _member.m_friendsList.size())
@@ -63,7 +58,7 @@ bool member::operator>(const member& _member) const
 	return false;
 }
 
-member::member(const member& other) //ct'or
+member::member(const member& other) //copy ct'or
 {
 	m_name = other.m_name;
 	m_dateOfBirth = other.m_dateOfBirth;
@@ -74,6 +69,8 @@ member::member(const member& other) //ct'or
 
 member::member(const string name, const string birthDate) //ct'or
 {
+	if (name.size() == 0)
+		throw wrongInput();
 	m_name = name;
 	m_dateOfBirth = birthDate;
 }
@@ -81,20 +78,6 @@ member::member(const string name, const string birthDate) //ct'or
 void member::updateFriend(member* _member) // update frien at friend list
 {
 	m_friendsList.push_back(_member);
-}
-
-int member::findFriendIndex(const char* wanted)const // find friend index
-{
-	int res;
-	for (int i = 0; i < m_friendsList.size(); i++)
-	{
-		if (m_friendsList.at(i)->m_name == wanted)
-		{
-			res = i;
-			return res;
-		}
-	}
-	return -1;
 }
 
 void member::removeFriend(const int indOfRemove) // remove friend from friend list

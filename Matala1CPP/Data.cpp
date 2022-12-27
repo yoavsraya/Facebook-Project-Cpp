@@ -102,49 +102,81 @@ void Facebook::runMenu() //run the facebook manu until exit
 	int select;
 	while (runningProgram == true)
 	{
-		printMenu();
-		cin >> select;
-		switch (select)
+		try
 		{
-		case (12):
+			printMenu();
+			cin >> select;
+			switch (select)
+			{
+			case (12):
+				runningProgram = false;
+				break;
+			case(11):
+				watch_MyFriend_List();
+				break;
+			case(10):
+				print_All_FaceBook_Members_And_Pages();
+				break;
+			case(9):
+				UnlikePage();
+				break;
+			case(8):
+				LikeNewPage();
+				break;
+			case(7):
+				RemoveFriend();
+				break;
+			case(6):
+				AddFriend();
+				break;
+			case(5):
+				WhatIsMyfriend_Friends_Latest_Status();
+				break;
+			case(4):
+				SeeAllMyStatus();
+				break;
+			case(3):
+				WriteNewStatus();
+				break;
+			case(2):
+				AddNewPage();
+				break;
+			case(1):
+				AddNewMember();
+				break;
+			default:
+				cout << "Wrong choice, choose again..." << endl;
+				break;
+			}
+		}
+		catch (wrongInput& e)
+		{
+			cout << e.what() << endl;
+		}
+		catch (userExist& e)
+		{
+			cout << e.what() << endl;
+		}
+		catch (badAlloc& e)
+		{
+			cout << e.what() << endl;
 			runningProgram = false;
-			break;
-		case(11):
-			watch_MyFriend_List();
-			break;
-		case(10):
-			print_All_FaceBook_Members_And_Pages();
-			break;
-		case(9):
-			UnlikePage();
-			break;
-		case(8):
-			LikeNewPage();
-			break;
-		case(7):
-			RemoveFriend();
-			break;
-		case(6):
-			AddFriend();
-			break;
-		case(5):
-			WhatIsMyfriend_Friends_Latest_Status();
-			break;
-		case(4):
-			SeeAllMyStatus();
-			break;
-		case(3):
-			WriteNewStatus();
-			break;
-		case(2):
-			AddNewPage();
-			break;
-		case(1):
-			AddNewMember();
-			break;
-		default:
-			cout << "Wrong choice, choose again..." << endl;
-			break;
+		}
+		catch (friendExist& e)
+		{
+			cout << e.what() << endl;
+		}
+		catch (emptyFriendList& e)
+		{
+			cout << e.what() << endl;
+		}
+		catch (emptyFollowerList& e)
+		{
+			cout << e.what() << endl;
+		}
+		catch (emptyPageList& e)
+		{
+			cout << e.what() << endl;
 		}
 	}
 	cout << "Thanks you for using our FaceBook! hope to see you soon again :)" << endl;

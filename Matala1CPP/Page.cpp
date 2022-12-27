@@ -1,10 +1,11 @@
 #include "page.h"
 #include "Member.h"
+#include "Exceptions.h"
 
-page::page(const char* name, const char* status1, const char* status2)noexcept(false)
+page::page(const char* name, const char* status1, const char* status2) noexcept(false)
 {
 	if (strlen(name) == 0)
-		throw "Invalid Name!";
+		throw wrongInput();
 	m_name = name;
 	m_board.reserve(2);
 	status* firststatus;
@@ -12,9 +13,10 @@ page::page(const char* name, const char* status1, const char* status2)noexcept(f
 	{
 		firststatus = new status;
 	}
-	catch (std::bad_alloc& e)
+	catch (bad_alloc& e)
 	{
-		throw std::bad_alloc();
+		delete firststatus;
+		throw badAlloc();
 	}
 	*firststatus = status1;
 	m_board.push_back(firststatus);
@@ -23,9 +25,10 @@ page::page(const char* name, const char* status1, const char* status2)noexcept(f
 	{
 		firststatus = new status;
 	}
-	catch (std::bad_alloc& e)
+	catch (bad_alloc& e)
 	{
-		throw std::bad_alloc();
+		delete firststatus;
+		throw badAlloc();
 	}
 	*secstatus = status2;
 	m_board.push_back(secstatus);
@@ -71,14 +74,14 @@ void page::createStatus(char* const text) //create new status
 	}
 	catch (std::bad_alloc& e)
 	{
-		throw std::bad_alloc();
+		throw badAlloc();
 	}
 	*tmp = text;
 	m_board.push_back(tmp);
 	
 }
 
-void page::printAllStatus() // print all statuses
+void page::printAllStatus()const // print all statuses
 {
 	cout << "your status are:" << endl;
 	for (int i = 0; i < m_board.size(); i++)

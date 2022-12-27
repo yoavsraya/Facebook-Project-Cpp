@@ -23,7 +23,7 @@ public:
 	void addFollower(member* const follower);
 	void removeFollower(member* follower);
 	void createStatus(char* const text);
-	void printAllStatus();
+	void printAllStatus()const;
 	void set(char* const name);
 	void printPage()const;
 	void printFollowers()const;	
