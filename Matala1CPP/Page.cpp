@@ -26,7 +26,6 @@ page::page(const char* name, const char* status1, const char* status2) noexcept(
 	}
 	catch (bad_alloc& e)
 	{
-		delete firststatus;
 		throw badAlloc();
 	}
 	*secstatus = status2;
@@ -104,7 +103,7 @@ void page::set(char* const name)
 page::page(const char* name)
 {
 	if (strlen(name) == 0)
-		throw "invalid name";
+		throw wrongInput();
 	m_name = name;
 }
 

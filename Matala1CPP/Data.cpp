@@ -351,7 +351,7 @@ void Facebook::watch_MyFriend_List()noexcept(false) //11
 	cout << "1. i'm member" << endl;
 	cout << "2. i'm page" << endl;
 	cin >> choose;
-	if (choose != 1 || choose != 2)
+	if (choose != 1 && choose != 2)
 		throw wrongInput();
 
 	if (choose == 1)
@@ -394,7 +394,7 @@ void Facebook::UnlikePage()noexcept(false) //9
 	}
 	m_members.at(indMe)->printPages();
 	int pageInd = whichOne();
-	if (pageInd < 0 && pageInd > m_members.at(indMe)->myNumOfPagesFollow())
+	if (pageInd < 0 || pageInd > m_members.at(indMe)->myNumOfPagesFollow())
 		throw wrongInput();
 
 	m_members.at(indMe)->removePage(pageInd);
@@ -511,6 +511,7 @@ void Facebook::AddNewPage()noexcept(false) //2
 	cout << "What is the page name?" << endl;
 	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	cin.getline(name, MAX_NAME_LENGTH);
+
 	page* newPage = new page(name);
 	if (!newPage) 
 	{
@@ -523,7 +524,7 @@ void Facebook::AddNewPage()noexcept(false) //2
 void Facebook::AddNewMember()noexcept(false) //1
 {
 	string name;
-	char buffer[2];
+	char buffer[33];
 	string date;
 
 	int day, month, year;
@@ -552,10 +553,13 @@ void Facebook::AddNewMember()noexcept(false) //1
 	date += itoa(month, buffer, 10);
 	date.push_back('/');
 	date += itoa(year, buffer, 10);
-	member* newMember = new member(name, date);
-	if(!newMember)
+	member* newMember;
+	try
 	{
-		delete newMember;
+		newMember = new member(name, date);
+	}
+	catch(bad_alloc& e)
+	{
 		throw badAlloc();
 	}
 	addMember(newMember);
