@@ -1,4 +1,5 @@
 #include "data.h"
+#include "Exceptions.h"
 
 Facebook::Facebook()
 {
@@ -485,6 +486,7 @@ void Facebook::AddNewMember() //1
 	cout << "What is your name?" << endl;
 	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	cin.getline(name, MAX_NAME_LENGTH);
+	if 
 	cout << "When have you burn? insert XX/XX/XXXX" << endl;
 	cin.getline(date, MAX_DATE_LENGTH);
 	member* newMember = new member(name, date);
