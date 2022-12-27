@@ -11,21 +11,21 @@ const int MAX_STATUS_LENGTH = 1000;
 class Facebook
 {
 public:
-	void printMembers()const;
-	void printPages()const;
-	Facebook();
-	~Facebook();
-	void addMember(member* const other);
-	void removeMember(const int index);
-	void addPage(page* other);
-	void removePage(const int index);
-	void runMenu();
-	void starterFunc();
-	void printMenu()const;
-	int whoAreYou();
-	int whichOne();
-	int whichPage();
-	void WhoisBigger();
+	void printMembers()const; //print All members
+	void printPages()const; //print All pages
+	Facebook();//Ct'or
+	~Facebook();//Dt'or
+	void addMember(member* const other); // add new member to facebook 
+	void removeMember(const int index); // remove facebook friend (not in use for now)
+	void addPage(page* other); // add new page to facebook
+	void removePage(const int index); //remove page from facebook
+	void runMenu(); // run facebook program until exit
+	void starterFunc(); // start facebook with 3 users and 3 pages
+	void printMenu()const; // print menu
+	int whoAreYou(); // return user index
+	int whichOne(); //return user index
+	int whichPage(); //return page
+	void WhoisBigger(); //use oprator > (Q2)
 
 private:
 	vector <member*> m_members;
