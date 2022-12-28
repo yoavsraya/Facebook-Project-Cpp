@@ -535,21 +535,21 @@ void Facebook::AddNewMember()noexcept(false) //1
 	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	getline(cin, name);
 	if (name.size() == 0)
-		throw wrongInput();
+		throw emptyName();
 	else if (isExsist(name) == false)
 		throw friendExist();
 	cout << "When have you burn? insert day:" << endl;
 	cin >> day;
 	if (day < 1 || day >30)
-		throw wrongInput();
+		throw invalidDate();
 	cout << "insert month:" << endl;
 	cin >> month;
 	if (month < 1 || month >12)
-		throw wrongInput();
+		throw invalidDate();
 	cout << "insert year:" << endl;
 	cin >> year;
 	if (year < 1)
-		throw wrongInput();
+		throw invalidDate();
 	date += itoa(day, buffer, 10);
 	date.push_back('/');
 	date += itoa(month, buffer, 10);

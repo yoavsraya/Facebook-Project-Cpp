@@ -2,6 +2,7 @@
 #include <iostream>
 #include <time.h>
 #include <string>
+#include "Exceptions.h"
 #pragma warning(disable: 4996)
 using namespace std;
 

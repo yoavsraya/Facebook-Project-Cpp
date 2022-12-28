@@ -5,7 +5,7 @@ status::status(const char* content)
 {
 	m_content = content;
 	if (m_content.size() == 0)
-		throw "you tried to enter an empty status...";
+		throw emptyStatus();
 	time(&dateAndtimeOfStatus);
 }
 
