@@ -63,7 +63,7 @@ void page::removeFollower(member* follower) //remove follower from page
 	m_ListOFfollowers.erase(itr);
 }
 
-void page::createStatus(char* const text) //create new status
+void page::createStatus(const string text) //create new status
 {
 	status* tmp = new status;
 	try
@@ -81,6 +81,8 @@ void page::createStatus(char* const text) //create new status
 
 void page::printAllStatus()const // print all statuses
 {
+	if (m_board.size() == 0)
+		throw emptyStatusesList();
 	cout << "your status are:" << endl;
 	for (int i = 0; i < m_board.size(); i++)
 	{
@@ -100,10 +102,10 @@ void page::set(char* const name)
 	m_name = name;
 }
 
-page::page(const char* name)
+page::page(string name)
 {
-	if (strlen(name) == 0)
-		throw wrongInput();
+	if (name.size() == 0)
+		throw emptyName();
 	m_name = name;
 }
 
@@ -119,6 +121,8 @@ int page::findFollowerInd(member* const follower)const//find follower index
 
 void page::printFollowers()const //print followers of a page
 {
+	if (m_ListOFfollowers.size() == 0)
+		throw emptyFollowerList();
 	cout << "the page " << this->m_name << " follwers are:" << endl;
 	for (int i = 0; i < m_ListOFfollowers.size(); i++)
 	{

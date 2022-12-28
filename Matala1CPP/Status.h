@@ -14,6 +14,7 @@ public:
 	status(const status& other);
 	bool operator==(const status& other)const;
 	bool operator!=(const status& other)const;
+	status& operator=(const string str);
 	status& operator=(const char* str);
 	status(){};
 

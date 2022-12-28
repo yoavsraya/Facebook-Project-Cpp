@@ -1,5 +1,5 @@
 #include "data.h"
-#include "Exceptions.h"
+
 
 Facebook::Facebook()
 {
@@ -39,6 +39,7 @@ void Facebook::printMembers()const //print all members at facebook
 	{
 		cout << "#" << i + 1 << endl;
 		m_members.at(i)->printMyDetails();
+		cout << endl;
 	}
 }
 
@@ -206,6 +207,30 @@ void Facebook::runMenu() //run the facebook manu until exit
 		{
 			cout << e.what() << endl;
 		}
+		catch (invalidDate& e)
+		{
+			cout << e.what() << endl;
+		}
+		catch (emptyName& e)
+		{
+			cout << e.what() << endl;
+		}
+		catch (emptyStatus& e)
+		{
+			cout << e.what() << endl;
+		}
+		catch (emptyStatusesList& e)
+		{
+			cout << e.what() << endl;
+		}
+		catch (alreadyFriends& e)
+		{
+			cout << e.what() << endl;
+		}
+		catch (AddYourSelf& e)
+		{
+			cout << e.what() << endl;
+		}
 	}
 	cout << "Thanks you for using our FaceBook! hope to see you soon again :)" << endl;
 }
@@ -213,7 +238,7 @@ void Facebook::runMenu() //run the facebook manu until exit
 void Facebook::printMenu()const //print manu option
 {
 	cout << "\nwhat would you like to do? (insert number from 1-12):" << endl;
-	cout << "1 - Add New Member\n2 - Add New Page\n3 - Write New Status\n4 - See All My Status\n5 - What is My friend friends latest Status\n6 - Add friend\n7 - Remove Friend\n8 - Like New Page\n9 - Unlike Page\n10 - print All FaceBook Members And Pages\n11 - Watch My Friend List\n12 - Exit" << endl << endl;
+	cout << "1 - Add New Member\n2 - Add New Page\n3 - Write New Status\n4 - See All My Status\n5 - What is My friend friends latest Status\n6 - Add friend\n7 - Remove Friend\n8 - Like New Page\n9 - Unlike Page\n10 - print All FaceBook Members And Pages\n11 - Watch My Friend/followers List\n12 - Exit" << endl << endl;
 }
 
 int Facebook::whoAreYou() // return the user index 
@@ -258,7 +283,6 @@ void Facebook::WhoisBigger()
 	int choose2;
 	int indme;
 	int indcompre;
-	bool res;
 
 	cout << "are you page or member? enter 1 for member, 2 for page" << endl;
 	cin >> choose1;
@@ -269,7 +293,7 @@ void Facebook::WhoisBigger()
 	cout << "what do you want to compre with? choose 1 for member, 2 for page" << endl;
 	cin >> choose2;
 	if (choose2 == 1)
-		 indcompre = whichOne();
+		 indcompre = whichOne(m_members.size());
 	else if (choose2 == 2)
 		 indcompre = whichPage();
 
@@ -336,11 +360,13 @@ bool Facebook::isExsist(string name)
 	return true;
 }
 
-int Facebook::whichOne() //ask the user to choose one 
+int Facebook::whichOne(int size) //ask the user to choose one 
 {
 	cout << "choose One:" << endl;
 	int res;
 	cin >> res;
+	if (res<1 || res>size)
+		throw wrongInput();
 	return res - 1;
 }
 
@@ -395,7 +421,7 @@ void Facebook::UnlikePage()noexcept(false) //9
 		return;
 	}
 	m_members.at(indMe)->printPages();
-	int pageInd = whichOne();
+	int pageInd = whichOne(m_members.at(indMe)->myNumOfPagesFollow());
 	if (pageInd < 0 || pageInd > m_members.at(indMe)->myNumOfPagesFollow())
 		throw wrongInput();
 
@@ -407,7 +433,7 @@ void Facebook::LikeNewPage()noexcept(false) //8
 	int ind = whoAreYou();
 	cout << "choose a page you want to follow:" << endl;
 	printPages();
-	int pageInd = whichOne();
+	int pageInd = whichOne(m_pages.size());
 	if (pageInd < 0 && pageInd > m_pages.size())
 		throw wrongInput();
 	*m_members.at(ind) += *m_pages.at(pageInd);
@@ -419,14 +445,16 @@ void Facebook::RemoveFriend()noexcept(false) //7
 	int indMe = whoAreYou();
 	if (m_members.at(indMe)->myNumOfFriends() == 0)
 		throw emptyFriendList();
-
+	if (indMe<1 || indMe > m_members.size())
+		throw wrongInput();
 	cout << "choose a friend to remove" << endl;
 	m_members.at(indMe)->printFriends();
-	int friendInd = whichOne();
+	int friendInd = whichOne(m_members.at(indMe)->myNumOfFriends());
 	if (friendInd < 0 || friendInd > m_members.at(indMe)->myNumOfFriends())
 		throw wrongInput();
-
-	m_members.at(indMe)->removeFriend(friendInd);
+	member* Friend = m_members.at(indMe)->friendIndex(friendInd);
+	m_members.at(indMe)->removeFriend(Friend);
+	Friend->removeFriend(m_members.at(indMe));
 }
 
 void Facebook::AddFriend()noexcept(false) //6
@@ -434,10 +462,16 @@ void Facebook::AddFriend()noexcept(false) //6
 	int indMe = whoAreYou();
 	cout << "choose a friend you want to add" << endl;
 	printMembers();
-	int friendToAdd = whichOne();
-	if (friendToAdd < 0 && friendToAdd > m_members.size())
-		throw wrongInput();
-	
+	int friendToAdd = whichOne(m_members.size());
+	if (indMe == friendToAdd)
+	{
+		throw AddYourSelf();
+	}
+	if (m_members.at(indMe)->isFriendExist(m_members.at(friendToAdd)) == true)
+	{
+		throw alreadyFriends();
+	}
+
 	*m_members.at(indMe) += *m_members.at(friendToAdd);
 }
 
@@ -479,7 +513,7 @@ void  Facebook::WriteNewStatus()noexcept(false) //3
 {
 	int choose;
 	int index;
-	char contant[MAX_STATUS_LENGTH];
+	string contant;
 
 	cout << "are you a page or a member? (choose 1 or 2)" << endl;
 	cout << "1. I'm A page" << endl;
@@ -492,8 +526,10 @@ void  Facebook::WriteNewStatus()noexcept(false) //3
 	{
 		index = whoAreYou();
 		cout << "what is on your mind? (no more then 1,000 letters)" << endl;
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		cin.getline(contant, 1000);
+		clearBuffer();
+		getline(cin, contant);
+		if (contant.size() == 0)
+			throw emptyStatus();
 		m_members.at(index)->createStatus(contant);
 	}
 	
@@ -501,23 +537,30 @@ void  Facebook::WriteNewStatus()noexcept(false) //3
 	{
 		index = whichPage();
 		cout << "what is on your mind? (no more then 1,000 letters)" << endl;
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		cin.getline(contant, 1000);
+		clearBuffer();
+		getline(cin,contant);
+		if (contant.size() == 0)
+			throw emptyStatus();
 		m_pages.at(index)->createStatus(contant);
 	}
 }
 
 void Facebook::AddNewPage()noexcept(false) //2
 {
-	char name[MAX_NAME_LENGTH];
+	string name;
+	page* newPage;
 	cout << "What is the page name?" << endl;
-	cin.ignore(numeric_limits<streamsize>::max(), '\n');
-	cin.getline(name, MAX_NAME_LENGTH);
-
-	page* newPage = new page(name);
-	if (!newPage) 
+	clearBuffer();
+	getline(cin, name);
+	if (name.size() == 0)
+		throw emptyName();
+	try
 	{
-		delete newPage;
+		newPage = new page(name);
+	}
+	
+	catch(bad_alloc& e)
+	{
 		throw badAlloc();
 	}
 	addPage(newPage);
@@ -532,7 +575,7 @@ void Facebook::AddNewMember()noexcept(false) //1
 	int day, month, year;
 
 	cout << "What is your name?" << endl;
-	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	clearBuffer();
 	getline(cin, name);
 	if (name.size() == 0)
 		throw emptyName();

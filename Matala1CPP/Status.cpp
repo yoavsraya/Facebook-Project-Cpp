@@ -29,6 +29,13 @@ bool status::operator!=(const status& other) const
 	return false;
 }
 
+status& status::operator=(const string str)
+{
+	m_content = str;
+	time(&dateAndtimeOfStatus);
+	return *this;
+}
+
 status& status::operator=(const char* str)
 {
 	m_content = str;

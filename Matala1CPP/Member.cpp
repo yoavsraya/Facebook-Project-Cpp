@@ -75,17 +75,26 @@ member::member(const string name, const string birthDate) //ct'or
 	m_dateOfBirth = birthDate;
 }
 
-void member::updateFriend(member* _member) // update frien at friend list
-{
-	m_friendsList.push_back(_member);
-}
 
-void member::removeFriend(const int indOfRemove) // remove friend from friend list
+void member::removeFriend(const member* friendToRemove) // remove friend from friend list
 {
+	int i = 0;
+	bool found = false;
 	if (m_friendsList.size() == 0)
 		throw emptyFriendList();
 
-	vector<member*>::iterator itr = m_friendsList.begin() + indOfRemove;
+	while (i < m_friendsList.size() && found == false)
+	{
+		if (m_friendsList.at(i) == friendToRemove)
+			found = true;
+		else
+			i++;
+	}
+
+	if (found == false)
+		throw wrongInput();
+
+	vector<member*>::iterator itr = m_friendsList.begin() + i;
 	m_friendsList.erase(itr);
 }
 
@@ -110,17 +119,10 @@ void member::removePage(const int indOfRemove) //remove follow from page
 	m_pages.erase(itr);
 }
 
-void member::printMyFriendStatuses()const //print my friend statuses
-{
-	for (int i = 0; i < m_friendsList.size(); i++)
-	{
-		m_friendsList.at(i)->printMyStatuses();
-	}
-
-}
-
 void member::printFriends()const // print my friend list 
 {
+	if (m_friendsList.size() == 0)
+		throw emptyFriendList();
 	cout << "My friend List is: " << endl;
 	for (int i = 0; i < m_friendsList.size(); i++)
 	{
@@ -141,6 +143,8 @@ void member::printPages()const // print the pages that i follow
 
 void member::printMyStatuses()const // print my statuses
 {
+	if (m_mySatuses.size() == 0)
+		throw emptyStatusesList();
 	cout << "My Statuses:" << endl;
 	for (int i = 0; i < m_mySatuses.size(); i++)
 	{
@@ -148,7 +152,7 @@ void member::printMyStatuses()const // print my statuses
 	}
 }
 
-void member::createStatus(const char* _status) // create new status
+void member::createStatus(const string _status) // create new status
 {
 	status* newStatus = new status;
 	if (!newStatus)
@@ -219,7 +223,16 @@ void member::printMyFriendLastStatuses() const
 	}
 }
 
+member* member::friendIndex(int index) const
+{
+	return m_friendsList.at(index);
+}
+
+
+
 string member::getName()
 {
 	return m_name;
 }
+
+

@@ -15,14 +15,14 @@ class page
 public:
 	page(const char* name, const char* status1, const char* status2) noexcept(false);
 	page() {};
-	page(const char* name);
+	page(const string name);
 	bool operator>(const page& _page)const;
 	bool operator>(const member& _member)const;
 	int findFollowerInd(member* const follower)const;
 	int myNumOfFollowers() const;
 	void addFollower(member* const follower);
 	void removeFollower(member* follower);
-	void createStatus(char* const text);
+	void createStatus(const string text);
 	void printAllStatus()const;
 	void set(char* const name);
 	void printPage()const;

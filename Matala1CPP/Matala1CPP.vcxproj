@@ -147,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Data.cpp" />
+    <ClCompile Include="Exceptions.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Member.cpp" />
     <ClCompile Include="Page.cpp" />

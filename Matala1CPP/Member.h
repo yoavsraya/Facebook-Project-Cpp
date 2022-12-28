@@ -13,36 +13,34 @@ using namespace std;
 class member
 {
 public:
-	//member(const char* name, const char* birthDate,const char* status1,const char* status2);
-	member(const string name, const string birthDate);
-	member(const member& other);
-	member() {};
-	member& operator+=(member& _member);
-	member& operator+=(page& _page);
-	bool operator>( const member& _member) const;
-	bool operator>( const page& _page) const;
-	bool isFriendExist(const member* _member)const;
-	bool isPageExist(const page* _page)const;
-	void removeFriend(const int indOfRemove); //remove friend from friend list
-	void addPage(page* currPage);
-	void removePage(const int indOfRemove);
-	void printFriends() const;
-	void printPages() const;
-	void createStatus(const char* status);
-	void printMyStatuses() const;
-	void printMyDetails() const;
-	void setName(const char* name);
-	void setBirth(const char* birth);
-	void printMyFriendStatuses() const;
-	void updatelastStatuses(status* _status);
-	void print10lastStatuses() const;
+	member(const string name, const string birthDate); //c'tor
+	member(const member& other); //ct'or
+	member() {}; //empty c'tor
+	member& operator+=(member& _member); //op +=
+	member& operator+=(page& _page); //op +=
+	bool operator>( const member& _member) const; //op >
+	bool operator>( const page& _page) const;// op >
+	bool isFriendExist(const member* _member)const; //check if the parmater is a friend of this
+	bool isPageExist(const page* _page)const; //check if page is exsist
+	void removeFriend(const member* friendToRemove); //remove friend from friend list
+	void addPage(page* currPage); //follow after new page
+	void removePage(const int indOfRemove); //remove follow from a page
+	void printFriends() const; //print this friends
+	void printPages() const; //print pages i follow
+	void createStatus(const string status); //create new status
+	void printMyStatuses() const; //print all this statuses
+	void printMyDetails() const; //print details
+	void setName(const char* name); //update name
+	void setBirth(const char* birth); // update birth
+	void updatelastStatuses(status* _status); //update last 10 statuses
+	void print10lastStatuses() const; //print last 10 status
 	int myNumOfFriends()const ; //return my number of friends
 	int myNumOfPagesFollow()const; // return mt number of pages I following
-	void printMyFriendLastStatuses()const;
-	string getName();
+	void printMyFriendLastStatuses()const; //print last 10 statuses of my friends
+	member* friendIndex(int index)const; //return pointer to member by index
+	string getName(); //get name
 
 private:
-	void updateFriend(member* _member);
 	string m_name;
 	string m_dateOfBirth;
 	int m_logSize10Statuses = 9;
@@ -52,11 +50,4 @@ private:
 	array<status*, 10> m_last10statuses;
 };
 
-class memberException : public exception
-{
-public:
-	virtual const char* what() const override
-	{
-		return "problemos";
-	}
-};
+

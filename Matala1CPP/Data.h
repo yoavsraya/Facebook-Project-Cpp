@@ -1,6 +1,7 @@
 #pragma once
 #include "Member.h"
 #include "Page.h"
+#include "Exceptions.h"
 #include <vector>
 #pragma warning(disable: 4996)
 
@@ -23,7 +24,7 @@ public:
 	void starterFunc(); // start facebook with 3 users and 3 pages
 	void printMenu()const; // print menu
 	int whoAreYou(); // return user index
-	int whichOne(); //return user index
+	int whichOne(int size); //return user index
 	int whichPage(); //return page
 	void WhoisBigger(); //use oprator > (Q2)
 	bool isExsist(string name);

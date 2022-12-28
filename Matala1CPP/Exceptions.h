@@ -2,11 +2,7 @@
 #include <iostream> 
 using namespace std;
 
-void clearBuffer()
-{
-	cin.clear();
-	cin.ignore(numeric_limits<streamsize>::max(), '\n');
-}
+void clearBuffer();
 
 class badAlloc : public exception
 {
@@ -72,6 +68,15 @@ public:
 	}
 };
 
+class emptyStatusesList : public exception
+{
+public:
+	virtual const char* what() const override
+	{
+		return "You dont have any statuses!";
+	}
+};
+
 class emptyStatus : public exception
 {
 public:
@@ -97,5 +102,23 @@ public:
 	virtual const char* what() const override
 	{
 		return "Empty name is not allowed...";
+	}
+};
+
+class alreadyFriends : public exception
+{
+public:
+	virtual const char* what() const override
+	{
+		return "You Are already friends!!";
+	}
+};
+
+class AddYourSelf : public exception
+{
+public:
+	virtual const char* what() const override
+	{
+		return "You cant add yourself!";
 	}
 };

@@ -19,7 +19,7 @@ int main()
 	}
 	program.runMenu(); // run facebook menu
 	//program.WhoisBigger();
-	/*program.~Facebook();
-	cout << _CrtDumpMemoryLeaks();*/
+	program.~Facebook();
+	cout << _CrtDumpMemoryLeaks();
 	return 0;
 }
