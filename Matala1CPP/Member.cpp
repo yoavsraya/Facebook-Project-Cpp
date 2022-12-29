@@ -1,6 +1,5 @@
 #include "Member.h"
 #include "Page.h"
-#include "Exceptions.h"
 
 bool member::isPageExist(const page* _page)const // check if page is already exsist at his pages
 {
@@ -104,18 +103,6 @@ void member::removeFriend(const member* friendToRemove) // remove friend from fr
 
 	vector<member*>::iterator itr = m_friendsList.begin() + i;
 	m_friendsList.erase(itr);
-}
-
-void member::addPage(page* currPage) //add follow to a page
-{
-	if (isPageExist(currPage))
-	{
-		cout << "Page already followed" << endl;
-		return;
-	}
-	
-	m_pages.push_back(currPage);
-	currPage->addFollower(this);
 }
 
 void member::removePage(const int indOfRemove) //remove follow from page

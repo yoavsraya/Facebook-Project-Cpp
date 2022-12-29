@@ -6,6 +6,7 @@ class page;
 #include <vector>
 #include<array>
 #include <string>
+#include "Exceptions.h"
 #pragma warning(disable: 4996)
 
 using namespace std;
