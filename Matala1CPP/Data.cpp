@@ -1,14 +1,5 @@
 #include "data.h"
 
-const int DEFAULT_MEMBERS_STARTS = 3;
-const int DEFAULT_PAGES_STARTS = 3;
-const int DECIMAL = 10;
-const int MAX_DAY_IN_MONTH = 31;
-const int MAX_MONTH_IN_YEAR = 12;
-const int MIN_DAY_IN_MONTH = 1;
-const int MIN_MONTH_IN_YEAR = 1;
-const int THE_YEAR_JESUS_BORN= 1;
-
 Facebook::Facebook()
 {
 	m_members.reserve(DEFAULT_MEMBERS_STARTS);
