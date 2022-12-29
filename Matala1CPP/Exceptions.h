@@ -114,6 +114,15 @@ public:
 	}
 };
 
+class alreadyfollow : public exception //cant add to friend list a friend
+{
+public:
+	virtual const char* what() const override
+	{
+		return "You Are already follow this page!!";
+	}
+};
+
 class AddYourSelf : public exception //cant add yourself
 {
 public:
