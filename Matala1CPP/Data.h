@@ -5,9 +5,6 @@
 #include <vector>
 #pragma warning(disable: 4996)
 
-const int MAX_NAME_LENGTH = 30;
-const int MAX_DATE_LENGTH = 11;
-const int MAX_STATUS_LENGTH = 1000;
 const int DEFAULT_MEMBERS_STARTS = 3;
 const int DEFAULT_PAGES_STARTS = 3;
 const int DECIMAL = 10;
