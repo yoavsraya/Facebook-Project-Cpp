@@ -31,6 +31,20 @@ page::page(const char* name, const char* status1, const char* status2) noexcept(
 	*secstatus = status2;
 	m_board.push_back(secstatus);
 }
+
+page::~page()
+{
+	for (int i = 0; i < m_board.size(); i++)
+	{
+		delete m_board.at(i);
+	}
+	for (int i = 0; i < m_ListOFfollowers.size(); i++)
+	{
+		delete m_ListOFfollowers.at(i);
+	}
+
+}
+
 bool page::operator>(const page& _page) const
 {
 	if (m_ListOFfollowers.size() > _page.m_ListOFfollowers.size())

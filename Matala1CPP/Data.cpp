@@ -11,7 +11,6 @@ Facebook::~Facebook() //free program
 {
 	for (int i = 0; i < m_members.size(); i++)
 	{
-		
 		delete m_members.at(i);
 	}
 
@@ -580,7 +579,7 @@ void Facebook::AddNewMember()noexcept(false) //1
 	if (name.size() == 0)
 		throw emptyName();
 	else if (isExsist(name) == false)
-		throw friendExist();
+		throw userExist();
 	cout << "When have you burn? insert day:" << endl;
 	cin >> day;
 	if (day < 1 || day >30)
