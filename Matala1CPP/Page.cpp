@@ -38,11 +38,6 @@ page::~page()
 	{
 		delete m_board.at(i);
 	}
-	for (int i = 0; i < m_ListOFfollowers.size(); i++)
-	{
-		delete m_ListOFfollowers.at(i);
-	}
-
 }
 
 bool page::operator>(const page& _page) const
