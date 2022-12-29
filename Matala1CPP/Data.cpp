@@ -108,9 +108,9 @@ void Facebook::starterFunc() //start the facebook with 3 members, 3 page, and 2 
 	m_pages.push_back(starterPage2);
 	m_pages.push_back(starterPage3);
 
-	m_members.at(0)->addPage(m_pages.at(2));
+	*m_members.at(0) += *m_pages.at(2);
 	*m_members.at(1) += *m_members.at(2);
-	m_members.at(2)->addPage(m_pages.at(0));
+	*m_members.at(2) += *m_pages.at(0);
 
 	m_members.at(0)->createStatus("hi im uzi");
 	m_members.at(0)->createStatus("i teach calculus 1");

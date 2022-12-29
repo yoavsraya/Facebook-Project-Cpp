@@ -25,7 +25,6 @@ public:
 	bool isFriendExist(const member* _member)const; //check if the parmater is a friend of this
 	bool isPageExist(const page* _page)const; //check if page is exsist
 	void removeFriend(const member* friendToRemove); //remove friend from friend list
-	void addPage(page* currPage); //follow after new page
 	void removePage(const int indOfRemove); //remove follow from a page
 	void printFriends() const; //print this friends
 	void printPages() const; //print pages i follow
