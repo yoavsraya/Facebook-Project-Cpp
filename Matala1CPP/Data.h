@@ -27,7 +27,7 @@ public:
 	int whichOne(int size); //return user index
 	int whichPage(); //return page
 	void WhoisBigger(); //use oprator > (Q2)
-	bool isExsist(string name);
+	bool isExsist(string name); //check if the name is already exsist
 
 private:
 	vector <member*> m_members;

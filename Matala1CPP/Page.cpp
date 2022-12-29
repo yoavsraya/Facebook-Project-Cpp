@@ -95,13 +95,6 @@ void page::printPage()const //print page
 	cout << m_name << endl;
 }
 
-void page::set(char* const name)
-{
-	if (strlen(name) == 0)
-		throw "invalid name";
-	m_name = name;
-}
-
 page::page(string name)
 {
 	if (name.size() == 0)

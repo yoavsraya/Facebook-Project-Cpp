@@ -9,13 +9,13 @@ using namespace std;
 class status
 {
 public:
-	void printStatus() const;
-	status(const char* content) noexcept(false);
-	status(const status& other);
-	bool operator==(const status& other)const;
-	bool operator!=(const status& other)const;
-	status& operator=(const string str);
-	status& operator=(const char* str);
+	void printStatus() const noexcept(false); //print status contant
+	status(const string content) noexcept(false); //ct'or
+	status(const status& other); //copy ct'or
+	bool operator==(const status& other)const; //opartor == Q2
+	bool operator!=(const status& other)const; //opartor != Q2
+	status& operator=(const string str); // oprator = for string
+	status& operator=(const char* str); // oprator = for char*
 	status(){};
 
 private:

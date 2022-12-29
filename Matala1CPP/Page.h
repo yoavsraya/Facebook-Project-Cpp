@@ -13,28 +13,19 @@ class page
 	vector <status*> m_board;
 
 public:
-	page(const char* name, const char* status1, const char* status2) noexcept(false);
-	page() {};
-	page(const string name);
-	bool operator>(const page& _page)const;
-	bool operator>(const member& _member)const;
-	int findFollowerInd(member* const follower)const;
-	int myNumOfFollowers() const;
-	void addFollower(member* const follower);
-	void removeFollower(member* follower);
-	void createStatus(const string text);
-	void printAllStatus()const;
-	void set(char* const name);
-	void printPage()const;
-	void printFollowers()const;	
+	page(const char* name, const char* status1, const char* status2) noexcept(false); //ct'or
+	page() {}; //empty ct'or
+	page(const string name); //ct'or
+	bool operator>(const page& _page)const; //oprator > Q2
+	bool operator>(const member& _member)const; //oprator > Q2
+	int findFollowerInd(member* const follower)const; //return member index
+	int myNumOfFollowers() const; // return num of follwers
+	void addFollower(member* const follower); //add new follower
+	void removeFollower(member* follower); //remove follower
+	void createStatus(const string text); //create status from string
+	void printAllStatus()const; //print all statuses of page
+	void printPage()const; //print page
+	void printFollowers()const;	// print follower
 };
 
-class pageException : public std::exception
-{
-public:
-	virtual const char* what() const override
-	{
-		return "Faild create page\n";
-	}
-};
 

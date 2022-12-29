@@ -1,7 +1,7 @@
 #include "Status.h"
 
 
-status::status(const char* content)
+status::status(const string content) noexcept(false)
 {
 	m_content = content;
 	if (m_content.size() == 0)
@@ -43,7 +43,7 @@ status& status::operator=(const char* str)
 	return *this;
 }
 
-void status::printStatus()const //print status
+void status::printStatus()const noexcept(false) //print status
 {
 	if (m_content.size() == 0)
 		throw "you tried to enter an empty status...";
