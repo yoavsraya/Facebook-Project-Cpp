@@ -229,6 +229,10 @@ void Facebook::runMenu() //run the facebook manu until exit
 		{
 			cout << e.what() << endl;
 		}
+		catch (alreadyfollow& e)
+		{
+			cout << e.what() << endl;
+		}
 	}
 	cout << "Thanks you for using our FaceBook! hope to see you soon again :)" << endl;
 }
@@ -434,6 +438,8 @@ void Facebook::LikeNewPage()noexcept(false) //8
 	int pageInd = whichOne(m_pages.size());
 	if (pageInd < 0 && pageInd > m_pages.size())
 		throw wrongInput();
+	if (m_members.at(ind)->isPageExist(m_pages.at(pageInd)) == true);
+	throw alreadyfollow();
 	*m_members.at(ind) += *m_pages.at(pageInd);
 }
 
