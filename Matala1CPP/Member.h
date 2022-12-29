@@ -10,6 +10,9 @@ class page;
 
 using namespace std;
 
+const int EMPTY = 0;
+const int FULL = -1;
+
 class member
 {
 public:

@@ -5,6 +5,7 @@
 #include "Exceptions.h"
 #pragma warning(disable: 4996)
 using namespace std;
+const int EMPTY = 0;
 
 class status
 {

@@ -77,7 +77,7 @@ member::member(const member& other) //copy ct'or
 
 member::member(const string name, const string birthDate) //ct'or
 {
-	if (name.size() == 0)
+	if (name.size() == EMPTY)
 		throw wrongInput();
 	m_name = name;
 	m_dateOfBirth = birthDate;
@@ -88,7 +88,7 @@ void member::removeFriend(const member* friendToRemove) // remove friend from fr
 {
 	int i = 0;
 	bool found = false;
-	if (m_friendsList.size() == 0)
+	if (m_friendsList.size() == EMPTY)
 		throw emptyFriendList();
 
 	while (i < m_friendsList.size() && found == false)
@@ -120,7 +120,7 @@ void member::addPage(page* currPage) //add follow to a page
 
 void member::removePage(const int indOfRemove) //remove follow from page
 {
-	if (m_pages.size() == 0)
+	if (m_pages.size() == EMPTY)
 		throw emptyPageList();
 	m_pages.at(indOfRemove)->removeFollower(this);
 	vector<page*>::iterator itr = m_pages.begin() + indOfRemove;
@@ -129,7 +129,7 @@ void member::removePage(const int indOfRemove) //remove follow from page
 
 void member::printFriends()const // print my friend list 
 {
-	if (m_friendsList.size() == 0)
+	if (m_friendsList.size() == EMPTY)
 		throw emptyFriendList();
 	cout << "My friend List is: " << endl;
 	for (int i = 0; i < m_friendsList.size(); i++)
@@ -141,6 +141,8 @@ void member::printFriends()const // print my friend list
 
 void member::printPages()const // print the pages that i follow 
 {
+	if (m_pages.size() == EMPTY)
+		throw emptyPageList();
 	cout << "List of the Pages I follow:" << endl;
 	for (int i = 0; i < m_pages.size(); i++)
 	{
@@ -151,7 +153,7 @@ void member::printPages()const // print the pages that i follow
 
 void member::printMyStatuses()const // print my statuses
 {
-	if (m_mySatuses.size() == 0)
+	if (m_mySatuses.size() == EMPTY)
 		throw emptyStatusesList();
 	cout << "My Statuses:" << endl;
 	for (int i = 0; i < m_mySatuses.size(); i++)
@@ -173,9 +175,9 @@ void member::createStatus(const string _status) // create new status
 
 void member::updatelastStatuses(status* _status) //update the 10 last statuses
 {
-	if (m_logSize10Statuses == -1)
+	if (m_logSize10Statuses == FULL)
 	{
-		for (int i = 9; i > 0; i--)
+		for (int i = 9; i > EMPTY; i--)
 		{
 			m_last10statuses[i] = m_last10statuses[i - 1];
 		}

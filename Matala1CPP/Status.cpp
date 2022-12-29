@@ -4,7 +4,7 @@
 status::status(const string content) noexcept(false)
 {
 	m_content = content;
-	if (m_content.size() == 0)
+	if (m_content.size() == EMPTY)
 		throw emptyStatus();
 	time(&dateAndtimeOfStatus);
 }
@@ -45,8 +45,9 @@ status& status::operator=(const char* str)
 
 void status::printStatus()const noexcept(false) //print status
 {
-	if (m_content.size() == 0)
+	if (m_content.size() == EMPTY)
 		throw emptyStatus();
+
 	cout << m_content << endl;
 	cout << "upload time and date: " << ctime(&dateAndtimeOfStatus) << endl;
 	cout << "------------------------------" << endl;
