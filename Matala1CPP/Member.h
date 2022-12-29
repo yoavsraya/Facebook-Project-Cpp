@@ -16,6 +16,7 @@ public:
 	member(const string name, const string birthDate); //c'tor
 	member(const member& other); //ct'or
 	member() {}; //empty c'tor
+	~member();
 	member& operator+=(member& _member); //op +=
 	member& operator+=(page& _page); //op +=
 	bool operator>( const member& _member) const; //op >

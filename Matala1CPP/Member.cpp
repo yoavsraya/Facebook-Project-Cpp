@@ -23,6 +23,14 @@ bool member::operator>(const page& _page) const
 	return false;
 }
 
+member::~member()
+{
+	for (int i = 0; i < m_mySatuses.size(); i++)
+	{
+		delete m_mySatuses.at(i);
+	}
+}
+
 member& member::operator+=(member& _member)
 {
 	m_friendsList.push_back(&_member);
