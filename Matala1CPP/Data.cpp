@@ -1,10 +1,18 @@
 #include "data.h"
 
+const int DEFAULT_MEMBERS_STARTS = 3;
+const int DEFAULT_PAGES_STARTS = 3;
+const int DECIMAL = 10;
+const int MAX_DAY_IN_MONTH = 31;
+const int MAX_MONTH_IN_YEAR = 12;
+const int MIN_DAY_IN_MONTH = 1;
+const int MIN_MONTH_IN_YEAR = 1;
+const int THE_YEAR_JESUS_BORN= 1;
 
 Facebook::Facebook()
 {
-	m_members.reserve(3);
-	m_pages.reserve(3);
+	m_members.reserve(DEFAULT_MEMBERS_STARTS);
+	m_pages.reserve(DEFAULT_PAGES_STARTS);
 }
 
 Facebook::~Facebook() //free program
@@ -444,7 +452,7 @@ void Facebook::RemoveFriend()noexcept(false) //7
 	int indMe = whoAreYou();
 	if (m_members.at(indMe)->myNumOfFriends() == 0)
 		throw emptyFriendList();
-	if (indMe<1 || indMe > m_members.size())
+	if (indMe < 1 || indMe > m_members.size())
 		throw wrongInput();
 	cout << "choose a friend to remove" << endl;
 	m_members.at(indMe)->printFriends();
@@ -582,21 +590,21 @@ void Facebook::AddNewMember()noexcept(false) //1
 		throw userExist();
 	cout << "When have you burn? insert day:" << endl;
 	cin >> day;
-	if (day < 1 || day >30)
+	if (day < MIN_DAY_IN_MONTH || day > MAX_DAY_IN_MONTH)
 		throw invalidDate();
 	cout << "insert month:" << endl;
 	cin >> month;
-	if (month < 1 || month >12)
+	if (month < MIN_MONTH_IN_YEAR || month > MAX_MONTH_IN_YEAR)
 		throw invalidDate();
 	cout << "insert year:" << endl;
 	cin >> year;
-	if (year < 1)
+	if (year < THE_YEAR_JESUS_BORN)
 		throw invalidDate();
-	date += itoa(day, buffer, 10);
+	date += itoa(day, buffer, DECIMAL);
 	date.push_back('/');
-	date += itoa(month, buffer, 10);
+	date += itoa(month, buffer, DECIMAL);
 	date.push_back('/');
-	date += itoa(year, buffer, 10);
+	date += itoa(year, buffer, DECIMAL);
 	member* newMember;
 	try
 	{
