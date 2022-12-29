@@ -4,7 +4,7 @@
 
 page::page(const char* name, const char* status1, const char* status2) noexcept(false)
 {
-	if (strlen(name) == 0)
+	if (strlen(name) == EMPTY)
 		throw wrongInput();
 	m_name = name;
 	m_board.reserve(2);
@@ -90,7 +90,7 @@ void page::createStatus(const string text) //create new status
 
 void page::printAllStatus()const // print all statuses
 {
-	if (m_board.size() == 0)
+	if (m_board.size() == EMPTY)
 		throw emptyStatusesList();
 	cout << "your status are:" << endl;
 	for (int i = 0; i < m_board.size(); i++)
@@ -106,7 +106,7 @@ void page::printPage()const //print page
 
 page::page(string name)
 {
-	if (name.size() == 0)
+	if (name.size() == EMPTY)
 		throw emptyName();
 	m_name = name;
 }
@@ -123,8 +123,9 @@ int page::findFollowerInd(member* const follower)const//find follower index
 
 void page::printFollowers()const //print followers of a page
 {
-	if (m_ListOFfollowers.size() == 0)
+	if (m_ListOFfollowers.size() == EMPTY)
 		throw emptyFollowerList();
+
 	cout << "the page " << this->m_name << " follwers are:" << endl;
 	for (int i = 0; i < m_ListOFfollowers.size(); i++)
 	{
