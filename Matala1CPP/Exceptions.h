@@ -4,7 +4,7 @@ using namespace std;
 
 void clearBuffer();
 
-class badAlloc : public exception
+class badAlloc : public exception // when Alocation failed
 {
 public:
 	virtual const char* what() const override
@@ -13,7 +13,7 @@ public:
 	}
 };
 
-class wrongInput : public exception
+class wrongInput : public exception //when Wrong input
 {
 public:
 	virtual const char* what() const override
@@ -23,7 +23,7 @@ public:
 	}
 };
 
-class userExist : public exception
+class userExist : public exception // when adding user that already exist
 {
 public:
 	virtual const char* what() const override
@@ -32,7 +32,7 @@ public:
 	}
 };
 
-class friendExist : public exception
+class friendExist : public exception // when aading friend that already exist
 {
 public:
 	virtual const char* what() const override
@@ -41,7 +41,7 @@ public:
 	}
 };
 
-class emptyFriendList : public exception
+class emptyFriendList : public exception //when doing something on empty freind list
 {
 public:
 	virtual const char* what() const override
@@ -50,7 +50,7 @@ public:
 	}
 };
 
-class emptyPageList : public exception
+class emptyPageList : public exception //when doing something on empty page list
 {
 public:
 	virtual const char* what() const override
@@ -59,7 +59,7 @@ public:
 	}
 };
 
-class emptyFollowerList : public exception
+class emptyFollowerList : public exception //when doing something on empty follower list
 {
 public:
 	virtual const char* what() const override
@@ -68,7 +68,7 @@ public:
 	}
 };
 
-class emptyStatusesList : public exception
+class emptyStatusesList : public exception // when doing something on empty Statuses list
 {
 public:
 	virtual const char* what() const override
@@ -77,7 +77,7 @@ public:
 	}
 };
 
-class emptyStatus : public exception
+class emptyStatus : public exception // cannot add empty status
 {
 public:
 	virtual const char* what() const override
@@ -86,7 +86,7 @@ public:
 	}
 };
 
-class invalidDate : public exception
+class invalidDate : public exception // date is not rational
 {
 public:
 	virtual const char* what() const override
@@ -96,7 +96,7 @@ public:
 	}
 };
 
-class emptyName : public exception
+class emptyName : public exception // cant choose empty name
 {
 public:
 	virtual const char* what() const override
@@ -105,7 +105,7 @@ public:
 	}
 };
 
-class alreadyFriends : public exception
+class alreadyFriends : public exception //cant add to friend list a friend
 {
 public:
 	virtual const char* what() const override
@@ -114,7 +114,7 @@ public:
 	}
 };
 
-class AddYourSelf : public exception
+class AddYourSelf : public exception //cant add yourself
 {
 public:
 	virtual const char* what() const override
