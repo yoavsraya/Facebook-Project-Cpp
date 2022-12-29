@@ -12,10 +12,13 @@ int main()
 	{
 	program.starterFunc(); // set 3 friends and pages
 	}
-	catch (exception& e)
+	catch (wrongInput& e)
 	{
 		cout << e.what();
-		return 0;
+	}
+	catch (badAlloc& e)
+	{
+		cout << e.what();
 	}
 	program.runMenu(); // run facebook menu
 	//program.WhoisBigger();
