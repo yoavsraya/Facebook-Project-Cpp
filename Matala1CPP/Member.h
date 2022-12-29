@@ -9,8 +9,6 @@ class page;
 #pragma warning(disable: 4996)
 
 using namespace std;
-
-const int EMPTY = 0;
 const int FULL = -1;
 
 class member

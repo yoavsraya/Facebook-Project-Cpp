@@ -3,7 +3,6 @@
 #include <vector>
 #include <string>
 #pragma warning(disable: 4996)
-const int EMPTY = 0;
 class member;
 
 class page
