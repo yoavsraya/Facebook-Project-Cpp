@@ -15,6 +15,7 @@ class page
 public:
 	page(const char* name, const char* status1, const char* status2) noexcept(false);
 	page() {};
+	~page();
 	page(const string name);
 	bool operator>(const page& _page)const;
 	bool operator>(const member& _member)const;
