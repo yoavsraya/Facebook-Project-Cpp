@@ -1,6 +1,5 @@
 #pragma once
 
-class page;
 #include <iostream>
 #include "Status.h"
 #include <vector>
@@ -9,6 +8,8 @@ class page;
 #include "Exceptions.h"
 #include "Object.h"
 #pragma warning(disable: 4996)
+class page;
+class object;
 
 using namespace std;
 const int FULL = -1;
@@ -28,7 +29,6 @@ public:
 	bool isPageExist(const page* _page)const; //check if page is exsist
 	void removeFriend(const member* friendToRemove); //remove friend from friend list
 	void removePage(const int indOfRemove); //remove follow from a page
-	void printFriends() const; //print this friends
 	void printPages() const; //print pages i follow
 	void setName(const char* name); //update name
 	void setBirth(const char* birth); // update birth

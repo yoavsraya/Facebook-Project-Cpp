@@ -114,18 +114,6 @@ void member::removePage(const int indOfRemove) //remove follow from page
 	m_pages.erase(itr);
 }
 
-void member::printFriends()const // print my friend list 
-{
-	if (m_friendsList.size() == EMPTY)
-		throw emptyFriendList();
-	cout << "My friend List is: " << endl;
-	for (int i = 0; i < m_friendsList.size(); i++)
-	{
-		cout << "#" << i + 1 << " ";
-		cout << m_friendsList.at(i)->m_name << endl;
-	}
-}
-
 void member::printPages()const // print the pages that i follow 
 {
 	if (m_pages.size() == EMPTY)

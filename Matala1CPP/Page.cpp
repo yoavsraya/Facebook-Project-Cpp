@@ -54,7 +54,6 @@ bool page::operator>(const member& _member) const
 	return false;
 }
 
-
 page::page(string name)
 {
 	if (name.size() == EMPTY)
@@ -62,26 +61,6 @@ page::page(string name)
 	m_name = name;
 }
 
-int page::findFollowerInd(member* const follower)const//find follower index
-{
-	for (int i = 0; i < m_ListOFfollowers.size(); i++)
-	{
-		if (m_ListOFfollowers[i] == follower)
-			return i;
-	}
-	return -1;
-}
 
-void page::printFollowers()const //print followers of a page
-{
-	if (m_ListOFfollowers.size() == EMPTY)
-		throw emptyFollowerList();
 
-	cout << "the page " << this->m_name << " follwers are:" << endl;
-	for (int i = 0; i < m_ListOFfollowers.size(); i++)
-	{
-		cout << "# " << i + 1 << endl;
-		m_ListOFfollowers[i]->printMyDetails();
-	}
-}
 

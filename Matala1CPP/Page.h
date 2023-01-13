@@ -2,10 +2,11 @@
 #include "Status.h"
 #include <vector>
 #include <string>
+#include "Object.h"
 #pragma warning(disable: 4996)
 class member;
 
-class page
+class page : public object
 {
 	
 public:
@@ -15,8 +16,6 @@ public:
 	~page(); //d'tor
 	bool operator>(const page& _page)const; //oprator > Q2
 	bool operator>(const member& _member)const; //oprator > Q2
-	int findFollowerInd(member* const follower)const; //return member index
-	void printFollowers()const;	// print follower
 };
 
 

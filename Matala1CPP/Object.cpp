@@ -5,7 +5,7 @@ int object::myNumOfMembers() const // return num of friend
 	return m_MemberList.size();
 }
 
-void object::RemoveFollower(const member* _member) //remove follower from page
+void object::RemoveFollower(const object* _member) //remove follower from page
 {
 		int followeInd = findFollowerInd(_member);
 		vector<member*>::iterator itr = m_MemberList.begin() + followeInd;
@@ -13,7 +13,7 @@ void object::RemoveFollower(const member* _member) //remove follower from page
 	
 }
 
-int object::findFollowerInd(const member* follower) const
+int object::findFollowerInd(const object* follower) const
 {
 	for (int i = 0; i < m_MemberList.size(); i++)
 	{
@@ -23,7 +23,7 @@ int object::findFollowerInd(const member* follower) const
 	return -1;
 }
 
-void object::addFollower(member* const follower)
+void object::addFollower(object* const follower)
 {
 	m_MemberList.push_back(follower);
 }
@@ -70,5 +70,23 @@ void object::printMydetails()
 	{
 		cout << "Born in: " << Pm->getDate() << endl;
 	}
+}
+
+void object::PrintMyMemberList()
+{
+	if (m_MemberList.size() == EMPTY)
+		throw emptyFriendList();
+	member* Pm = dynamic_cast<member*>(this);
+	if(Pm) //if im member
+	cout << "My friend List is: " << endl;
+	else // im page
+	cout << "the page " << this->m_name << " follwers are:" << endl;
+
+	for (int i = 0; i < m_MemberList.size(); i++)
+	{
+		cout << "#" << i + 1 << " ";
+		cout << m_MemberList.at(i)->m_name << endl;
+	}
+
 }
 
