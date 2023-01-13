@@ -141,15 +141,19 @@
   <ItemGroup>
     <ClInclude Include="Data.h" />
     <ClInclude Include="Exceptions.h" />
+    <ClInclude Include="ImageStatus.h" />
     <ClInclude Include="Member.h" />
+    <ClInclude Include="Object.h" />
     <ClInclude Include="Page.h" />
     <ClInclude Include="Status.h" />
+    <ClInclude Include="VideoStatus.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="Exceptions.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Member.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="Page.cpp" />
     <ClCompile Include="Status.cpp" />
   </ItemGroup>

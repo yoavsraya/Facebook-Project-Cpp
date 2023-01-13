@@ -7,6 +7,7 @@
     <ClCompile Include="Page.cpp" />
     <ClCompile Include="Status.cpp" />
     <ClCompile Include="Exceptions.cpp" />
+    <ClCompile Include="Object.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Data.h" />
@@ -14,5 +15,8 @@
     <ClInclude Include="Page.h" />
     <ClInclude Include="Status.h" />
     <ClInclude Include="Exceptions.h" />
+    <ClInclude Include="ImageStatus.h" />
+    <ClInclude Include="VideoStatus.h" />
+    <ClInclude Include="Object.h" />
   </ItemGroup>
 </Project>

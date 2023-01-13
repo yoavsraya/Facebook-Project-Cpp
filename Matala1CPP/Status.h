@@ -10,7 +10,7 @@ const int EMPTY = 0;
 class status
 {
 public:
-	void printStatus() const noexcept(false); //print status contant
+	virtual void printStatus() const noexcept(false) = 0; //print status contant
 	status(const string content) noexcept(false); //ct'or
 	status(const status& other); //copy ct'or
 	bool operator==(const status& other)const; //opartor == Q2
@@ -22,5 +22,5 @@ public:
 private:
 	time_t dateAndtimeOfStatus;
 	string m_content;
-
+	string DataName;
 };

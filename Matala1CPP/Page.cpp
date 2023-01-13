@@ -55,55 +55,6 @@ bool page::operator>(const member& _member) const
 }
 
 
-int page::myNumOfFollowers()const
-{
-	return m_ListOFfollowers.size();
-}
-
-void page::addFollower(member* follower) // add foolower to a page
-{
-	m_ListOFfollowers.push_back(follower);
-}
-
-void page::removeFollower(member* follower) //remove follower from page
-{
-	int followeInd = findFollowerInd(follower);
-	vector<member*>::iterator itr = m_ListOFfollowers.begin() + followeInd;
-	m_ListOFfollowers.erase(itr);
-}
-
-void page::createStatus(const string text) //create new status
-{
-	status* tmp = new status;
-	try
-	{
-		tmp = new status;
-	}
-	catch (std::bad_alloc& e)
-	{
-		throw badAlloc();
-	}
-	*tmp = text;
-	m_board.push_back(tmp);
-	
-}
-
-void page::printAllStatus()const // print all statuses
-{
-	if (m_board.size() == EMPTY)
-		throw emptyStatusesList();
-	cout << "your status are:" << endl;
-	for (int i = 0; i < m_board.size(); i++)
-	{
-		m_board[i]->printStatus();
-	}
-}
-
-void page::printPage()const //print page
-{
-	cout << m_name << endl;
-}
-
 page::page(string name)
 {
 	if (name.size() == EMPTY)

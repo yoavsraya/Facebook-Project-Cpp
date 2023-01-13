@@ -138,27 +138,6 @@ void member::printPages()const // print the pages that i follow
 	}
 }
 
-void member::printMyStatuses()const // print my statuses
-{
-	if (m_mySatuses.size() == EMPTY)
-		throw emptyStatusesList();
-	cout << "My Statuses:" << endl;
-	for (int i = 0; i < m_mySatuses.size(); i++)
-	{
-		m_mySatuses.at(i)->printStatus();
-	}
-}
-
-void member::createStatus(const string _status) // create new status
-{
-	status* newStatus = new status;
-	if (!newStatus)
-		throw badAlloc();
-
-	*newStatus = _status;
-	m_mySatuses.push_back(newStatus);
-	updatelastStatuses(newStatus);
-}
 
 void member::updatelastStatuses(status* _status) //update the 10 last statuses
 {
@@ -194,17 +173,6 @@ void member::setName(const char* name)
 void member::setBirth(const char* birth)
 {
 	m_dateOfBirth = birth;
-}
-
-void member::printMyDetails()const // print my info
-{
-	cout << "Name: " << m_name << endl;
-	cout << "Born in: " << m_dateOfBirth << endl;
-}
-
-int member::myNumOfFriends()const // return num of friend
-{
-	return m_friendsList.size();
 }
 
 int member::myNumOfPagesFollow()const // return num of pages i'm follow
