@@ -9,7 +9,6 @@
 #include "Object.h"
 #pragma warning(disable: 4996)
 class page;
-class object;
 
 using namespace std;
 const int FULL = -1;

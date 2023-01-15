@@ -5,8 +5,6 @@
 #include "Status.h"
 #include "Member.h"
 
-class member;
-
 class object
 {
 	string m_name;
