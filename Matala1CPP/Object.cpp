@@ -5,12 +5,41 @@ int object::myNumOfMembers() const // return num of friend
 	return m_MemberList.size();
 }
 
-void object::RemoveFollower(const object* _member) //remove follower from page
+void object::RemoveObjectFromList(const object* _object) //remove follower from page
 {
-		int followeInd = findFollowerInd(_member);
-		vector<object*>::iterator itr = m_MemberList.begin() + followeInd;
-		m_MemberList.erase(itr);
-	
+	int Ind = 0;
+	member* Pm = dynamic_cast<member*>(this);
+	if (Pm) //if im member
+	{
+		if (m_MemberList.size() == EMPTY)
+			throw emptyFriendList();
+		bool found = false;
+		if (m_MemberList.size() == EMPTY)
+			throw emptyFriendList();
+
+		while (Ind < m_MemberList.size() && found == false)
+		{
+			if (m_MemberList.at(Ind) == _object)
+				found = true;
+			else
+				Ind++;
+		}
+
+		if (found == false)
+			throw memberdontFriendWithYou();
+
+	}
+	else //im a page 
+	{
+		if (m_MemberList.size() == EMPTY)
+			throw emptyFollowerList();
+		Ind = findFollowerInd(_object);
+		if (Ind == -1)
+			throw memberdontFollowYou();
+	}
+		
+	vector<object*>::iterator itr = m_MemberList.begin() + Ind;
+	m_MemberList.erase(itr);
 }
 
 int object::findFollowerInd(const object* follower) const
@@ -23,9 +52,9 @@ int object::findFollowerInd(const object* follower) const
 	return -1;
 }
 
-void object::addFollower(object* const follower)
+void object::addFollower(object* const object)
 {
-	m_MemberList.push_back(follower);
+	m_MemberList.push_back(object);
 }
 
 void object::createStatus(const string text)
@@ -89,4 +118,33 @@ void object::PrintMyMemberList()
 	}
 
 }
+
+bool object::isFriendExist(const object* _member) const
+{
+	bool exist = false;
+	for (int i = 0; i < m_MemberList.size() && exist == false; i++)
+	{
+		if (m_MemberList.at(i)->m_name == _member->m_name)
+		{
+			exist = true;
+			
+		}
+	}
+
+	return exist;
+}
+
+void object::PrintPagesThatImFollowing()
+{
+	int i = m_MemberList.size() - 1;
+	page* Pp = dynamic_cast<page*>(m_MemberList.at(i));
+
+	while (Pp) // im a page
+	{
+		m_MemberList.at(i)->printMydetails();
+		i--;
+		Pp = dynamic_cast<page*>(m_MemberList.at(i));
+	}
+}
+
 

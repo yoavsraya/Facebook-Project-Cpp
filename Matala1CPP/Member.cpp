@@ -1,7 +1,7 @@
 #include "Member.h"
 #include "Page.h"
 
-bool member::isPageExist(const page* _page)const // check if page is already exsist at his pages
+bool member::isPageExistInMyList(const page* _page)const // check if page is already exsist at his pages
 {
 	bool exist = false;
 	for (int i = 0; i < m_pages.size(); i++)
@@ -44,19 +44,6 @@ member& member::operator+=(page& _page)
 	return *this;
 }
 
-bool member::isFriendExist(const member* _member)const //check if friend is already at friend with this
-{
-	bool exist = false;
-	for (int i = 0; i < m_friendsList.size(); i++)
-	{
-		if (m_friendsList.at(i)->m_name == _member->m_name)
-		{
-			exist = true;
-			return exist;
-		}
-	}
-	return exist;
-}
 
 bool member::operator>(const member& _member) const
 {
@@ -81,51 +68,6 @@ member::member(const string name, const string birthDate) //ct'or
 	m_name = name;
 	m_dateOfBirth = birthDate;
 }
-
-
-void member::removeFriend(const member* friendToRemove) // remove friend from friend list
-{
-	int i = 0;
-	bool found = false;
-	if (m_friendsList.size() == EMPTY)
-		throw emptyFriendList();
-
-	while (i < m_friendsList.size() && found == false)
-	{
-		if (m_friendsList.at(i) == friendToRemove)
-			found = true;
-		else
-			i++;
-	}
-
-	if (found == false)
-		throw wrongInput();
-
-	vector<member*>::iterator itr = m_friendsList.begin() + i;
-	m_friendsList.erase(itr);
-}
-
-void member::removePage(const int indOfRemove) //remove follow from page
-{
-	if (m_pages.size() == EMPTY)
-		throw emptyPageList();
-	m_pages.at(indOfRemove)->removeFollower(this);
-	vector<page*>::iterator itr = m_pages.begin() + indOfRemove;
-	m_pages.erase(itr);
-}
-
-void member::printPages()const // print the pages that i follow 
-{
-	if (m_pages.size() == EMPTY)
-		throw emptyPageList();
-	cout << "List of the Pages I follow:" << endl;
-	for (int i = 0; i < m_pages.size(); i++)
-	{
-		cout << "#" << i + 1 << endl;
-		m_pages.at(i)->printPage();
-	}
-}
-
 
 void member::updatelastStatuses(status* _status) //update the 10 last statuses
 {
