@@ -5,28 +5,30 @@ int object::myNumOfMembers() const // return num of friend
 	return m_MemberList.size();
 }
 
-void object::RemoveObjectFromList(const object* _object) //remove follower from page
+void object::RemoveObjectFromList(object* _object) //remove follower from page
 {
-	int Ind = 0;
+	int Ind;
 	member* Pm = dynamic_cast<member*>(this);
 	if (Pm) //if im member
 	{
-		if (m_MemberList.size() == EMPTY)
-			throw emptyFriendList();
 		bool found = false;
-		if (m_MemberList.size() == EMPTY)
-			throw emptyFriendList();
-
-		while (Ind < m_MemberList.size() && found == false)
+		member* Pm2 = dynamic_cast<member*>(_object);
+		if (Pm2)
 		{
-			if (m_MemberList.at(Ind) == _object)
-				found = true;
-			else
-				Ind++;
-		}
+			Ind = 0;
+			if (m_MemberList.size() == EMPTY)
+				throw emptyFriendList();
+			while (Ind < m_MemberList.size() && found == false)
+			{
+				if (m_MemberList.at(Ind) == _object)
+					found = true;
+				else
+					Ind++;
+			}
 
-		if (found == false)
+			if (found == false)
 			throw memberdontFriendWithYou();
+		}
 
 	}
 	else //im a page 
@@ -119,15 +121,14 @@ void object::PrintMyMemberList()
 
 }
 
-bool object::isFriendExist(const object* _member) const
+bool object::isObjectExistInMyList(const object* _object) const
 {
 	bool exist = false;
 	for (int i = 0; i < m_MemberList.size() && exist == false; i++)
 	{
-		if (m_MemberList.at(i)->m_name == _member->m_name)
+		if (m_MemberList.at(i)->m_name == _object->m_name)
 		{
 			exist = true;
-			
 		}
 	}
 
@@ -145,6 +146,31 @@ void object::PrintPagesThatImFollowing()
 		i--;
 		Pp = dynamic_cast<page*>(m_MemberList.at(i));
 	}
+}
+
+string object::getName()
+{
+	return m_name;
+}
+
+void object::printMyFriendLastStatuses() const
+{
+
+	bool Page = false;
+	member* Mp;
+	for (int i = 0; i < m_MemberList.size() && Page == false; i++)
+	{
+		Mp = dynamic_cast<member*>(m_MemberList.at(i));
+		if (Mp)
+			m_MemberList.at(i)->print10lastStatuses();
+		else
+			Page = true;
+	}
+}
+
+object* object::friendIndex(int index) const
+{
+	return m_MemberList.at(index);
 }
 
 bool object::operator>(const object& _object) const

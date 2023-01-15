@@ -1,27 +1,6 @@
 #include "Member.h"
 #include "Page.h"
 
-bool member::isPageExistInMyList(const page* _page)const // check if page is already exsist at his pages
-{
-	bool exist = false;
-	for (int i = 0; i < m_pages.size(); i++)
-	{
-		if (m_pages.at(i) == _page)
-		{
-			exist = true;
-			return exist;
-		}
-	}
-	return exist;
-}
-
-member::~member()
-{
-	for (int i = 0; i < m_mySatuses.size(); i++)
-	{
-		delete m_mySatuses.at(i);
-	}
-}
 
 object& member::operator+=(object& _object)
 {
@@ -30,22 +9,11 @@ object& member::operator+=(object& _object)
 	return *this;
 }
 
-
-
-member::member(const member& other) //copy ct'or
-{
-	m_name = other.m_name;
-	m_dateOfBirth = other.m_dateOfBirth;
-	m_friendsList = other.m_friendsList;
-	m_mySatuses = other.m_mySatuses;
-	m_pages = other.m_pages;
-}
-
 member::member(const string name, const string birthDate) //ct'or
 {
 	if (name.size() == EMPTY)
 		throw wrongInput();
-	m_name = name;
+	setName(name);
 	m_dateOfBirth = birthDate;
 }
 
@@ -66,18 +34,14 @@ void member::updatelastStatuses(status* _status) //update the 10 last statuses
 	}
 }
 
-void member::print10lastStatuses()const // print last 10 statuses
+void member::print10lastStatuses() // print last 10 statuses
 {
-	cout << "the last 10 statuses of " << m_name << " is:" << endl;
+	cout << "the last 10 statuses of " << getName() << " is:" << endl;
+
 	for (int i = 9; i > m_logSize10Statuses; i--)
 	{
 		m_last10statuses[i]->printStatus();
 	}
-}
-
-void member::setName(const char* name) 
-{
-	m_name = name;
 }
 
 void member::setBirth(const char* birth)
@@ -85,29 +49,6 @@ void member::setBirth(const char* birth)
 	m_dateOfBirth = birth;
 }
 
-int member::myNumOfPagesFollow()const // return num of pages i'm follow
-{
-	return m_pages.size();
-}
 
-void member::printMyFriendLastStatuses() const
-{
-	for (int i = 0; i < m_friendsList.size(); i++)
-	{
-		m_friendsList.at(i)->print10lastStatuses();
-	}
-}
-
-member* member::friendIndex(int index) const
-{
-	return m_friendsList.at(index);
-}
-
-
-
-string member::getName()
-{
-	return m_name;
-}
 
 
