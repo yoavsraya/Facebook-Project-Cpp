@@ -131,3 +131,21 @@ public:
 		return "You cant add yourself!";
 	}
 };
+
+class memberdontFollowYou : public exception //cant add yourself
+{
+public:
+	virtual const char* what() const override
+	{
+		return "This member dosent follow your page!";
+	}
+};
+
+class memberdontFriendWithYou : public exception //cant add yourself
+{
+public:
+	virtual const char* what() const override
+	{
+		return "This member is Not friend Of yours!!!";
+	}
+};
