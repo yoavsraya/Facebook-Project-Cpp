@@ -22,6 +22,7 @@ public:
 	void printMyStatuses() const; //print all this statuses
 	virtual void printMydetails(); //print object
 	virtual void PrintMyMemberList(); // print my member list
-
+	bool operator>(const object& _object)const;
+	virtual object& operator+=(object& _object) = 0; // relevant only to member
 
 };

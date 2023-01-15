@@ -20,10 +20,7 @@ public:
 	member(const member& other); //ct'or
 	member() {}; //empty c'tor
 	~member();
-	member& operator+=(member& _member); //op +=
-	member& operator+=(page& _page); //op +=
-	bool operator>( const member& _member) const; //op >
-	bool operator>( const page& _page) const;// op >
+	virtual object& operator+=(object& _object);
 	bool isFriendExist(const member* _member)const; //check if the parmater is a friend of this
 	bool isPageExist(const page* _page)const; //check if page is exsist
 	void removeFriend(const member* friendToRemove); //remove friend from friend list
