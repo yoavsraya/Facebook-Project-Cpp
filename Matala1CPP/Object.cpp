@@ -12,22 +12,54 @@ void object::RemoveObjectFromList(object* _object) //remove follower from page
 	if (Pm) //if im member
 	{
 		bool found = false;
+		bool Page = false;
+		bool Member = false;
 		member* Pm2 = dynamic_cast<member*>(_object);
-		if (Pm2)
+		if (Pm2) //if the object is a member and this is a member 
 		{
 			Ind = 0;
 			if (m_MemberList.size() == EMPTY)
 				throw emptyFriendList();
-			while (Ind < m_MemberList.size() && found == false)
+			member* Pm3 = dynamic_cast<member*>(m_MemberList.at(Ind));
+			if (Pm3 == nullptr)
+				throw emptyFriendList();
+			while (Ind < m_MemberList.size() && found == false && Page == false)
 			{
 				if (m_MemberList.at(Ind) == _object)
 					found = true;
 				else
+				{
 					Ind++;
+					member* Pm3 = dynamic_cast<member*>(m_MemberList.at(Ind));
+					if (Pm3 == nullptr)
+						Page = true;
+				}
 			}
 
 			if (found == false)
 			throw memberdontFriendWithYou();
+		}
+		else // object is page and this is a member
+		{
+			Ind = m_MemberList.size() - 1;
+			if (m_MemberList.size() == EMPTY)
+				throw emptyPageList();
+			page* Pp3 = dynamic_cast<page*>(m_MemberList.at(Ind));
+			if (Pp3 == nullptr)
+				throw emptyPageList();
+			while (Ind >0 && found == false && Member == false)
+			{
+				if (m_MemberList.at(Ind) == _object)
+					found = true;
+				else
+				{
+					Ind--;
+					Pp3 = dynamic_cast<page*>(m_MemberList.at(Ind));
+					if (Pp3 == nullptr)
+						Page = true;
+				}
+			}
+
 		}
 
 	}
