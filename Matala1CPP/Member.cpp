@@ -129,7 +129,7 @@ void member::print10lastStatuses()const // print last 10 statuses
 	cout << "the last 10 statuses of " << m_name << " is:" << endl;
 	for (int i = 9; i > m_logSize10Statuses; i--)
 	{
-		m_last10statuses[i]->printStatus();
+		m_last10statuses[i]->printContent();
 	}
 }
 

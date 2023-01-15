@@ -3,8 +3,7 @@
 
 class ImageStastus : public status
 {
-
+	string ImageFileName = "start ";
 public:
-	virtual void printStatus() const noexcept(false) override; //print image status contant
-
+	void printImageStatus()const;
 };

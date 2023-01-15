@@ -8,6 +8,8 @@
     <ClCompile Include="Status.cpp" />
     <ClCompile Include="Exceptions.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="VideoStatus.cpp" />
+    <ClCompile Include="ImageStatus.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Data.h" />

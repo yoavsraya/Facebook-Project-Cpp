@@ -4,8 +4,7 @@
 
 class  VideoStatus: public status
 {
-
+	string VideoFileName = "start ";
 public:
-	virtual void printStatus() const noexcept(false) override; //print image status contant
-
+	void printVideoStatus() const;
 };

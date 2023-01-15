@@ -43,11 +43,11 @@ status& status::operator=(const char* str)
 	return *this;
 }
 
-void status::printStatus()const noexcept(false) //print status
+void status::printContent()const noexcept(false) //print status
 {
 	if (m_content.size() == EMPTY)
 		throw emptyStatus();
-
+	
 	cout << m_content << endl;
 	cout << "upload time and date: " << ctime(&dateAndtimeOfStatus) << endl;
 	cout << "------------------------------" << endl;

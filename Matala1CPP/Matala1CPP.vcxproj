@@ -151,11 +151,13 @@
   <ItemGroup>
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="Exceptions.cpp" />
+    <ClCompile Include="ImageStatus.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Member.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Page.cpp" />
     <ClCompile Include="Status.cpp" />
+    <ClCompile Include="VideoStatus.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
