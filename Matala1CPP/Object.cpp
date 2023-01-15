@@ -89,7 +89,7 @@ void object::printMyStatuses() const
 	cout << "My Statuses:" << endl;
 	for (int i = 0; i < m_mySatuses.size(); i++)
 	{
-		m_mySatuses.at(i)->printStatus();
+		m_mySatuses.at(i)->printContent();
 	}
 }
 
