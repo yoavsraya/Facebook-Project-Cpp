@@ -37,7 +37,7 @@ public:
 private:
 	vector <member*> m_members;
 	vector <page*> m_pages;
-	
+
 public:
 	void watch_MyFriend_List()noexcept(false); //11
 	void  print_All_FaceBook_Members_And_Pages() const noexcept(false); //10
@@ -50,6 +50,6 @@ public:
 	void  WriteNewStatus()noexcept(false); //3
 	void AddNewPage()noexcept(false); //2
 	void AddNewMember()noexcept(false); //1
-	
+
 };
 

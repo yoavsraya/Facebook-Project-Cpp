@@ -17,12 +17,12 @@ Facebook::~Facebook() //free program
 	{
 		delete m_pages.at(i);
 	}
-} 
+}
 
 void Facebook::addMember(member* const _member) //add new member to facebook
 {
 	m_members.push_back(_member);
-} 
+}
 
 void Facebook::removeMember(const int index) // remove friend from facebook
 {
@@ -73,7 +73,7 @@ void Facebook::starterFunc() //start the facebook with 3 members, 3 page, and 2 
 		starterUser2 = new member("Boaz Cohen", "04/05/1973");
 		starterUser3 = new member("Barak Kendell", "24/05/1981");
 	}
-	catch(wrongInput& e)
+	catch (wrongInput& e)
 	{
 		throw wrongInput();
 	}
@@ -91,15 +91,15 @@ void Facebook::starterFunc() //start the facebook with 3 members, 3 page, and 2 
 		starterPage2 = new page("math for doctors", "google just found the next number in phi!!", "Leonhard Euler is the best");
 		starterPage3 = new page("weather news", "big storm coming to us this weekend!", "this is a butiful day today!");
 	}
-	catch(bad_alloc& e)
+	catch (bad_alloc& e)
 	{
 		throw badAlloc();
 	}
-	catch(wrongInput& e)
+	catch (wrongInput& e)
 	{
 		throw wrongInput();
 	}
-	catch(badAlloc& e)
+	catch (badAlloc& e)
 	{
 		throw badAlloc();
 	}
@@ -289,15 +289,15 @@ void Facebook::WhoisBigger()
 	cout << "are you page or member? enter 1 for member, 2 for page" << endl;
 	cin >> choose1;
 	if (choose1 == 1)
-		 indme = whoAreYou();
+		indme = whoAreYou();
 	else if (choose1 == 2)
-		 indme = whichPage();
+		indme = whichPage();
 	cout << "what do you want to compre with? choose 1 for member, 2 for page" << endl;
 	cin >> choose2;
 	if (choose2 == 1)
-		 indcompre = whichOne(m_members.size());
+		indcompre = whichOne(m_members.size());
 	else if (choose2 == 2)
-		 indcompre = whichPage();
+		indcompre = whichPage();
 
 	if (choose1 == choose2 == 1)
 	{
@@ -330,7 +330,7 @@ void Facebook::WhoisBigger()
 			m_pages[indcompre]->printPage();
 		}
 	}
-	
+
 	else if (choose1 == 1 && choose2 == 2)
 	{
 		if (*m_members[indme] > *m_pages[indcompre])
@@ -347,8 +347,8 @@ void Facebook::WhoisBigger()
 			cout << "the member have more";
 	}
 
-		
-	
+
+
 
 }
 
@@ -445,7 +445,7 @@ void Facebook::LikeNewPage()noexcept(false) //8
 
 void Facebook::RemoveFriend()noexcept(false) //7
 {
-	
+
 	int indMe = whoAreYou();
 	if (m_members.at(indMe)->myNumOfFriends() == 0)
 		throw emptyFriendList();
@@ -484,7 +484,7 @@ void Facebook::WhatIsMyfriend_Friends_Latest_Status() //5
 	int member_index = whoAreYou();
 	if (m_members.at(member_index)->myNumOfFriends() == 0)
 		throw emptyFriendList();
-	
+
 	m_members.at(member_index)->printMyFriendLastStatuses();
 }
 
@@ -525,7 +525,7 @@ void  Facebook::WriteNewStatus()noexcept(false) //3
 	cin >> choose;
 	if (choose != 1 && choose != 2)
 		throw wrongInput();
-	
+
 	if (choose == 2)
 	{
 		index = whoAreYou();
@@ -536,13 +536,13 @@ void  Facebook::WriteNewStatus()noexcept(false) //3
 			throw emptyStatus();
 		m_members.at(index)->createStatus(contant);
 	}
-	
+
 	else if (choose == 1)
 	{
 		index = whichPage();
 		cout << "what is on your mind? (no more then 1,000 letters)" << endl;
 		clearBuffer();
-		getline(cin,contant);
+		getline(cin, contant);
 		if (contant.size() == 0)
 			throw emptyStatus();
 		m_pages.at(index)->createStatus(contant);
@@ -562,8 +562,8 @@ void Facebook::AddNewPage()noexcept(false) //2
 	{
 		newPage = new page(name);
 	}
-	
-	catch(bad_alloc& e)
+
+	catch (bad_alloc& e)
 	{
 		throw badAlloc();
 	}
@@ -607,7 +607,7 @@ void Facebook::AddNewMember()noexcept(false) //1
 	{
 		newMember = new member(name, date);
 	}
-	catch(bad_alloc& e)
+	catch (bad_alloc& e)
 	{
 		throw badAlloc();
 	}
