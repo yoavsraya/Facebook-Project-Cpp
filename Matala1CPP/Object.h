@@ -10,7 +10,7 @@ class member;
 class object
 {
 	string m_name;
-	vector<member*> m_MemberList;
+	vector<object*> m_MemberList;
 	vector<status*> m_mySatuses;
 
 public:

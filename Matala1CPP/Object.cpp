@@ -8,7 +8,7 @@ int object::myNumOfMembers() const // return num of friend
 void object::RemoveFollower(const object* _member) //remove follower from page
 {
 		int followeInd = findFollowerInd(_member);
-		vector<member*>::iterator itr = m_MemberList.begin() + followeInd;
+		vector<object*>::iterator itr = m_MemberList.begin() + followeInd;
 		m_MemberList.erase(itr);
 	
 }
