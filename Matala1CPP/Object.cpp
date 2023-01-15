@@ -147,4 +147,10 @@ void object::PrintPagesThatImFollowing()
 	}
 }
 
+bool object::operator>(const object& _object) const
+{
+	if (this->myNumOfMembers() > _object.myNumOfMembers())
+		return true;
+	return false;
+}
 

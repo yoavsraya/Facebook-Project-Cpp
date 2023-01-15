@@ -23,9 +23,7 @@ public:
 	void printMyStatuses() const; //print all this statuses
 	virtual void printMydetails(); //print object
 	virtual void PrintMyMemberList(); // print my member list
-	virtual bool isFriendExist(const object* _member)const; //check if the parmater is a friend of this
-	virtual bool isPageExistInMyList(const page* _page)const = 0; // only for memebr :: check if page is already exsist at his pages
-	void PrintPagesThatImFollowing(); // only for memebr :: print pages that member follow
-
+	bool operator>(const object& _object)const;
+	virtual object& operator+=(object& _object) = 0; // relevant only to member
 
 };

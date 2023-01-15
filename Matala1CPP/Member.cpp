@@ -15,13 +15,6 @@ bool member::isPageExistInMyList(const page* _page)const // check if page is alr
 	return exist;
 }
 
-bool member::operator>(const page& _page) const
-{
-	if (m_friendsList.size() > _page.myNumOfFollowers())
-		return true;
-	return false;
-}
-
 member::~member()
 {
 	for (int i = 0; i < m_mySatuses.size(); i++)
@@ -30,27 +23,14 @@ member::~member()
 	}
 }
 
-member& member::operator+=(member& _member)
+object& member::operator+=(object& _object)
 {
-	m_friendsList.push_back(&_member);
-	_member.m_friendsList.push_back(this);
-	return *this;
-}
-
-member& member::operator+=(page& _page)
-{
-	m_pages.push_back(&_page);
-	_page.addFollower(this);
+	this->addFollower(&_object);
+	_object.addFollower(this);
 	return *this;
 }
 
 
-bool member::operator>(const member& _member) const
-{
-	if (m_friendsList.size() > _member.m_friendsList.size())
-		return true;
-	return false;
-}
 
 member::member(const member& other) //copy ct'or
 {

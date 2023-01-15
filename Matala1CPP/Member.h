@@ -20,11 +20,12 @@ public:
 	member(const member& other); //ct'or
 	member() {}; //empty c'tor
 	~member();
-	member& operator+=(member& _member); //op +=
-	member& operator+=(page& _page); //op +=
-	bool operator>( const member& _member) const; //op >
-	bool operator>( const page& _page) const;// op >
-	virtual bool isPageExistInMyList(const page* _page)const; //check if page is exsist
+	virtual object& operator+=(object& _object);
+	bool isFriendExist(const member* _member)const; //check if the parmater is a friend of this
+	bool isPageExist(const page* _page)const; //check if page is exsist
+	void removeFriend(const member* friendToRemove); //remove friend from friend list
+	void removePage(const int indOfRemove); //remove follow from a page
+	void printPages() const; //print pages i follow
 	void setName(const char* name); //update name
 	void setBirth(const char* birth); // update birth
 	void updatelastStatuses(status* _status); //update last 10 statuses
