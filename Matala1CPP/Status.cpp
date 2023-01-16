@@ -43,6 +43,7 @@ status& status::operator=(const char* str)
 	return *this;
 }
 
+
 void status::printContent()const noexcept(false) //print status
 {
 	if (m_content.size() == EMPTY)

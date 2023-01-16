@@ -10,10 +10,11 @@ class page
 	string m_name;
 	vector <member*> m_ListOFfollowers;
 	vector <status*> m_board;
+	int index;
+	static int NumOfPages;
 
 public:
-	page(const char* name, const char* status1, const char* status2) noexcept(false); //ct'or
-	page() {}; //empty ct'or
+	page() {index = NumOfPages; NumOfPages++;} //empty ct'or
 	page(const string name); //ct'or
 	~page(); //d'tor
 	bool operator>(const page& _page)const; //oprator > Q2
@@ -22,10 +23,14 @@ public:
 	int myNumOfFollowers() const; // return num of follwers
 	void addFollower(member* const follower); //add new follower
 	void removeFollower(member* follower); //remove follower
-	void createStatus(const string text); //create status from string
+	void createStatus(const string content, int index, string dataName); //create status from string
 	void printAllStatus()const; //print all statuses of page
 	void printPage()const; //print page
 	void printFollowers()const;	// print follower
+	int getPageindex() { return index; }
+	string getName() { return m_name; }
+	void writeToFile(fstream& file);
+	void createStatusFromFile(string contant, time_t time, int type, string datatype = 0);
 };
 
 

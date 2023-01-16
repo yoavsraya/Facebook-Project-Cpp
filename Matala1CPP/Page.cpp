@@ -2,35 +2,8 @@
 #include "Member.h"
 #include "Exceptions.h"
 
-page::page(const char* name, const char* status1, const char* status2) noexcept(false)
-{
-	if (strlen(name) == EMPTY)
-		throw wrongInput();
-	m_name = name;
-	m_board.reserve(2);
-	status* firststatus;
-	try
-	{
-		firststatus = new status;
-	}
-	catch (bad_alloc& e)
-	{
-		throw badAlloc();
-	}
-	*firststatus = status1;
-	m_board.push_back(firststatus);
-	status* secstatus = new status;
-	try
-	{
-		firststatus = new status;
-	}
-	catch (bad_alloc& e)
-	{
-		throw badAlloc();
-	}
-	*secstatus = status2;
-	m_board.push_back(secstatus);
-}
+int page::NumOfPages = 0;
+
 
 page::~page()
 {
@@ -38,7 +11,9 @@ page::~page()
 	{
 		delete m_board.at(i);
 	}
+	NumOfPages--;
 }
+
 
 bool page::operator>(const page& _page) const
 {
@@ -72,19 +47,18 @@ void page::removeFollower(member* follower) //remove follower from page
 	m_ListOFfollowers.erase(itr);
 }
 
-void page::createStatus(const string text) //create new status
+void page::createStatus(const string content, int index, string dataName) //create new status
 {
-	status* tmp = new status;
-	try
-	{
-		tmp = new status;
-	}
-	catch (std::bad_alloc& e)
-	{
+	status* newStatus;
+	if (index == TEXT)
+		newStatus = new status(content);
+	else if (index == VIDEO)
+		newStatus = new VideoStatus(content, dataName);
+	else
+		newStatus = new ImageStastus(content, dataName);
+	if (!newStatus)
 		throw badAlloc();
-	}
-	*tmp = text;
-	m_board.push_back(tmp);
+	m_board.push_back(newStatus);
 
 }
 
@@ -108,6 +82,8 @@ page::page(string name)
 {
 	if (name.size() == EMPTY)
 		throw emptyName();
+	index = NumOfPages;
+	NumOfPages++;
 	m_name = name;
 }
 
@@ -132,5 +108,44 @@ void page::printFollowers()const //print followers of a page
 		cout << "# " << i + 1 << endl;
 		m_ListOFfollowers[i]->printMyDetails();
 	}
+}
+
+void page::writeToFile(fstream& file)
+{
+	int type;
+	file << index << endl;
+	file << m_ListOFfollowers.size() << endl;
+	for (int i = 0; i < m_ListOFfollowers.size(); i++)
+	{
+		file << m_ListOFfollowers.at(i)->getIndex() << " " << m_ListOFfollowers.at(i)->getName() << endl;
+	}
+	file << m_board.size() << endl;
+	for (int i = 0; i < m_board.size(); i++)
+	{
+		type = m_board.at(i)->getTypeIndex();
+		file << m_board.at(i)->getTypeIndex() << endl;
+		file << m_board.at(i)->getContent() << endl;
+		file << m_board.at(i)->getTime() << endl;
+		if (type != 0)
+			file << m_board.at(i)->getDataFileName() << endl;
+	}
+
+
+}
+
+void page::createStatusFromFile(string content, time_t time, int type, string datatype)
+{
+	status* newStatus;
+	if (type == TEXT)
+		newStatus = new status(content);
+	else if (type == VIDEO)
+		newStatus = new VideoStatus(content,datatype);
+	else
+		newStatus = new ImageStastus(content, datatype);
+	if (!newStatus)
+		throw badAlloc();
+
+	newStatus->setTime(time);
+	m_board.push_back(newStatus);
 }
 

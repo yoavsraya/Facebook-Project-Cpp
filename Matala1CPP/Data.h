@@ -3,16 +3,19 @@
 #include "Page.h"
 #include "Exceptions.h"
 #include <vector>
+#include <fstream>
+
 #pragma warning(disable: 4996)
 
-const int DEFAULT_MEMBERS_STARTS = 3;
-const int DEFAULT_PAGES_STARTS = 3;
+const int SIZE_OF_DATE = 11;
+const int MAX_NAME_LENGTH = 50;
 const int DECIMAL = 10;
 const int MAX_DAY_IN_MONTH = 31;
 const int MAX_MONTH_IN_YEAR = 12;
 const int MIN_DAY_IN_MONTH = 1;
 const int MIN_MONTH_IN_YEAR = 1;
 const int THE_YEAR_JESUS_BORN = 1;
+const int MAX_TEXT_LENGTH = 500;
 
 class Facebook
 {
@@ -26,17 +29,21 @@ public:
 	void addPage(page* other); // add new page to facebook
 	void removePage(const int index); //remove page from facebook
 	void runMenu(); // run facebook program until exit
-	void starterFunc(); // start facebook with 3 users and 3 pages
 	void printMenu()const; // print menu
 	int whoAreYou(); // return user index
 	int whichOne(int size); //return user index
 	int whichPage(); //return page
 	void WhoisBigger(); //use oprator > (Q2)
 	bool isExsist(string name); //check if the name is already exsist
+	void WriteTofile(); //write all data to txt
+	void ReadFromFile(); //read all data from txt
+	void createMemberFromFile(string name, string date);
+	void createPageFromFile(char* name);
 
 private:
 	vector <member*> m_members;
 	vector <page*> m_pages;
+	//fstream Data_file;
 
 public:
 	void watch_MyFriend_List()noexcept(false); //11

@@ -7,3 +7,17 @@ void VideoStatus::printVideoStatus() const
 	system(fileName);
 	cout << endl;
 }
+
+VideoStatus::VideoStatus(string content, string dataName)
+{
+	setIndex(VIDEO);
+	setName(content);
+	VideoFileName = dataName;
+}
+
+string VideoStatus::getDataFileName()
+{
+	return VideoFileName;
+}
+
+

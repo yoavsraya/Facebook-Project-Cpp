@@ -1,8 +1,9 @@
 #pragma once
 
 class page;
-#include <iostream>
-#include "Status.h"
+#include <fstream>
+#include "VideoStatus.h"
+#include "ImageStatus.h"
 #include <vector>
 #include<array>
 #include <string>
@@ -17,7 +18,7 @@ class member
 public:
 	member(const string name, const string birthDate); //c'tor
 	member(const member& other); //ct'or
-	member() {}; //empty c'tor
+	member() { index = NumOfMember; NumOfMember++; }; //empty c'tor
 	~member();
 	member& operator+=(member& _member); //op +=
 	member& operator+=(page& _page); //op +=
@@ -29,7 +30,7 @@ public:
 	void removePage(const int indOfRemove); //remove follow from a page
 	void printFriends() const; //print this friends
 	void printPages() const; //print pages i follow
-	void createStatus(const string status); //create new status
+	void createStatus(const string content, int index, string dataName); //create new status
 	void printMyStatuses() const; //print all this statuses
 	void printMyDetails() const; //print details
 	void setName(const char* name); //update name
@@ -41,6 +42,10 @@ public:
 	void printMyFriendLastStatuses()const; //print last 10 statuses of my friends
 	member* friendIndex(int index)const; //return pointer to member by index
 	string getName(); //get name
+	string getDate() { return m_dateOfBirth; } // get birth day
+	void writeToFile(fstream& file);
+	int getIndex() { return index; }
+	void createStatusFromFile(string contant, time_t time, int type, string datatype =nullptr);
 
 private:
 	string m_name;
@@ -50,6 +55,8 @@ private:
 	vector<page*> m_pages;
 	vector<status*> m_mySatuses;
 	array<status*, 10> m_last10statuses;
+	int index;
+	static int NumOfMember;
 };
 
 

@@ -1,10 +1,7 @@
 #include "data.h"
 
 Facebook::Facebook()
-{
-	m_members.reserve(DEFAULT_MEMBERS_STARTS);
-	m_pages.reserve(DEFAULT_PAGES_STARTS);
-}
+{}
 
 Facebook::~Facebook() //free program
 {
@@ -62,65 +59,6 @@ void Facebook::printPages()const // print all pages on facebook
 	}
 }
 
-void Facebook::starterFunc() //start the facebook with 3 members, 3 page, and 2 statuses each
-{
-	member* starterUser1;
-	member* starterUser2;
-	member* starterUser3;
-	try
-	{
-		starterUser1 = new member("Uzi Harush", "06/09/1988");
-		starterUser2 = new member("Boaz Cohen", "04/05/1973");
-		starterUser3 = new member("Barak Kendell", "24/05/1981");
-	}
-	catch (wrongInput& e)
-	{
-		throw wrongInput();
-	}
-	m_members.push_back(starterUser1);
-	m_members.push_back(starterUser2);
-	m_members.push_back(starterUser3);
-
-	page* starterPage1;
-	page* starterPage2;
-	page* starterPage3;
-
-	try
-	{
-		starterPage1 = new page("golf Lovers", "tonight! tiger woods challenging the world championship", "what is your favorite club?");
-		starterPage2 = new page("math for doctors", "google just found the next number in phi!!", "Leonhard Euler is the best");
-		starterPage3 = new page("weather news", "big storm coming to us this weekend!", "this is a butiful day today!");
-	}
-	catch (bad_alloc& e)
-	{
-		throw badAlloc();
-	}
-	catch (wrongInput& e)
-	{
-		throw wrongInput();
-	}
-	catch (badAlloc& e)
-	{
-		throw badAlloc();
-	}
-
-	m_pages.push_back(starterPage1);
-	m_pages.push_back(starterPage2);
-	m_pages.push_back(starterPage3);
-
-	*m_members.at(0) += *m_pages.at(2);
-	*m_members.at(1) += *m_members.at(2);
-	*m_members.at(2) += *m_pages.at(0);
-
-	m_members.at(0)->createStatus("hi im uzi");
-	m_members.at(0)->createStatus("i teach calculus 1");
-	m_members.at(1)->createStatus("hi im boaz");
-	m_members.at(1)->createStatus("i teach calculus 2");
-	m_members.at(2)->createStatus("hi im barak");
-	m_members.at(2)->createStatus("i teach probability");
-
-}
-
 void Facebook::runMenu() //run the facebook manu until exit
 {
 	bool runningProgram = true;
@@ -135,6 +73,7 @@ void Facebook::runMenu() //run the facebook manu until exit
 			{
 			case (12):
 				runningProgram = false;
+				WriteTofile();
 				break;
 			case(11):
 				watch_MyFriend_List();
@@ -362,6 +301,171 @@ bool Facebook::isExsist(string name)
 	return true;
 }
 
+void Facebook::WriteTofile()
+{
+	fstream Data_file("Facbook_Data.txt");
+	Data_file << m_members.size()<< endl;
+	for (int i = 0; i < m_members.size(); i++)
+	{
+		Data_file << m_members.at(i)->getName() << endl;
+		Data_file << m_members.at(i)->getDate() << endl;
+	}
+	Data_file << m_pages.size() << endl;
+	for (int i = 0; i < m_pages.size(); i++)
+	{
+		Data_file << m_pages.at(i)->getName() << endl;
+	}
+	for (int i = 0; i < m_members.size(); i++)
+	{
+		m_members.at(i)->writeToFile(Data_file);
+	}
+	for (int i = 0; i < m_pages.size(); i++)
+	{
+		m_pages.at(i)->writeToFile(Data_file);
+	}
+
+	Data_file.close();
+}
+
+void Facebook::ReadFromFile()
+{
+	int numOfMember;
+	int numOfPages;
+	int numOfFriends;
+	int friendIndex;
+	int numOfPagefollow;
+	int pageIndex;
+	int numOfStatuses;
+	int datatype;
+	int index;
+	char name[MAX_NAME_LENGTH];
+	char DateOfBirth[SIZE_OF_DATE];
+	char statustext[MAX_TEXT_LENGTH];
+	char dataTypeName[MAX_NAME_LENGTH];
+	time_t statustime;
+	string Name;
+	string Date;
+
+	fstream Data_file("Facbook_Data.txt");
+	if (Data_file.peek() == std::ifstream::traits_type::eof())
+	{
+		return;
+	}
+
+	Data_file >> numOfMember;
+	m_members.reserve(numOfMember);
+
+	for (int i = 0; i < numOfMember; i++)
+	{
+		Data_file.get();
+		Data_file.getline(name, MAX_NAME_LENGTH);
+		Data_file.getline(DateOfBirth, SIZE_OF_DATE);
+		Name = name;
+		Date = DateOfBirth;
+		createMemberFromFile(Name, Date);
+	}
+	Data_file >> numOfPages;
+	m_pages.reserve(numOfPages);
+
+	for (int i = 0; i < numOfPages; i++)
+	{
+		Data_file.get();
+		Data_file.getline(name, MAX_NAME_LENGTH);
+		createPageFromFile(name);
+	}
+	
+	for (int i = 0; i < numOfMember; i++)
+	{
+		Data_file >> index;
+		Data_file >> numOfFriends;
+		for (int j = 0; j < numOfFriends; j++)
+		{
+			Data_file >> friendIndex;
+			*m_members.at(index) += *m_members.at(friendIndex);
+		}
+
+		Data_file >> numOfPagefollow;
+		for (int j = 0; j < numOfPagefollow; j++)
+		{
+			Data_file >> pageIndex;
+			*m_members.at(i) += *m_pages.at(pageIndex);
+		}
+
+		Data_file >> numOfStatuses;
+		for (int j = 0; j < numOfStatuses; j++)
+		{
+			Data_file >> datatype;
+			Data_file.get();
+			Data_file.getline(statustext, MAX_TEXT_LENGTH);
+			Data_file >> statustime;
+			if (datatype != 0)
+			{
+				Data_file.get();
+				Data_file.getline(dataTypeName, MAX_NAME_LENGTH);
+				m_members.at(i)->createStatusFromFile(statustext, statustime, datatype, dataTypeName);
+			}
+			m_members.at(i)->createStatusFromFile(statustext, statustime, datatype, dataTypeName);
+		}
+	}
+	for (int i = 0; i < numOfPages; i++)
+	{
+		Data_file >> index;
+		Data_file >> numOfFriends;
+		for (int j = 0; j < numOfFriends; j++)
+		{
+			Data_file >> friendIndex;
+			m_pages.at(index)->addFollower(m_members.at(friendIndex));
+		}
+		Data_file >> numOfStatuses;
+
+		for (int j = 0; j < numOfStatuses; j++)
+		{
+			Data_file >> datatype;
+			Data_file.get();
+			Data_file.getline(statustext, MAX_TEXT_LENGTH);
+			Data_file >> statustime;
+			if (datatype != 0)
+			{
+				Data_file.get();
+				Data_file.getline(dataTypeName, MAX_NAME_LENGTH);
+				m_pages.at(i)->createStatusFromFile(statustext, statustime, datatype, dataTypeName);
+			}
+			m_pages.at(i)->createStatusFromFile(statustext, statustime, datatype, dataTypeName);
+		}
+
+	}
+	Data_file.close();
+}
+
+void Facebook::createMemberFromFile(string name, string date)
+{
+	member* newMember;
+		try
+		{
+			newMember = new member(name, date);
+		}
+		catch (bad_alloc& e)
+		{
+			throw badAlloc();
+		}
+		addMember(newMember);
+}
+
+void Facebook::createPageFromFile(char* name)
+{
+	page* newPage;
+	try
+	{
+		newPage = new page(name);
+	}
+
+	catch (bad_alloc& e)
+	{
+		throw badAlloc();
+	}
+	addPage(newPage);
+}
+
 int Facebook::whichOne(int size) //ask the user to choose one 
 {
 	cout << "choose One:" << endl;
@@ -518,6 +622,8 @@ void  Facebook::WriteNewStatus()noexcept(false) //3
 	int choose;
 	int index;
 	string contant;
+	int StatusType;
+	string DataName;
 
 	cout << "are you a page or a member? (choose 1 or 2)" << endl;
 	cout << "1. I'm A page" << endl;
@@ -529,23 +635,41 @@ void  Facebook::WriteNewStatus()noexcept(false) //3
 	if (choose == 2)
 	{
 		index = whoAreYou();
+		cout << "which kind of status do you want?" << endl;
+		cout << "1. text" << endl << "2. for video" << endl << "3. for image" << endl;
+		cin >> StatusType;
+		if (StatusType != 1)
+		{
+			cout << "enter video/image name: (no more then 50 characters)" << endl;
+			clearBuffer();
+			getline(cin, DataName);
+		}
 		cout << "what is on your mind? (no more then 1,000 letters)" << endl;
 		clearBuffer();
 		getline(cin, contant);
 		if (contant.size() == 0)
 			throw emptyStatus();
-		m_members.at(index)->createStatus(contant);
+		m_members.at(index)->createStatus(contant,StatusType,DataName);
 	}
 
 	else if (choose == 1)
 	{
 		index = whichPage();
+		cout << "which kind of status do you want?" << endl;
+		cout << "1. text" << endl << "2. for video" << endl << "3. for image" << endl;
+		cin >> StatusType;
+		if (StatusType != 1)
+		{
+			cout << "enter video/image name: (no more then 50 characters)" << endl;
+			clearBuffer();
+			getline(cin, DataName);
+		}
 		cout << "what is on your mind? (no more then 1,000 letters)" << endl;
 		clearBuffer();
 		getline(cin, contant);
 		if (contant.size() == 0)
 			throw emptyStatus();
-		m_pages.at(index)->createStatus(contant);
+		m_pages.at(index)->createStatus(contant,StatusType,DataName);
 	}
 }
 

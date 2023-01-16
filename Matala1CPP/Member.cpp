@@ -1,6 +1,8 @@
 #include "Member.h"
 #include "Page.h"
 
+int member::NumOfMember = 0;
+
 bool member::isPageExist(const page* _page)const // check if page is already exsist at his pages
 {
 	bool exist = false;
@@ -28,6 +30,7 @@ member::~member()
 	{
 		delete m_mySatuses.at(i);
 	}
+	NumOfMember--;
 }
 
 member& member::operator+=(member& _member)
@@ -67,6 +70,8 @@ bool member::operator>(const member& _member) const
 
 member::member(const member& other) //copy ct'or
 {
+	index = NumOfMember;
+	NumOfMember++;
 	m_name = other.m_name;
 	m_dateOfBirth = other.m_dateOfBirth;
 	m_friendsList = other.m_friendsList;
@@ -76,6 +81,9 @@ member::member(const member& other) //copy ct'or
 
 member::member(const string name, const string birthDate) //ct'or
 {
+	index = NumOfMember;
+	NumOfMember++;
+
 	if (name.size() == EMPTY)
 		throw wrongInput();
 	m_name = name;
@@ -149,13 +157,21 @@ void member::printMyStatuses()const // print my statuses
 	}
 }
 
-void member::createStatus(const string _status) // create new status
+void member::createStatus(const string content, int index, string dataName) // create new status
 {
-	status* newStatus = new status;
+	status* newStatus;
+	ImageStastus* Ip;
+	VideoStatus* Vp;
+	if (index == TEXT)
+		newStatus = new status(content);
+	else if (index == VIDEO)
+		newStatus = new VideoStatus(content, dataName);
+	else
+		newStatus = new ImageStastus(content, dataName);
+
 	if (!newStatus)
 		throw badAlloc();
 
-	*newStatus = _status;
 	m_mySatuses.push_back(newStatus);
 	updatelastStatuses(newStatus);
 }
@@ -230,6 +246,56 @@ member* member::friendIndex(int index) const
 string member::getName()
 {
 	return m_name;
+}
+
+void member::writeToFile(fstream& file)
+{
+	int type;
+	file << index << endl;
+	file << m_friendsList.size() << endl;
+	for (int i = 0; i < m_friendsList.size(); i++)
+	{
+		file << m_friendsList.at(i)->index << " " << m_friendsList.at(i)->getName() << endl;
+	}
+	file << m_pages.size() << endl;
+	for (int i = 0; i < m_pages.size(); i++)
+	{
+		file << m_pages.at(i)->getPageindex() << " " << m_pages.at(i)->getName() << endl;
+	}
+	file << m_mySatuses.size() << endl;
+	for (int i = 0; i < m_mySatuses.size(); i++)
+	{
+		type = m_mySatuses.at(i)->getTypeIndex();
+		file << m_mySatuses.at(i)->getTypeIndex() <<endl;
+		file << m_mySatuses.at(i)->getContent() << endl;
+		file << m_mySatuses.at(i)->getTime() << endl;
+		if (type != 0)
+		{
+			file << m_mySatuses.at(i)->getDataFileName() << endl;
+		}
+	}
+
+
+}
+
+void member::createStatusFromFile(string contant, time_t time, int type, string datatype)
+{
+	status* newStatus;
+	ImageStastus* Ip;
+	VideoStatus* Vp;
+	if (type == TEXT)
+		newStatus = new status(contant);
+	else if (type == VIDEO)
+		newStatus = new VideoStatus(contant,datatype);
+	else
+		newStatus = new ImageStastus(contant, datatype);
+	if (!newStatus)
+		throw badAlloc();
+
+	newStatus->setTime(time);
+
+	m_mySatuses.push_back(newStatus);
+	updatelastStatuses(newStatus);
 }
 
 
