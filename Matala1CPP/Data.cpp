@@ -673,7 +673,7 @@ void  Facebook::WriteNewStatus()noexcept(false) //3
 		getline(cin, content);
 		if (content.size() == 0)
 			throw emptyStatus();
-		m_members.at(index)->createStatus(content,StatusType,DataName);
+		m_members.at(index)->createStatus(content,StatusType-1,DataName);
 	}
 
 	else if (choose == 1)
@@ -692,7 +692,7 @@ void  Facebook::WriteNewStatus()noexcept(false) //3
 		getline(cin, content);
 		if (content.size() == 0)
 			throw emptyStatus();
-		m_pages.at(index)->createStatus(content,StatusType,DataName);
+		m_pages.at(index)->createStatus(content, StatusType - 1, DataName);
 	}
 }
 

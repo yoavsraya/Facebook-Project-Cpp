@@ -13,6 +13,7 @@ ImageStastus::ImageStastus(string content, string dataName)
 	setIndex(IMAGE);
 	setName(content);
 	ImageFileName = dataName;
+	setTime();
 }
 
 string ImageStastus::getDataFileName()

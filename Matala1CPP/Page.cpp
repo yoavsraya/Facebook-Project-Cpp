@@ -145,7 +145,7 @@ void page::createStatusFromFile(string content, time_t time, int type, string da
 	if (!newStatus)
 		throw badAlloc();
 
-	newStatus->setTime(time);
+	newStatus->copyTime(time);
 	m_board.push_back(newStatus);
 }
 

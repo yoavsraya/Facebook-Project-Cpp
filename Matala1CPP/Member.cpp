@@ -290,7 +290,7 @@ void member::createStatusFromFile(string contant, time_t time, int type, string 
 	if (!newStatus)
 		throw badAlloc();
 
-	newStatus->setTime(time);
+	newStatus->copyTime(time);
 
 	m_mySatuses.push_back(newStatus);
 	updatelastStatuses(newStatus);
