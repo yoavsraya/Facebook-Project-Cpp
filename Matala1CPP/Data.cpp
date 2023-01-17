@@ -355,9 +355,9 @@ void Facebook::ReadFromFile()
 	Data_file >> numOfMember;
 	m_members.reserve(numOfMember);
 
+	Data_file.get();
 	for (int i = 0; i < numOfMember; i++)
 	{
-		Data_file.get();
 		Data_file.getline(name, MAX_NAME_LENGTH);
 		Data_file.getline(DateOfBirth, SIZE_OF_DATE);
 		Name = name;
@@ -367,9 +367,9 @@ void Facebook::ReadFromFile()
 	Data_file >> numOfPages;
 	m_pages.reserve(numOfPages);
 
+	Data_file.get();
 	for (int i = 0; i < numOfPages; i++)
 	{
-		Data_file.get();
 		Data_file.getline(name, MAX_NAME_LENGTH);
 		createPageFromFile(name);
 	}
