@@ -315,7 +315,7 @@ bool Facebook::isExsist(string name)
 
 void Facebook::WriteTofile()
 {
-	fstream Data_file("Facbook_Data.txt",ios_base::app | ios_base::in | ios_base::trunc);
+	fstream Data_file("Facbook_Data.txt",ios_base::out | ios_base::in | ios_base::trunc);
 	Data_file << m_members.size()<< endl;
 	for (int i = 0; i < m_members.size(); i++)
 	{
