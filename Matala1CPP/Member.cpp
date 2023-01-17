@@ -5,16 +5,14 @@ int member::NumOfMember = 0;
 
 bool member::isPageExist(const page* _page)const // check if page is already exsist at his pages
 {
-	bool exist = false;
 	for (int i = 0; i < m_pages.size(); i++)
 	{
 		if (m_pages.at(i) == _page)
 		{
-			exist = true;
-			return exist;
+			return true;
 		}
 	}
-	return exist;
+	return false;
 }
 
 bool member::operator>(const page& _page) const
