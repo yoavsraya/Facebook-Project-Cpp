@@ -654,8 +654,9 @@ void  Facebook::WriteNewStatus()noexcept(false) //3
 			clearBuffer();
 			getline(cin, DataName);
 		}
+		char tmp[10];
 		cout << "what is on your mind? (no more then 1,000 letters)" << endl;
-		clearBuffer();
+		cin >> tmp;
 		getline(cin, contant);
 		if (contant.size() == 0)
 			throw emptyStatus();
@@ -675,7 +676,6 @@ void  Facebook::WriteNewStatus()noexcept(false) //3
 			getline(cin, DataName);
 		}
 		cout << "what is on your mind? (no more then 1,000 letters)" << endl;
-		clearBuffer();
 		getline(cin, contant);
 		if (contant.size() == 0)
 			throw emptyStatus();
