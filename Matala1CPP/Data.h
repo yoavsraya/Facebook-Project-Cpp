@@ -30,10 +30,10 @@ public:
 	void removePage(const int index); //remove page from facebook
 	void runMenu(); // run facebook program until exit
 	void printMenu()const; // print menu
-	int whoAreYou(); // return user index
-	int whichOne(int size); //return user index
-	int whichPage(); //return page
-	void WhoisBigger(); //use oprator > (Q2)
+	int whoAreYou()const; // return user index
+	int whichOne(const int size) const; //return user index
+	int whichPage()const; //return page
+	void WhoisBigger()const; //use oprator > (Q2)
 	bool isExsist(string name); //check if the name is already exsist
 	void WriteTofile(); //write all data to txt
 	void ReadFromFile(); //read all data from txt

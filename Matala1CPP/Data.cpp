@@ -191,7 +191,7 @@ void Facebook::printMenu()const //print manu option
 	cout << "1 - Add New Member\n2 - Add New Page\n3 - Write New Status\n4 - See All My Status\n5 - What is My friend friends latest Status\n6 - Add friend\n7 - Remove Friend\n8 - Like New Page\n9 - Unlike Page\n10 - print All FaceBook Members And Pages\n11 - Watch My Friend/followers List\n12 - Exit" << endl << endl;
 }
 
-int Facebook::whoAreYou() // return the user index 
+int Facebook::whoAreYou() const// return the user index 
 {
 	int ind;
 	if (m_members.size() == 0)
@@ -211,9 +211,9 @@ int Facebook::whoAreYou() // return the user index
 	return ind - 1;
 }
 
-int Facebook::whichPage() //return page index
+int Facebook::whichPage()const //return page index
 {
-	if (m_pages.size() == 0)
+	if (m_pages.size() == EMPTY)
 		throw NoPages();
 	int ind;
 	cout << "who Are you? choose number: " << endl;
@@ -231,7 +231,7 @@ int Facebook::whichPage() //return page index
 	return ind - 1;
 }
 
-void Facebook::WhoisBigger()
+void Facebook::WhoisBigger() const
 {
 	int choose1;
 	int choose2;
@@ -413,7 +413,7 @@ void Facebook::ReadFromFile()
 			Data_file.get();
 			Data_file.getline(statustext, MAX_TEXT_LENGTH);
 			Data_file >> statustime;
-			if (datatype != 0)
+			if (datatype != TEXT)
 			{
 				Data_file.get();
 				Data_file.getline(dataTypeName, MAX_NAME_LENGTH);
@@ -438,7 +438,7 @@ void Facebook::ReadFromFile()
 			Data_file.get();
 			Data_file.getline(statustext, MAX_TEXT_LENGTH);
 			Data_file >> statustime;
-			if (datatype != 0)
+			if (datatype != TEXT)
 			{
 				Data_file.get();
 				Data_file.getline(dataTypeName, MAX_NAME_LENGTH);
@@ -480,7 +480,7 @@ void Facebook::createPageFromFile(char* name)
 	addPage(newPage);
 }
 
-int Facebook::whichOne(int size) //ask the user to choose one 
+int Facebook::whichOne(const int size) const//ask the user to choose one 
 {
 	cout << "choose One:" << endl;
 	int res;
@@ -517,12 +517,12 @@ void Facebook::watch_MyFriend_List()noexcept(false) //11
 
 void  Facebook::print_All_FaceBook_Members_And_Pages()const noexcept(false)//10
 {
-	if (m_members.size() == 0 && m_pages.size() == 0)
+	if (m_members.size() == EMPTY && m_pages.size() == EMPTY)
 	{
 		cout << "there is no friends/pages on facebook" << endl;
 		return;
 	}
-	if (m_members.size() != 0)
+	if (m_members.size() != EMPTY)
 	{
 		cout << "All Facebook users: " << endl;
 		for (int i = 0; i < m_members.size(); i++)
@@ -533,7 +533,7 @@ void  Facebook::print_All_FaceBook_Members_And_Pages()const noexcept(false)//10
 		cout << "----------------------------" << endl;
 	}
 	cout << endl;
-	if (m_pages.size() != 0)
+	if (m_pages.size() != EMPTY)
 	{
 		cout << "All Pages in Facebook: " << endl;
 		for (int i = 0; i < m_pages.size(); i++)
@@ -547,7 +547,7 @@ void  Facebook::print_All_FaceBook_Members_And_Pages()const noexcept(false)//10
 void Facebook::UnlikePage()noexcept(false) //9
 {
 	int indMe = whoAreYou();
-	if (m_members.at(indMe)->myNumOfPagesFollow() == 0)
+	if (m_members.at(indMe)->myNumOfPagesFollow() == EMPTY)
 	{
 		cout << " you dont follow after any page" << endl;
 		return;
@@ -579,7 +579,7 @@ void Facebook::RemoveFriend()noexcept(false) //7
 {
 
 	int indMe = whoAreYou();
-	if (m_members.at(indMe)->myNumOfFriends() == 0)
+	if (m_members.at(indMe)->myNumOfFriends() == EMPTY)
 		throw emptyFriendList();
 	if (indMe < 0 || indMe > m_members.size())
 		throw wrongInput();
@@ -614,7 +614,7 @@ void Facebook::AddFriend()noexcept(false) //6
 void Facebook::WhatIsMyfriend_Friends_Latest_Status() //5
 {
 	int member_index = whoAreYou();
-	if (m_members.at(member_index)->myNumOfFriends() == 0)
+	if (m_members.at(member_index)->myNumOfFriends() == EMPTY)
 		throw emptyFriendList();
 
 	m_members.at(member_index)->printMyFriendLastStatuses();
@@ -696,7 +696,7 @@ void  Facebook::WriteNewStatus()noexcept(false) //3
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cout << "what is on your mind? (no more then 1,000 letters)" << endl;
 		getline(cin, content);
-		if (content.size() == 0)
+		if (content.size() == EMPTY)
 			throw emptyStatus();
 		m_pages.at(index)->createStatus(content, StatusType - 1, DataName);
 	}
@@ -709,7 +709,7 @@ void Facebook::AddNewPage()noexcept(false) //2
 	cout << "What is the page name?" << endl;
 	clearBuffer();
 	getline(cin, name);
-	if (name.size() == 0)
+	if (name.size() == EMPTY)
 		throw emptyName();
 	try
 	{
@@ -734,7 +734,7 @@ void Facebook::AddNewMember()noexcept(false) //1
 	cout << "What is your name?" << endl;
 	clearBuffer();
 	getline(cin, name);
-	if (name.size() == 0)
+	if (name.size() == EMPTY)
 		throw emptyName();
 	else if (isExsist(name) == false)
 		throw userExist();
