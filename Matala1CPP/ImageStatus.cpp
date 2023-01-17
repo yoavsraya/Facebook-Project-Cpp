@@ -19,7 +19,8 @@ void ImageStastus::printContent() const
 {
 	cout << "\033[1;33m";
 	cout << getContent() << endl;
-	cout << "upload time and date: " << getTime() << endl;
+	time_t tmp = getTime();
+	cout << "upload time and date: " << ctime(&tmp) << endl;
 	system(ImageFileName.c_str());
 	cout << "------------------------------" << endl;
 	cout << "\033[0m";
