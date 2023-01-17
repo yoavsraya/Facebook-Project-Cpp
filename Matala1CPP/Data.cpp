@@ -414,7 +414,6 @@ void Facebook::ReadFromFile()
 			{
 				Data_file.get();
 				Data_file.getline(dataTypeName, MAX_NAME_LENGTH);
-				m_members.at(i)->createStatusFromFile(statustext, statustime, datatype, dataTypeName);
 			}
 			m_members.at(i)->createStatusFromFile(statustext, statustime, datatype, dataTypeName);
 		}
