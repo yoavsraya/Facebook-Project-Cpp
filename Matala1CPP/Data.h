@@ -43,8 +43,7 @@ public:
 private:
 	vector <member*> m_members;
 	vector <page*> m_pages;
-	//fstream Data_file;
-
+	
 public:
 	void watch_MyFriend_List()noexcept(false); //11
 	void  print_All_FaceBook_Members_And_Pages() const noexcept(false); //10

@@ -18,7 +18,7 @@ public:
 	bool operator!=(const status& other)const; //opartor != Q2
 	status& operator=(const string str); // oprator = for string
 	status& operator=(const char* str); // oprator = for char*
-	status(){};
+	//status(){};
 	virtual string getDataFileName() { return "\0"; }
 	string getContent() { return m_content; }
 	time_t getTime() { return dateAndtimeOfStatus; }
