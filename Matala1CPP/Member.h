@@ -12,6 +12,8 @@ class page;
 
 using namespace std;
 const int FULL = -1;
+const int FULL_CAPACITY_INDEX = 9;
+const int ARRAY_SIZE = 10;
 
 class member
 {
@@ -51,11 +53,11 @@ public:
 private:
 	string m_name;
 	string m_dateOfBirth;
-	int m_logSize10Statuses = 9;
+	int m_logSize10Statuses = FULL_CAPACITY_INDEX;
 	vector<member*> m_friendsList;
 	vector<page*> m_pages;
 	vector<status*> m_mySatuses;
-	array<status*, 10> m_last10statuses;
+	array<status*, ARRAY_SIZE> m_last10statuses;
 	int index;
 	static int NumOfMember;
 };
