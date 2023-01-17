@@ -1,18 +1,10 @@
 #include "VideoStatus.h"
 
-void VideoStatus::printVideoStatus() const
-{
-	printContent();
-	const char* fileName = VideoFileName.c_str();
-	system(fileName);
-	cout << endl;
-}
-
 VideoStatus::VideoStatus(string content, string dataName)
 {
 	setIndex(VIDEO);
 	setName(content);
-	VideoFileName = dataName;
+	VideoFileName += dataName += ".mov";
 	setTime();
 }
 
@@ -21,4 +13,10 @@ string VideoStatus::getDataFileName()
 	return VideoFileName;
 }
 
-
+void VideoStatus::printContent() const
+{
+	cout << getContent() << endl;
+	cout << "upload time and date: " << getTime() << endl;
+	system(VideoFileName.c_str());
+	cout << "------------------------------" << endl;
+}
