@@ -25,7 +25,9 @@ public:
 	int getTypeIndex() { return TypeIndex; }
 	void setIndex(int _index) { TypeIndex = _index; }
 	void setName(string content) { m_content = content; }
-	void setTime(time_t time) { dateAndtimeOfStatus = time; }
+	void copyTime(time_t time) { dateAndtimeOfStatus = time; }
+	void setTime() { time(&dateAndtimeOfStatus); }
+
 	
 private:
 	time_t dateAndtimeOfStatus;

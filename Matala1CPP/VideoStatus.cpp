@@ -13,6 +13,7 @@ VideoStatus::VideoStatus(string content, string dataName)
 	setIndex(VIDEO);
 	setName(content);
 	VideoFileName = dataName;
+	setTime();
 }
 
 string VideoStatus::getDataFileName()
