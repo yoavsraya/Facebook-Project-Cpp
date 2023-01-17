@@ -623,7 +623,7 @@ void  Facebook::WriteNewStatus()noexcept(false) //3
 {
 	int choose;
 	int index;
-	string contant;
+	string content;
 	int StatusType;
 	string DataName;
 
@@ -646,13 +646,12 @@ void  Facebook::WriteNewStatus()noexcept(false) //3
 			clearBuffer();
 			getline(cin, DataName);
 		}
-		char tmp[10];
 		cout << "what is on your mind? (no more then 1,000 letters)" << endl;
-		cin >> tmp;
-		getline(cin, contant);
-		if (contant.size() == 0)
+		cin.ignore();
+		getline(cin, content);
+		if (content.size() == 0)
 			throw emptyStatus();
-		m_members.at(index)->createStatus(contant,StatusType,DataName);
+		m_members.at(index)->createStatus(content,StatusType,DataName);
 	}
 
 	else if (choose == 1)
@@ -668,10 +667,10 @@ void  Facebook::WriteNewStatus()noexcept(false) //3
 			getline(cin, DataName);
 		}
 		cout << "what is on your mind? (no more then 1,000 letters)" << endl;
-		getline(cin, contant);
-		if (contant.size() == 0)
+		getline(cin, content);
+		if (content.size() == 0)
 			throw emptyStatus();
-		m_pages.at(index)->createStatus(contant,StatusType,DataName);
+		m_pages.at(index)->createStatus(content,StatusType,DataName);
 	}
 }
 
