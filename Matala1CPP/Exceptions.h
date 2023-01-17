@@ -158,3 +158,12 @@ public:
 		return "there is no members on facebook!";
 	}
 };
+
+class NoPages : public exception //cant add yourself
+{
+public:
+	virtual const char* what() const override
+	{
+		return "there is no Pages on facebook!";
+	}
+};

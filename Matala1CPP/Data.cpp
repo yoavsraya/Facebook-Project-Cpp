@@ -172,6 +172,14 @@ void Facebook::runMenu() //run the facebook manu until exit
 		{
 			cout << e.what() << endl;
 		}
+		catch (Nomembers& e)
+		{
+			cout << e.what() << endl;
+		}
+		catch (NoPages& e)
+		{
+			cout << e.what() << endl;
+		}
 	}
 	cout << "Thanks you for using our FaceBook! hope to see you soon again :)" << endl;
 }
