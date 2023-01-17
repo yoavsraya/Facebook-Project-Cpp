@@ -5,7 +5,7 @@ const int VIDEO = 1;
 
 class  VideoStatus: public status
 {
-	string VideoFileName = "start ";
+	string VideoFileName;
 public:
 	virtual void printContent() const override;
 	VideoStatus() { setIndex(VIDEO);}

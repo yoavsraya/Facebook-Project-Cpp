@@ -4,7 +4,7 @@ const int IMAGE = 2;
 
 class ImageStastus : public status
 {
-	string ImageFileName = "start ";
+	string ImageFileName;
 public:
 	virtual void printContent() const override;
 	ImageStastus() { setIndex(IMAGE); }
