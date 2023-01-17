@@ -35,6 +35,7 @@ void Facebook::printMembers()const //print all members at facebook
 		cout << "#" << i + 1 << endl;
 		m_members.at(i)->printMyDetails();
 		cout << endl;
+		cout << "------------------------" << endl;
 	}
 }
 
@@ -351,6 +352,7 @@ void Facebook::ReadFromFile()
 	int datatype;
 	int index;
 	char name[MAX_NAME_LENGTH];
+	char eatName[MAX_NAME_LENGTH];
 	char DateOfBirth[SIZE_OF_DATE];
 	char statustext[MAX_TEXT_LENGTH];
 	char dataTypeName[MAX_NAME_LENGTH];
@@ -393,7 +395,8 @@ void Facebook::ReadFromFile()
 		for (int j = 0; j < numOfFriends; j++)
 		{
 			Data_file >> friendIndex;
-			*m_members.at(index) += *m_members.at(friendIndex);
+			m_members.at(index)->AddFriendFromFile(m_members.at(friendIndex));
+			Data_file.getline(eatName, MAX_NAME_LENGTH);
 		}
 
 		Data_file >> numOfPagefollow;
@@ -559,6 +562,8 @@ void Facebook::UnlikePage()noexcept(false) //9
 
 void Facebook::LikeNewPage()noexcept(false) //8
 {
+	if (m_pages.size() == EMPTY)
+		throw NoPages();
 	int ind = whoAreYou();
 	cout << "choose a page you want to follow:" << endl;
 	printPages();
@@ -576,7 +581,7 @@ void Facebook::RemoveFriend()noexcept(false) //7
 	int indMe = whoAreYou();
 	if (m_members.at(indMe)->myNumOfFriends() == 0)
 		throw emptyFriendList();
-	if (indMe < 1 || indMe > m_members.size())
+	if (indMe < 0 || indMe > m_members.size())
 		throw wrongInput();
 	cout << "choose a friend to remove" << endl;
 	m_members.at(indMe)->printFriends();

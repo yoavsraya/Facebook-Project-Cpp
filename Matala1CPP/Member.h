@@ -46,6 +46,7 @@ public:
 	void writeToFile(fstream& file);
 	int getIndex() { return index; }
 	void createStatusFromFile(string contant, time_t time, int type, string datatype =nullptr);
+	void AddFriendFromFile(member* other) { m_friendsList.push_back(other); }
 
 private:
 	string m_name;
