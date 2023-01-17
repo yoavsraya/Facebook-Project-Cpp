@@ -4,6 +4,7 @@ ImageStastus::ImageStastus(string content, string dataName)
 {
 	setIndex(IMAGE);
 	setName(content);
+	ImageFileName = "start ";
 	ImageFileName += dataName += ".jpg";
 	setTime();
 }

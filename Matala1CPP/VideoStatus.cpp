@@ -4,6 +4,7 @@ VideoStatus::VideoStatus(string content, string dataName)
 {
 	setIndex(VIDEO);
 	setName(content);
+	VideoFileName = "start ";
 	VideoFileName += dataName += ".mov";
 	setTime();
 }
