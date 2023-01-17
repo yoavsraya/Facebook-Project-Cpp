@@ -2,10 +2,11 @@
 
 ImageStastus::ImageStastus(string content, string dataName)
 {
+	int i = 0;
 	setIndex(IMAGE);
 	setName(content);
 	ImageFileName = "start ";
-	ImageFileName += dataName += ".jpg";
+	ImageFileName += dataName;
 	setTime();
 }
 
