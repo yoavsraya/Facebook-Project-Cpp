@@ -7,7 +7,7 @@ class  VideoStatus: public status
 {
 	string VideoFileName = "start ";
 public:
-	void printVideoStatus() const;
+	virtual void printContent() const override;
 	VideoStatus() { setIndex(VIDEO);}
 	VideoStatus(string content, string dataName);
 	virtual string getDataFileName();
