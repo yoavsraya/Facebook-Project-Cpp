@@ -305,7 +305,7 @@ bool Facebook::isExsist(string name)
 
 void Facebook::WriteTofile()
 {
-	fstream Data_file("Facbook_Data.txt",ios_base::app | ios_base::in);
+	fstream Data_file("Facbook_Data.txt",ios_base::app | ios_base::in | ios_base::trunc);
 	Data_file << m_members.size()<< endl;
 	for (int i = 0; i < m_members.size(); i++)
 	{
@@ -544,7 +544,7 @@ void Facebook::LikeNewPage()noexcept(false) //8
 	int pageInd = whichOne(m_pages.size());
 	if (pageInd < 0 && pageInd > m_pages.size())
 		throw wrongInput();
-	if (m_members.at(ind)->isPageExist(m_pages.at(pageInd)) == true);
+	if (m_members.at(ind)->isPageExist(m_pages.at(pageInd)) == true)
 	throw alreadyfollow();
 	*m_members.at(ind) += *m_pages.at(pageInd);
 }
