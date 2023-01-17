@@ -669,7 +669,7 @@ void  Facebook::WriteNewStatus()noexcept(false) //3
 		if (StatusType != 1)
 		{
 			cout << "enter video/image name: (no more then 50 characters)" << endl;
-			clearBuffer();
+			cin.clear();
 			getline(cin, DataName);
 		}
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
