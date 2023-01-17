@@ -672,6 +672,7 @@ void  Facebook::WriteNewStatus()noexcept(false) //3
 			clearBuffer();
 			getline(cin, DataName);
 		}
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cout << "what is on your mind? (no more then 1,000 letters)" << endl;
 		
 		getline(cin, content);
