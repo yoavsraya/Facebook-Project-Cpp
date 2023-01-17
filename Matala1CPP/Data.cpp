@@ -185,6 +185,8 @@ void Facebook::printMenu()const //print manu option
 int Facebook::whoAreYou() // return the user index 
 {
 	int ind;
+	if (m_members.size() == 0)
+		throw Nomembers();
 	cout << "who Are you? choose number: " << endl;
 	cout << "--------------" << endl;
 	for (int i = 1; i <= m_members.size(); i++)
@@ -303,7 +305,7 @@ bool Facebook::isExsist(string name)
 
 void Facebook::WriteTofile()
 {
-	fstream Data_file("Facbook_Data.txt");
+	fstream Data_file("Facbook_Data.txt",ios_base::app | ios_base::in);
 	Data_file << m_members.size()<< endl;
 	for (int i = 0; i < m_members.size(); i++)
 	{
@@ -346,7 +348,7 @@ void Facebook::ReadFromFile()
 	string Name;
 	string Date;
 
-	fstream Data_file("Facbook_Data.txt");
+	fstream Data_file("Facbook_Data.txt", ios_base::app | ios_base::in);
 	if (Data_file.peek() == std::ifstream::traits_type::eof())
 	{
 		return;

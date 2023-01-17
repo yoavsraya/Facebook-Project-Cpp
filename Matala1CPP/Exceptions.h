@@ -149,3 +149,12 @@ public:
 		return "This member is Not friend Of yours!!!";
 	}
 };
+
+class Nomembers : public exception //cant add yourself
+{
+public:
+	virtual const char* what() const override
+	{
+		return "there is no members on facebook!";
+	}
+};
