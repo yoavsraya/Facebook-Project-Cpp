@@ -172,6 +172,14 @@ void Facebook::runMenu() //run the facebook manu until exit
 		{
 			cout << e.what() << endl;
 		}
+		catch (Nomembers& e)
+		{
+			cout << e.what() << endl;
+		}
+		catch (NoPages& e)
+		{
+			cout << e.what() << endl;
+		}
 	}
 	cout << "Thanks you for using our FaceBook! hope to see you soon again :)" << endl;
 }
@@ -204,6 +212,8 @@ int Facebook::whoAreYou() // return the user index
 
 int Facebook::whichPage() //return page index
 {
+	if (m_pages.size() == 0)
+		throw NoPages();
 	int ind;
 	cout << "who Are you? choose number: " << endl;
 	cout << "--------------" << endl;
@@ -305,7 +315,7 @@ bool Facebook::isExsist(string name)
 
 void Facebook::WriteTofile()
 {
-	fstream Data_file("Facbook_Data.txt",ios_base::app | ios_base::in);
+	fstream Data_file("Facbook_Data.txt",ios_base::out | ios_base::in | ios_base::trunc);
 	Data_file << m_members.size()<< endl;
 	for (int i = 0; i < m_members.size(); i++)
 	{
@@ -505,18 +515,30 @@ void Facebook::watch_MyFriend_List()noexcept(false) //11
 
 void  Facebook::print_All_FaceBook_Members_And_Pages()const noexcept(false)//10
 {
-	cout << "All Facebook users: " << endl;
-	for (int i = 0; i < m_members.size(); i++)
+	if (m_members.size() == 0 && m_pages.size() == 0)
 	{
-		m_members.at(i)->printMyDetails();
-		cout << endl;
+		cout << "there is no friends/pages on facebook" << endl;
+		return;
 	}
-	cout << "----------------------------" << endl;
-	cout << endl;
-	cout << "All Pages in Facebook: " << endl;
-	for (int i = 0; i < m_pages.size(); i++)
+	if (m_members.size() != 0)
 	{
-		m_pages.at(i)->printPage();
+		cout << "All Facebook users: " << endl;
+		for (int i = 0; i < m_members.size(); i++)
+		{
+			m_members.at(i)->printMyDetails();
+			cout << endl;
+		}
+		cout << "----------------------------" << endl;
+	}
+	cout << endl;
+	if (m_pages.size() != 0)
+	{
+		cout << "All Pages in Facebook: " << endl;
+		for (int i = 0; i < m_pages.size(); i++)
+		{
+			m_pages.at(i)->printPage();
+		}
+		cout << "----------------------------" << endl;
 	}
 }
 
@@ -544,7 +566,7 @@ void Facebook::LikeNewPage()noexcept(false) //8
 	int pageInd = whichOne(m_pages.size());
 	if (pageInd < 0 && pageInd > m_pages.size())
 		throw wrongInput();
-	if (m_members.at(ind)->isPageExist(m_pages.at(pageInd)) == true);
+	if (m_members.at(ind)->isPageExist(m_pages.at(pageInd)) == true)
 	throw alreadyfollow();
 	*m_members.at(ind) += *m_pages.at(pageInd);
 }
@@ -710,7 +732,7 @@ void Facebook::AddNewMember()noexcept(false) //1
 		throw emptyName();
 	else if (isExsist(name) == false)
 		throw userExist();
-	cout << "When have you burn? insert day:" << endl;
+	cout << "When have you born? insert day:" << endl;
 	cin >> day;
 	if (day < MIN_DAY_IN_MONTH || day > MAX_DAY_IN_MONTH)
 		throw invalidDate();
