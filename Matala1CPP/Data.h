@@ -37,8 +37,8 @@ public:
 	bool isExsist(string name); //check if the name is already exsist
 	void WriteTofile(); //write all data to txt
 	void ReadFromFile(); //read all data from txt
-	void createMemberFromFile(string name, string date);
-	void createPageFromFile(char* name);
+	void createMemberFromFile(string name, string date); //create new member from file
+	void createPageFromFile(char* name); // create page from file 
 
 private:
 	vector <member*> m_members;

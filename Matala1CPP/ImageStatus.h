@@ -6,8 +6,8 @@ class ImageStastus : public status
 {
 	string ImageFileName;
 public:
-	virtual void printContent() const override;
-	ImageStastus() { setIndex(IMAGE); }
-	ImageStastus(string content, string dataName);
-	virtual string getDataFileName();
+	virtual void printContent() const override; //print status content
+	ImageStastus() { setIndex(IMAGE); } // ct'or
+	ImageStastus(string content, string dataName); // ct'or
+	virtual string getDataFileName(); // read data from file ro status
 };

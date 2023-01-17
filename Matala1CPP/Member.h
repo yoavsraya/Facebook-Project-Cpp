@@ -43,10 +43,10 @@ public:
 	member* friendIndex(int index)const; //return pointer to member by index
 	string getName(); //get name
 	string getDate() { return m_dateOfBirth; } // get birth day
-	void writeToFile(fstream& file);
-	int getIndex() { return index; }
-	void createStatusFromFile(string contant, time_t time, int type, string datatype =nullptr);
-	void AddFriendFromFile(member* other) { m_friendsList.push_back(other); }
+	void writeToFile(fstream& file); // write member to file 
+	int getIndex() { return index; } // get member index
+	void createStatusFromFile(string contant, time_t time, int type, string datatype); // create status from file 
+	void AddFriendFromFile(member* other) { m_friendsList.push_back(other); } //add friend to friend list from file 
 
 private:
 	string m_name;

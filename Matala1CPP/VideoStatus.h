@@ -7,8 +7,8 @@ class  VideoStatus: public status
 {
 	string VideoFileName;
 public:
-	virtual void printContent() const override;
-	VideoStatus() { setIndex(VIDEO);}
-	VideoStatus(string content, string dataName);
-	virtual string getDataFileName();
+	virtual void printContent() const override; //print status content 
+	VideoStatus() { setIndex(VIDEO);} //ct'or
+	VideoStatus(string content, string dataName); //ct'or
+	virtual string getDataFileName(); //get data file name 
 };

@@ -27,10 +27,10 @@ public:
 	void printAllStatus()const; //print all statuses of page
 	void printPage()const; //print page
 	void printFollowers()const;	// print follower
-	int getPageindex() { return index; }
-	string getName() { return m_name; }
-	void writeToFile(fstream& file);
-	void createStatusFromFile(string contant, time_t time, int type, string datatype = 0);
+	int getPageindex() { return index; } //get page index 
+	string getName() { return m_name; } // get name
+	void writeToFile(fstream& file); //write page to file 
+	void createStatusFromFile(string contant, time_t time, int type, string datatype); // create new status 
 };
 
 
